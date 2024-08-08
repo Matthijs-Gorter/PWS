@@ -1,0 +1,16 @@
+\babel@toc {dutch}{}\relax 
+\contentsline {section}{Voorwoord}{1}{section*.1}%
+\contentsline {section}{Variabelen en Notatie}{2}{section*.2}%
+\contentsline {section}{Inhoudsopgave}{3}{section*.3}%
+\contentsline {section}{\numberline {A}Inleiding}{4}{section.1}%
+\contentsline {section}{\numberline {B}Theoretisch Kader}{5}{section.2}%
+\contentsline {subsection}{\numberline {B.1}Definitie}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {B.2}Belangrijke Reinforcement Learning-Algoritmes}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {B.3}Vergelijking met andere Artificiële Leermethodes}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {B.4}Reinforcement Learning in Computerspellen}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {C}Onderzoeksmethoden}{7}{section.3}%
+\contentsline {section}{\numberline {D}Analyse en Resultaten}{8}{section.4}%
+\contentsline {section}{\numberline {E}Conclusie}{9}{section.5}%
+\contentsline {section}{\numberline {F}Discussie}{10}{section.6}%
+\contentsline {section}{\numberline {G}Bronvermelding}{11}{section.7}%
+\contentsline {section}{\numberline {H}Bijlagen}{12}{section.8}%
