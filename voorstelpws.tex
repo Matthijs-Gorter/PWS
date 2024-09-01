@@ -114,29 +114,32 @@ Q-Network (DQN), Proximal Policy Optimization (PPO), en AlphaZero (of Deep
 Deterministic Policy Gradient (DDPG) als AlphaZero niet lukt). Het doel is om
 te ontdekken hoe goed elk algoritme werkt in elk spel en hoe de kenmerken van
 het spel de prestaties van de algoritmes beïnvloeden.
-\subsection*{Experiment 1: Snake} Snake is een simpel actiespel waar je een slang bestuurt die appels eet om
-langer te worden, terwijl je ervoor zorgt dat hij zichzelf niet raakt. Het spel
-vereist snelle beslissingen en het vooruitzicht zodat je je zelf niet opsluit.
-Het doel van het experiment met Snake is om te onderzoeken hoe de RL-algoritmes
-presteren in een omgeving met beperkte ruimte en snel veranderende situaties.
-We zullen kijken hoe snel elk algoritme leert, hoe stabiel de prestaties zijn
-en wat de uiteindelijke score is. \subsection*{Experiment 2: Schaken} Schaken is een complex bordspel met een grote hoeveelheid mogelijke zetten en
-uitkomsten. Dit experiment is bedoeld om te bepalen hoe de RL-algoritmes omgaan
-met de grote hoeveelheid mogelijkheden en de noodzaak om
-lange-termijnstrategieën te ontwikkelen. We zullen meten hoe snel de algoritmes
-leren, hoe goed de strategieën zijn die ze ontwikkelen (gecontroleerd door een
-schaakprogramma), en hoe consistent de prestaties zijn in verschillende
-schaaksituaties.
+\begin{enumerate}
+    \item\subsection*{Snake} Snake is een simpel actiespel waar je een slang bestuurt die appels eet om
+          langer te worden, terwijl je ervoor zorgt dat hij zichzelf niet raakt. Het spel
+          vereist snelle beslissingen en het vooruitzicht zodat je je zelf niet opsluit.
+          Het doel van het experiment met Snake is om te onderzoeken hoe de RL-algoritmes
+          presteren in een omgeving met beperkte ruimte en snel veranderende situaties.
+          We zullen kijken hoe snel elk algoritme leert, hoe stabiel de prestaties zijn
+          en wat de uiteindelijke score is.           
+          \item\subsection*{Schaken} Schaken is een complex bordspel met een grote hoeveelheid mogelijke zetten en
+          uitkomsten. Dit experiment is bedoeld om te bepalen hoe de RL-algoritmes omgaan
+          met de grote hoeveelheid mogelijkheden en de noodzaak om
+          lange-termijnstrategieën te ontwikkelen. We zullen meten hoe snel de algoritmes
+          leren, hoe goed de strategieën zijn die ze ontwikkelen (gecontroleerd door een
+          schaakprogramma), en hoe consistent de prestaties zijn in verschillende
+          schaaksituaties.
 
-\subsection*{Experiment 3: Mario Super Bros}
-Mario Super Bros, is een platformspel waarin de speler een personage bestuurt
-dat door verschillende levels moet navigeren, obstakels moet vermijden en
-vijanden moet verslaan. Dit spel combineert elementen van actie en planning,
-met veel variatie in speelomgevingen en uitdagingen. Het doel van het
-experiment met Mario Super Bros is om te onderzoeken hoe de RL-algoritmes
-presteren in een dynamische omgeving waar zowel snelheid als strategie nodig
-zijn. We zullen beoordelen hoe snel de algoritmes leren, hoe stabiel de
-prestaties zijn, en hoeveel levels succesvol worden voltooid.
+    \item\subsection*{Mario Super Bros}
+          Mario Super Bros, is een platformspel waarin de speler een personage bestuurt
+          dat door verschillende levels moet navigeren, obstakels moet vermijden en
+          vijanden moet verslaan. Dit spel combineert elementen van actie en planning,
+          met veel variatie in speelomgevingen en uitdagingen. Het doel van het
+          experiment met Mario Super Bros is om te onderzoeken hoe de RL-algoritmes
+          presteren in een dynamische omgeving waar zowel snelheid als strategie nodig
+          zijn. We zullen beoordelen hoe snel de algoritmes leren, hoe stabiel de
+          prestaties zijn, en hoeveel levels succesvol worden voltooid.
+\end{enumerate}
 
 \section{Relevantie van het Onderzoek}
 Dit onderzoek laat effectiviteit van reinforcement learning algoritmes in

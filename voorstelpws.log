@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  1 SEP 2024 17:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  1 SEP 2024 18:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -718,11 +718,11 @@ l.95
 
 [3]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 167.
+(Font)              <12> on input line 170.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 167.
+(Font)              <8> on input line 170.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 167.
+(Font)              <6> on input line 170.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -733,9 +733,9 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 247.
+(Font)              <10.95> on input line 250.
 
-Overfull \hbox (5.4944pt too wide) in paragraph at lines 247--281
+Overfull \hbox (5.4944pt too wide) in paragraph at lines 250--284
 [][]  
  []
 
@@ -752,8 +752,8 @@ Package rerunfilecheck Info: File `voorstelpws.out' has not changed.
 (rerunfilecheck)             Checksum: 102AB9404A7E610BE76793E351704A25;2026.
  ) 
 Here is how much of TeX's memory you used:
- 21536 strings out of 473899
- 413244 string characters out of 5726501
+ 21539 strings out of 473899
+ 413264 string characters out of 5726501
  1960960 words of memory out of 5000000
  44032 multiletter control sequences out of 15000+600000
  566182 words of font info for 62 fonts, out of 8000000 for 9000
@@ -776,9 +776,9 @@ sfonts/cm/cmsy10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/matth/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on voorstelpws.pdf (8 pages, 240771 bytes).
+Output written on voorstelpws.pdf (8 pages, 241286 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
- 36 named destinations out of 1000 (max. 500000)
+ 214 PDF objects out of 1000 (max. 8388607)
+ 39 named destinations out of 1000 (max. 500000)
  122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
