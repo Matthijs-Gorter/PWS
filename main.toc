@@ -2,15 +2,24 @@
 \contentsline {chapter}{Voorwoord}{1}{chapter*.1}%
 \contentsline {chapter}{Variabelen en Notatie}{2}{chapter*.2}%
 \contentsline {chapter}{Inhoudsopgave}{3}{chapter*.3}%
-\contentsline {chapter}{\numberline {1}Inleiding}{4}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Theoretisch Kader}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Definitie}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Belangrijke Algoritmes}{6}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Artificiële Leermethodes}{7}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Computerspellen}{7}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Onderzoeksmethoden}{8}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Analyse en Resultaten}{9}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusie}{10}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Discussie}{11}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Referentielijst}{12}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Bijlagen}{13}{chapter.8}%
+\contentsline {chapter}{\numberline {1}Inleiding}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Theoretisch Kader}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definitie}{6}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Markov-eigenschap}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Overgangswaarschijnlijkheidsmatrix}{8}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Beleid}{8}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Verwachtingswaarde}{8}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Kortingsfactor}{9}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Waardefunctie}{9}{subsection.2.1.6}%
+\contentsline {subsection}{\numberline {2.1.7}Q-functie}{9}{subsection.2.1.7}%
+\contentsline {subsection}{\numberline {2.1.8}Bellman vergelijking}{9}{subsection.2.1.8}%
+\contentsline {subsection}{\numberline {2.1.9}Evaluatie en Controle}{10}{subsection.2.1.9}%
+\contentsline {section}{\numberline {2.2}Belangrijke Algoritmes}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Artificiële Leermethodes}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Computerspellen}{11}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Onderzoeksmethoden}{12}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Analyse en Resultaten}{13}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusie}{14}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Discussie}{15}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Referentielijst}{16}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Bijlagen}{17}{chapter.8}%
