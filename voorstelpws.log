@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  1 SEP 2024 18:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  2 SEP 2024 16:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -606,28 +606,28 @@ File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
 z/libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 26.
+Package hyperref Info: Option `colorlinks' set `true' on input line 28.
  (voorstelpws.aux)
 \openout1 = `voorstelpws.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -689,15 +689,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 36.
+Package hyperref Info: Link coloring ON on input line 38.
  (voorstelpws.out) (voorstelpws.out)
 \@outlinefile=\write4
 \openout4 = `voorstelpws.out'.
 
-<logo-clz.png, id=58, 88.8921pt x 99.44353pt>
+<logo-clz.png, id=54, 88.8921pt x 99.44353pt>
 File: logo-clz.png Graphic file (type png)
 <use logo-clz.png>
-Package pdftex.def Info: logo-clz.png  used on input line 49.
+Package pdftex.def Info: logo-clz.png  used on input line 51.
 (pdftex.def)             Requested size: 91.04742pt x 101.8559pt.
 
 
@@ -711,31 +711,27 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.95 
+l.97 
       [1]
 
 [2]
 
 [3]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 170.
+(Font)              <12> on input line 187.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 170.
+(Font)              <8> on input line 187.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 170.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(Font)              <6> on input line 187.
 
 
 [4]
 
 [5]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 250.
+(Font)              <10.95> on input line 256.
 
-Overfull \hbox (5.4944pt too wide) in paragraph at lines 250--284
+Overfull \hbox (5.4944pt too wide) in paragraph at lines 256--301
 [][]  
  []
 
@@ -749,13 +745,13 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
  ***********
 Package rerunfilecheck Info: File `voorstelpws.out' has not changed.
-(rerunfilecheck)             Checksum: 102AB9404A7E610BE76793E351704A25;2026.
+(rerunfilecheck)             Checksum: 440CB1C4BC0C6B7B4500887A6FF5601C;1828.
  ) 
 Here is how much of TeX's memory you used:
- 21539 strings out of 473899
- 413264 string characters out of 5726501
- 1960960 words of memory out of 5000000
- 44032 multiletter control sequences out of 15000+600000
+ 21535 strings out of 473899
+ 413210 string characters out of 5726501
+ 1966960 words of memory out of 5000000
+ 44031 multiletter control sequences out of 15000+600000
  566182 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,9n,93p,462b,857s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -774,11 +770,10 @@ atth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:
 cm/cmr8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmsy10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/matth/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on voorstelpws.pdf (8 pages, 241286 bytes).
+s/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on voorstelpws.pdf (8 pages, 236076 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 39 named destinations out of 1000 (max. 500000)
- 122 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 202 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1725208669.02547 "c:/Users/matth/Developer/PWS/voorstelpws.tex" "voorstelpws.pdf" "voorstelpws" 1725208669.97143 0
-  "C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1725192426 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+["pdflatex"] 1725286037.74322 "c:/Users/matth/Developer/PWS/voorstelpws.tex" "voorstelpws.pdf" "voorstelpws" 1725286038.53852 0
+  "C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1725285343 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1725054433 12668 e1d4c6cbd70166deb03bbc99a66b8d1f ""
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1725055139 14064 72b7f8b17797142a15c517f1214237c7 ""
   "C:/Users/matth/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1723082193 24265332 4cb76a6909b72608f7473a5a715c90d0 ""
@@ -35,7 +35,6 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247596667 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1247596667 37944 359e864bd06cde3b1cf57bb20757fb06 ""
-  "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247596667 36118 fad905eba93cff5bce1e185fe980a177 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/generic/atbegshi/atbegshi.sty" 1575571100 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1719641066 146636 00e6e4b5a5b72cebe149cf3066d53b30 ""
@@ -159,11 +158,11 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1718356376 14067 1383bd6ee23ab18ae0e796155404deb7 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/matth/Developer/PWS/voorstelpws.tex" 1725208668 18834 194c83ca78ee80d2442487ec009f9056 ""
+  "c:/Users/matth/Developer/PWS/voorstelpws.tex" 1725286036 20319 c16ab39c41dd0924b29fd7510152565c ""
   "logo-clz.png" 1723084649 36205 a7d80d8df9bf0fbfb7c030627ce2715b ""
-  "voorstelpws.aux" 1725208669 2204 87914ea61b8b3f1171792597839ebf66 "pdflatex"
-  "voorstelpws.out" 1725208669 2026 102ab9404a7e610be76793e351704a25 "pdflatex"
-  "voorstelpws.tex" 1725208668 18834 194c83ca78ee80d2442487ec009f9056 ""
+  "voorstelpws.aux" 1725286038 2063 32a8cfb4ea6593d7a74756318a3cdc2a "pdflatex"
+  "voorstelpws.out" 1725286038 1828 440cb1c4bc0c6b7b4500887a6ff5601c "pdflatex"
+  "voorstelpws.tex" 1725286036 20319 c16ab39c41dd0924b29fd7510152565c ""
   (generated)
   "voorstelpws.aux"
   "voorstelpws.log"

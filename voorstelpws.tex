@@ -10,6 +10,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning}
 
+
+
 \geometry{a4paper, top=4cm, bottom=3.5cm, left=2.5cm, right=2.5cm} 
 
 
@@ -121,8 +123,7 @@ het spel de prestaties van de algoritmes beïnvloeden.
           Het doel van het experiment met Snake is om te onderzoeken hoe de RL-algoritmes
           presteren in een omgeving met beperkte ruimte en snel veranderende situaties.
           We zullen kijken hoe snel elk algoritme leert, hoe stabiel de prestaties zijn
-          en wat de uiteindelijke score is.           
-          \item\subsection*{Schaken} Schaken is een complex bordspel met een grote hoeveelheid mogelijke zetten en
+          en wat de uiteindelijke score is. \item\subsection*{Schaken} Schaken is een complex bordspel met een grote hoeveelheid mogelijke zetten en
           uitkomsten. Dit experiment is bedoeld om te bepalen hoe de RL-algoritmes omgaan
           met de grote hoeveelheid mogelijkheden en de noodzaak om
           lange-termijnstrategieën te ontwikkelen. We zullen meten hoe snel de algoritmes
@@ -139,6 +140,22 @@ het spel de prestaties van de algoritmes beïnvloeden.
           presteren in een dynamische omgeving waar zowel snelheid als strategie nodig
           zijn. We zullen beoordelen hoe snel de algoritmes leren, hoe stabiel de
           prestaties zijn, en hoeveel levels succesvol worden voltooid.
+\end{enumerate}
+
+\section{Hypothese}
+We verwachten dat:
+\begin{enumerate}
+    \item Deep Q-Network het beste zal presteren in Snake omdat het algoritme snel kan
+          leren in omgevingen met beperkte ruimte en snel veranderende situaties, waar
+          directe beloningen een grote rol spelen.
+
+    \item Proximal Policy Optimization zal beter presteren in Mario Super Bros, omdat dit
+          algoritme geschikt is voor dynamische omgevingen en situaties waar zowel
+          snelheid en planning belangrijk zijn.
+
+    \item AlphaZero zal beter zijn in Schaken, vanwege het planning en
+          lange-termijnstrategie die nodig zijn.
+
 \end{enumerate}
 
 \section{Relevantie van het Onderzoek}
@@ -234,50 +251,50 @@ de horizon \(T\) zowel eindig als oneindig kan zijn.
 
 \section{Onderzoeksplan en -overzicht}
 
-\subsection{Taakverdeling en Planning}
-De taken zullen als volgt worden verdeeld:
-\begin{enumerate}
-    \item \textbf{Theoretisch kader opstellen}: Inlezen en samenvatten van de beschikbare literatuur over RL-algoritmes en hun toepassing in games.
-    \item \textbf{Selectie van spellen en algoritmes}: Identificatie en selectie van spellen (\textit{Snake}, \textit{Mario Super Bros}, autoracen) en RL-algoritmes (met nadruk op DQL).
-    \item \textbf{Experimenten uitvoeren}: Toepassing van de geselecteerde RL-algoritmes op de gekozen spellen en het verzamelen van prestatiegegevens.
-    \item \textbf{Data-analyse}: Analyseren van de prestaties van de RL-algoritmes in relatie tot de spelkenmerken.
-    \item \textbf{Conclusies trekken en verslag schrijven}: Samenstellen van het eindrapport waarin de resultaten en conclusies worden gepresenteerd.
-\end{enumerate}
-
-\subsection{Planning}
 T = Gechatte tijd pp \\ \small
 
 \begin{tabular}{|>{\raggedright}m{6cm}|>{\raggedright}m{2.3cm}|>{\raggedright}m{1.4cm}|>{\raggedright}m{2.3cm}|>{\raggedright\arraybackslash}m{2cm}|}
     \hline
-    \textbf{Taak}                     & \textbf{Persoon} & \textbf{T(uur)} & \textbf{Startdatum} & \textbf{Deadline} \\ \hline
-    Taakverdeling \& planning         & Alle             & 3               & 30/08/2024          & 04/09/2024        \\
-    PWS voorstel maken                & Matthijs         & 3               & 04/09/2024          & 06/09/2024        \\
-    PWS voorstel inleveren            & 1p               & nvt             & 06/09/2024          & 06/09/2024        \\
-    Inlezen in onderwerp              & Alle             & 10              & 06/09/2024          & 20/09/2024        \\
-    Theoretisch kader opstellen       & Matthijs         & 20              & 20/09/2024          & 04/10/2024        \\
-    Deelvraag 1 beantwoorden          & 1p               & 10              & 20/09/2024          & 04/10/2024        \\
-    Deelvraag 2 beantwoorden          & 1p               & 10              & 20/09/2024          & 04/10/2024        \\
-    Deelvraag 3 beantwoorden          & 1p               & 15              & 04/10/2024          & 18/10/2024        \\
-    Experiment 1 uitvoeren            & Matthijs         & 20              & 04/10/2024          & 18/10/2024        \\
-    Resultaten Experiment 1 verwerken & 1p               & 5               & 18/10/2024          & 25/10/2024        \\
-    Experiment 2 uitvoeren            & Matthijs         & 10              & 18/10/2024          & 25/10/2024        \\
-    Herfstvakantie en Toetsweek 1     & Alle             & nvt             & 25/10/2024          & 19/11/2024        \\
-    Eerste versie PWS maken           & 1p, Matthijs     & 8               & 20/11/2024          & 29/11/2024        \\
-    Eerste versie inleveren           & 1p               & nvt             & 29/11/2024          & 29/11/2024        \\
-    Resultaten Experiment 2 verwerken & 1p               & 5               & 20/11/2024          & 29/11/2024        \\
-    Experiment 3 uitvoeren            & Matthijs         & 10              & 29/11/2024          & 13/12/2024        \\
-    Resultaten Experiment 3 verwerken & 1p               & 5               & 13/12/2024          & 20/12/2024        \\
-    Kerstvakantie                     & Alle             & nvt             & 21/12/2024          & 05/01/2025        \\
-    Resultaten                        & 1p               & 3               & 05/01/2024          & 13/01/2025        \\
-    Toetsweek 2                       & Alle             & nvt             & 13/01/2024          & 31/01/2025        \\
-    Conclusie                         & 1p               & 10              & 31/01/2024          & 16/02/2025        \\
-    Onderzoeksmethode                 & Matthijs         & 3               & 31/01/2024          & 16/02/2025        \\
-    Discussie                         & 1p               & 3               & 31/01/2024          & 16/02/2025        \\
-    Voorwoord                         & 1p               & 3               & 31/01/2024          & 16/02/2025        \\
-    Referentielijst                   & 1p               & 3               & 31/01/2024          & 16/02/2025        \\
-    Nakijken van alle hoofdstukken    & Alle             & 3               & 16/02/2024          & 19/02/2025        \\
-    Eindversie maken                  & Matthijs         & 2               & 19/02/2024          & 21/02/2025        \\
-    Eindversie inleveren              & 1p               & nvt             & 21/02/2024          & 21/02/2025        \\
+    \textbf{Taak}                      & \textbf{Persoon}  & \textbf{T(uur)} & \textbf{Startdatum} & \textbf{Deadline} \\ \hline
+    Taakverdeling \& planning          & Alle              & 3               & 30/08/2024          & 04/09/2024        \\
+    PWS voorstel maken                 & Alle              & 3               & 04/09/2024          & 06/09/2024        \\
+    PWS voorstel inleveren             & Thom              & nvt             & 06/09/2024          & 06/09/2024        \\
+    Inlezen in onderwerp               & Alle              & 12              & 06/09/2024          & 20/09/2024        \\
+    Theoretisch kader opstellen        & Matthijs          & 20              & 20/09/2024          & 04/10/2024        \\
+    Deelvraag 1 beantwoorden           & Thom              & 10              & 20/09/2024          & 04/10/2024        \\
+    Deelvraag 2 beantwoorden           & Pepijn            & 10              & 20/09/2024          & 04/10/2024        \\
+    Deelvraag 3 beantwoorden           & Thom              & 15              & 04/10/2024          & 18/10/2024        \\
+    Experiment 1 uitvoeren             & Alle              & 15              & 04/10/2024          & 18/10/2024        \\
+    Resultaten Experiment 1 verwerken  & Pepijn            & 5               & 18/10/2024          & 25/10/2024        \\
+    Experiment 2 uitvoeren             & Alle              & 20              & 18/10/2024          & 25/10/2024        \\
+    Herftvakantie en Toetsweek 1       & Alle              & nvt             & 25/10/2024          & 19/11/2024        \\
+    Eerste versie PWS maken            & Matthijs          & 10              & 20/11/2024          & 29/11/2024        \\
+    Eerste versie inleveren            & Thom              & nvt             & 29/11/2024          & 29/11/2024        \\
+    Resultaten Experiment 2 verwerken  & Pepijn            & 5               & 20/11/2024          & 29/11/2024        \\
+    Experiment 3 uitvoeren             & Alle              & 15              & 29/11/2024          & 13/12/2024        \\
+    Resultaten Experiment 3 verwerken  & Pepijn            & 5               & 13/12/2024          & 20/12/2024        \\
+    Kerstvakantie                      & Alle              & nvt             & 21/12/2024          & 05/01/2025        \\
+    Resultaten                         & Pepijn            & 5               & 05/01/2024          & 13/01/2025        \\
+    Toetsweek 2                        & Alle              & nvt             & 13/01/2024          & 31/01/2025        \\
+    Conclusie                          & Thom              & 8               & 31/01/2024          & 16/02/2025        \\
+    Onderzoeksmethode                  & Matthijs          & 3               & 31/01/2024          & 16/02/2025        \\
+    Discussie                          & Thom              & 3               & 31/01/2024          & 16/02/2025        \\
+    Voorwoord                          & Thom              & 3               & 31/01/2024          & 16/02/2025        \\
+    Referentielijst                    & Pepijn            & 3               & 31/01/2024          & 16/02/2025        \\
+    Nakijken van alle hoofdstukken     & Alle              & 3               & 16/02/2024          & 19/02/2025        \\
+    Alles samenvoegen in de eindversie & Matthijs          & 3               & 19/02/2024          & 21/02/2025        \\
+    Eindeversie inleveren              & Thom              & nvt             & 21/02/2024          & 21/02/2025        \\
+    Presentatie voorbereiden           & Alle              & 5               & 21/02/2025          & 28/02/2025        \\
+    Presentatie maken                  & Alle              & 5               & 28/02/2025          & 08/03/2025        \\
+    \hline
+
+    \textbf{Totaal}                    & \textbf{Matthijs} & \textbf{97}     & nvt                 & nvt               \\
+    \textbf{Totaal}                    & \textbf{Thom}     & \textbf{94}     & nvt                 & nvt               \\
+    \textbf{Totaal}                    & \textbf{Pepijn}   & \textbf{93}     & nvt                 & nvt               \\
+    \hline
+
+    \textbf{Totaal}                    & \textbf{Alle}     & \textbf{284}    & nvt                 & nvt               \\
+
     \hline
 
 \end{tabular}
@@ -301,8 +318,20 @@ bronnen worden gebruikt:
 
     \item Yunhao Tang 2021: \textit{Deep Reinforcement Learning}.
           \begin{itemize}
-              \item \url{https://academiccommons.columbia.edu/doi/10.7916/d8-7b4y-dk07}
               \item \url{https://web.archive.org/web/20240429102051/https://academiccommons.columbia.edu/doi/10.7916/d8-y0tc-h725/download}
+          \end{itemize}
+
+    \item \textit{Proximal Policy Optimization Algorithms} door Schulman, J., Wolski, F., Dhariwal, P., Radford, A., en Klimov, O. (2017, 20 juli).
+          \begin{itemize}
+              \item \url{https://arxiv.org/abs/1707.06347}
+          \end{itemize}
+    \item \textit{Playing Atari with Deep Reinforcement Learning} door Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., Riedmiller, M., en DeepMind Technologies. (z.d.).
+          \begin{itemize}
+              \item \url{https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf}
+          \end{itemize}
+    \item \textit{Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm} door Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A., Lanctot, M., Sifre, L., Kumaran, D., Graepel, T., Lillicrap, T., Simonyan, K., en Hassabis, D. (2017, 5 december).
+          \begin{itemize}
+              \item \url{https://arxiv.org/abs/1712.01815}
           \end{itemize}
 \end{itemize}
 Daarnaast zullen eerdere PWS-projecten worden geraadpleegd, zoals:
