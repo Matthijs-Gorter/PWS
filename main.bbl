@@ -19,19 +19,64 @@
 
 \refsection{0}
   \datalist[entry]{apa/apasortcite//global/global/global}
-    \entry{unknown-author-no-date}{misc}{}{}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{labeldatesource}{nodate}
+    \entry{unknown-author-2018}{misc}{}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
-      \field{title}{{Part 1: Key Concepts in RL — Spinning Up documentation}}
+      \field{title}{{Introduction to RL}}
+      \field{year}{2018}
       \true{nocite}
       \verb{urlraw}
-      \verb https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+      \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
       \verb{url}
-      \verb https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+      \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
+    \endentry
+    \entry{10.5555/1795711}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=503d3d26ec6cb51d31d8013bf13acc0b}{%
+           family={Millington},
+           familyi={M\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=35576c74c04443b4204e50760bc5600d}{%
+           family={Funge},
+           familyi={F\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {San Francisco, CA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann Publishers Inc.}%
+      }
+      \strng{namehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{fullhash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{fullhashraw}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{bibnamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorbibnamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authornamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorfullhash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorfullhashraw}{115d1b2a0148473d72fce5690c2a982b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Creating robust artificial intelligence is one of the greatest challenges for game developers, yet the commercial success of a game is often dependent upon the quality of the AI. In this book, Ian Millington brings extensive professional experience to the problem of improving the quality of AI in games. He describes numerous examples from real games and explores the underlying ideas through detailed case studies. He goes further to introduce many techniques little used by developers today. The book's associated web site contains a library of C++ source code and demonstration programs, and a complete commercial source code library of AI algorithms and techniques."Artificial Intelligence for Games - 2nd edition" will be highly useful to academics teaching courses on game AI, in that it includes exercises with each chapter. It will also include new and expanded coverage of the following: AI-oriented gameplay; Behavior driven AI; Casual games (puzzle games). * The first comprehensive, professional tutorial and reference to implement true AI in games written by an engineer with extensive industry experience.* Walks through the entire development process from beginning to end.* Includes examples from over 100 real games, 10 in-depth case studies, and web site with sample code.}
+      \field{edition}{2nd}
+      \field{isbn}{0123747317}
+      \field{title}{Artificial Intelligence for Games, Second Edition}
+      \field{year}{2009}
+      \true{nocite}
     \endentry
     \entry{puterman-1994}{book}{}{}
       \name{author}{1}{}{%
@@ -144,19 +189,64 @@
     \endentry
   \enddatalist
   \datalist[entry]{apa/global//global/global/global}
-    \entry{unknown-author-no-date}{misc}{}{}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{labeldatesource}{nodate}
+    \entry{unknown-author-2018}{misc}{}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
-      \field{title}{{Part 1: Key Concepts in RL — Spinning Up documentation}}
+      \field{title}{{Introduction to RL}}
+      \field{year}{2018}
       \true{nocite}
       \verb{urlraw}
-      \verb https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+      \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
       \verb{url}
-      \verb https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+      \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
+    \endentry
+    \entry{10.5555/1795711}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=503d3d26ec6cb51d31d8013bf13acc0b}{%
+           family={Millington},
+           familyi={M\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=35576c74c04443b4204e50760bc5600d}{%
+           family={Funge},
+           familyi={F\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {San Francisco, CA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Morgan Kaufmann Publishers Inc.}%
+      }
+      \strng{namehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{fullhash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{fullhashraw}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{bibnamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorbibnamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authornamehash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorfullhash}{115d1b2a0148473d72fce5690c2a982b}
+      \strng{authorfullhashraw}{115d1b2a0148473d72fce5690c2a982b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Creating robust artificial intelligence is one of the greatest challenges for game developers, yet the commercial success of a game is often dependent upon the quality of the AI. In this book, Ian Millington brings extensive professional experience to the problem of improving the quality of AI in games. He describes numerous examples from real games and explores the underlying ideas through detailed case studies. He goes further to introduce many techniques little used by developers today. The book's associated web site contains a library of C++ source code and demonstration programs, and a complete commercial source code library of AI algorithms and techniques."Artificial Intelligence for Games - 2nd edition" will be highly useful to academics teaching courses on game AI, in that it includes exercises with each chapter. It will also include new and expanded coverage of the following: AI-oriented gameplay; Behavior driven AI; Casual games (puzzle games). * The first comprehensive, professional tutorial and reference to implement true AI in games written by an engineer with extensive industry experience.* Walks through the entire development process from beginning to end.* Includes examples from over 100 real games, 10 in-depth case studies, and web site with sample code.}
+      \field{edition}{2nd}
+      \field{isbn}{0123747317}
+      \field{title}{Artificial Intelligence for Games, Second Edition}
+      \field{year}{2009}
+      \true{nocite}
     \endentry
     \entry{puterman-1994}{book}{}{}
       \name{author}{1}{}{%

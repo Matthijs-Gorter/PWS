@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  5 SEP 2024 13:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  6 SEP 2024 15:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1238,7 +1238,7 @@ Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
 Package biblatex Info: Reference section=0 on input line 38.
 Package biblatex Info: Reference segment=0 on input line 38.
-<logo-clz.png, id=102, 88.8921pt x 99.44353pt>
+<logo-clz.png, id=130, 88.8921pt x 99.44353pt>
 File: logo-clz.png Graphic file (type png)
 <use logo-clz.png>
 Package pdftex.def Info: logo-clz.png  used on input line 51.
@@ -1335,68 +1335,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--122
 [1
 
 ]
+Overfull \hbox (11.5278pt too wide) in paragraph at lines 158--158
+[]\T1/lmr/bx/n/12 Hoe be-ïn-vloe-den de spel-ken-mer-ken de pres-ta-tie van rei
+n-for-ce-ment learning-
+ []
+
+
+
+[2]
+
+[3]
+
+[4]
 Hoofdstuk 2.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[2
+[5
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-99.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
+03.
  (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[3
+[6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.209     \item \textbf
+l.313     \item \textbf
                        {Schaak}: Elke positie op het bord (toestand) en moge...
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 
-[4]
+[7]
 
-[5{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.en
+[8{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.en
 c}]
 
-[6]
+[9]
 
-[7]
+[10]
 Hoofdstuk 3.
-
-
-[8
-
-]
-Hoofdstuk 4.
-
-
-[9
-
-]
-Hoofdstuk 5.
-
-
-[10
-
-]
-Hoofdstuk 6.
 
 
 [11
 
 ]
+Hoofdstuk 4.
+
 
 [12
 
 ]
+Hoofdstuk 5.
+
 
 [13
+
+]
+Hoofdstuk 6.
+
+
+[14
+
+]
+
+[15
+
+]
+
+[16
 
 ] (main.aux)
  ***********
@@ -1404,16 +1416,16 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: CE09EEAD6FB5CEEF83D67F0FB3467F4F;3055.
+(rerunfilecheck)             Checksum: 693AECB26675EF7488DC906535572522;4007.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 32055 strings out of 473899
- 608228 string characters out of 5726501
+ 32089 strings out of 473899
+ 608783 string characters out of 5726501
  1940960 words of memory out of 5000000
- 54388 multiletter control sequences out of 15000+600000
+ 54402 multiletter control sequences out of 15000+600000
  603555 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,87p,1783b,2809s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1431,9 +1443,9 @@ b><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
 /Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/
 Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb>
-Output written on main.pdf (18 pages, 269008 bytes).
+Output written on main.pdf (21 pages, 283233 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 48 named destinations out of 1000 (max. 500000)
- 210 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 368 PDF objects out of 1000 (max. 8388607)
+ 68 named destinations out of 1000 (max. 500000)
+ 266 words of extra memory for PDF output out of 10000 (max. 10000000)
 
