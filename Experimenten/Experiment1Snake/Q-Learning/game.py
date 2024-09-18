@@ -4,103 +4,64 @@ import random
 import numpy as np
 
 
+# Game
 snakeSpeed = 15
-
-windowX = 800
-windowY = 600
+windowX, windowY = 800, 600
 
 # Q Learning
-alpha = 0.1  # Learning rate
-gamma = 0.99  # Discount factor
-epsilon = 1  # Exploration factor
-epsilonDecay = 0.95
-nActions = 3 
-nStates = 128
-
+alpha, gamma, epsilon, epsilonDecay = 0.1, 0.99, 1, 0.95
+nActions, nStates = 3, 128
 Q = np.zeros((nStates, nActions))
 
-# logging
-games = []
-scores = []
+# Logging
+games, scores = [], []
 
-# colors
-black = pygame.Color(0, 0, 0)
-white = pygame.Color(255, 255, 255)
-red = pygame.Color(255, 0, 0)
-green = pygame.Color(0, 255, 0)
-blue = pygame.Color(0, 0, 255)
+# Colors
+black, white, red, green = (0, 0, 0), (255, 255, 255), (255, 0, 0), (0, 255, 0)
 
+# Pygame
 pygame.init()
-
 pygame.display.set_caption('Q_Learning_Snake')
 gameWindow = pygame.display.set_mode((windowX, windowY))
 FPS = pygame.time.Clock()
 
-# action = int 0 = left; 1 = straight; 2 = right;
+DIRECTIONS = {"UP": (0, -20), "DOWN": (0, 20), "LEFT": (-20, 0), "RIGHT": (20, 0)}
+LEFT_TURN = {"UP": "LEFT", "LEFT": "DOWN", "DOWN": "RIGHT", "RIGHT": "UP"}
+RIGHT_TURN = {"UP": "RIGHT", "RIGHT": "DOWN", "DOWN": "LEFT", "LEFT": "UP"}
+
 
 def getState(snake_position, fruit_position, snake_body, direction):
-    pointLeft  = [snake_position[0] - 20, snake_position[1]]
-    pointRight = [snake_position[0] + 20, snake_position[1]]
-    pointUp    = [snake_position[0]     , snake_position[1] + 20]
-    pointDown  = [snake_position[0]     , snake_position[1] - 20]
-    
-    foodLeft  = fruit_position[0] < snake_position[0]
-    foodRight = fruit_position[0] > snake_position[0]
-    foodUp    = fruit_position[1] < snake_position[1]
-    foodDown  = fruit_position[1] > snake_position[1] 
-    
+    direction_vector = DIRECTIONS[direction]
+    left_vector = DIRECTIONS[LEFT_TURN[direction]]
+    right_vector = DIRECTIONS[RIGHT_TURN[direction]]
+
+    food_direction = (fruit_position[0] - snake_position[0], fruit_position[1] - snake_position[1])
+
     state = (
         # Danger straight
-        (direction == "RIGHT" and checkCollision(pointRight,snake_body)) or 
-        (direction == "LEFT" and checkCollision(pointLeft,snake_body)) or 
-        (direction == "UP" and checkCollision(pointUp,snake_body)) or 
-        (direction == "DOWN" and checkCollision(pointDown,snake_body)),
+        checkCollision([snake_position[0] + direction_vector[0], snake_position[1] + direction_vector[1]], snake_body),
 
         # Danger right
-        (direction == "UP" and checkCollision(pointRight,snake_body)) or 
-        (direction == "DOWN" and checkCollision(pointLeft,snake_body)) or 
-        (direction == "LEFT" and checkCollision(pointUp,snake_body)) or 
-        (direction == "RIGHT" and checkCollision(pointDown,snake_body)),
+        checkCollision([snake_position[0] + right_vector[0], snake_position[1] + right_vector[1]], snake_body),
 
         # Danger left
-        (direction == "DOWN" and checkCollision(pointRight,snake_body)) or 
-        (direction == "UP" and checkCollision(pointLeft,snake_body)) or 
-        (direction == "RIGHT" and checkCollision(pointUp,snake_body)) or 
-        (direction == "LEFT" and checkCollision(pointDown,snake_body)),
-        
-        # food straight
-        (direction == "RIGHT" and foodRight) or 
-        (direction == "LEFT" and foodLeft) or 
-        (direction == "UP" and foodUp) or 
-        (direction == "DOWN" and foodDown),
+        checkCollision([snake_position[0] + left_vector[0], snake_position[1] + left_vector[1]], snake_body),
 
-        # food right
-        (direction == "UP" and foodRight) or 
-        (direction == "DOWN" and foodLeft) or 
-        (direction == "LEFT" and foodUp) or 
-        (direction == "RIGHT" and foodDown),
+        # Food straight
+        (direction_vector[0] * food_direction[0] > 0 or direction_vector[1] * food_direction[1] > 0),
 
-        # food left
-        (direction == "DOWN" and foodRight) or 
-        (direction == "UP" and foodLeft) or 
-        (direction == "RIGHT" and foodUp) or 
-        (direction == "LEFT" and foodDown),
-        
-        # food behind
-        (direction == "LEFT" and foodRight) or 
-        (direction == "RIGHT" and foodLeft) or 
-        (direction == "DOWN" and foodUp) or 
-        (direction == "UP" and foodDown),
-        
+        # Food right
+        (right_vector[0] * food_direction[0] > 0 or right_vector[1] * food_direction[1] > 0),
+
+        # Food left
+        (left_vector[0] * food_direction[0] > 0 or left_vector[1] * food_direction[1] > 0),
     )
     return sum(1 << i for i, val in enumerate(state) if val)
 
-def checkCollision(position,snake_body):
-    if position[0] < 0 or position[0] >= windowX or position[1] < 0 or position[1] >= windowY:
-        return True
-    if position in snake_body:
-        return True
-    return False
+def checkCollision(position, snake_body):
+    return (position[0] < 0 or position[0] >= windowX or
+            position[1] < 0 or position[1] >= windowY or
+            tuple(position) in snake_body)
 
 def chooseAction(state):
     # Epsilon-greedy action selection
@@ -187,7 +148,10 @@ def startNewGame(training):
 
         if not fruit_spawn:
             fruit_position = [random.randrange(1, (windowX // 20)) * 20,
-                            random.randrange(1, (windowY // 20)) * 20]
+                              random.randrange(1, (windowY // 20)) * 20]
+            while tuple(fruit_position) in snake_body:
+                fruit_position = [random.randrange(1, (windowX // 20)) * 20,
+                                  random.randrange(1, (windowY // 20)) * 20]
 
         fruit_spawn = True
         gameWindow.fill(black)
@@ -262,7 +226,7 @@ def train(numGames):
         
         if i % 100 == 0:
             print(i)
-train(1000)    
+train(100)    
 print(games)
 print(scores)
     
