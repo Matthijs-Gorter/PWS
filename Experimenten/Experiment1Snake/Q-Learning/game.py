@@ -3,6 +3,7 @@ import time
 import random
 import numpy as np
 import time
+import csv
 
 
 # Game
@@ -10,7 +11,7 @@ snakeSpeed = 15
 windowX, windowY = 800, 600
 
 # Q Learning
-alpha, gamma, epsilon, epsilonDecay = 0.1, 0.99, 1, 0.95
+alpha, gamma, epsilon, epsilonDecay = 0.1, 0.99, 1, 0.99
 nActions, nStates = 3, 128
 Q = np.zeros((nStates, nActions))
 
@@ -229,11 +230,12 @@ def train(numGames):
             
             
 start_time = time.time()            
-train(10000)    
+train(100000)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
-print(games)
-print(scores)
     
-print(Q)
+with open('games_scores.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['Game', 'Score'])  # header
+    writer.writerows(zip(games, scores))  # data
 
 startNewGame(False)
