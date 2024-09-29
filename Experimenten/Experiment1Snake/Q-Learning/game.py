@@ -11,7 +11,7 @@ snakeSpeed = 15
 windowX, windowY = 800, 600
 
 # Q Learning
-alpha, gamma, epsilon, epsilonDecay = 0.1, 0.99, 1, 0.99
+alpha, gamma, epsilon, epsilonDecay = 0.001, 0.99, 1, 0.99
 nActions, nStates = 3, 128
 Q = np.zeros((nStates, nActions))
 
@@ -230,7 +230,7 @@ def train(numGames):
             
             
 start_time = time.time()            
-train(100000)    
+train(25000)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
     
 with open('games_scores.csv', 'w', newline='') as csvfile:

@@ -4,7 +4,10 @@ import random
 import numpy as np
 import time
 import csv
-
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from collections import deque
 
 # Game
 snakeSpeed = 15
@@ -75,7 +78,6 @@ def chooseAction(state):
         return np.argmax(Q[state])
 
 def updateQTable(state, action, reward, next_state):    
-    # Q-learning update rule
     Q[state][action] = Q[state][action] + alpha * (
         reward + gamma * np.max(Q[next_state]) - Q[state][action]
     )
@@ -230,7 +232,7 @@ def train(numGames):
             
             
 start_time = time.time()            
-train(100000)    
+train(100)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
     
 with open('games_scores.csv', 'w', newline='') as csvfile:

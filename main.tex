@@ -14,22 +14,52 @@
 \usepackage{array} 
 \usepackage{multicol}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta, positioning}
+\usetikzlibrary{arrows.meta,shapes.geometric, arrows, positioning}
 \usepackage[hidelinks]{hyperref}
 \usepackage{titlesec} 
 \usepackage{algorithm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
 \usepackage{algpseudocode}
+\usepackage{listings}
 \usepackage[
 backend=biber,
 style=apa,
 ]{biblatex}
 \addbibresource{references.bib}
 
+\algrenewcommand{\alglinenumber}[1]{#1}
 
 \setlength{\parskip}{0.8em}
 \setlength{\parindent}{0pt}
 
 \nocite{*}
+
+% Define custom colors based on VSCode's default dark theme
+\definecolor{vscBackground}{HTML}{1E1E1E} % Dark background
+\definecolor{vscText}{HTML}{D4D4D4}       % Default text color (light grey)
+\definecolor{vscKeyword}{HTML}{569CD6}    % Blue for keywords
+\definecolor{vscBuiltin}{HTML}{4EC9B0}    % Light teal for built-in functions (e.g., def, return)
+\definecolor{vscString}{HTML}{D69D85}     % Salmon for strings
+\definecolor{vscComment}{HTML}{6A9955}    % Green for comments
+\definecolor{vscNumber}{HTML}{B5CEA8}     % Light green for numbers
+\definecolor{vscFunction}{HTML}{DCDCAA}   % Yellow for function names
+
+\lstset{
+    backgroundcolor=\color{vscBackground},   % Set background color
+    basicstyle=\ttfamily\color{vscText},     % Basic text style and color
+    keywordstyle=\color{vscKeyword}\bfseries, % Keywords in blue
+    identifierstyle=\color{vscText},         % Identifiers in default text color
+    commentstyle=\color{vscComment}\itshape, % Comments in italic green
+    stringstyle=\color{vscString},           % Strings in salmon
+    numberstyle=\color{vscNumber},           % Numbers in light green
+    frame=single,                            % Frame the code
+    breaklines=true,                         % Allow line breaking
+    showstringspaces=false,                  % Don't show spaces as underscores
+    language=Python,                         % Set language to Python
+    morekeywords={np},                       % Add 'np' as a keyword (numpy)
+    columns=fullflexible                    % Allow flexible column alignment
+}
 
 \pagenumbering{Roman}  % Romeinse nummering
 
@@ -131,11 +161,11 @@ verschillende kenmerken, willen we ontdekken welke algoritmes het beste
 presteren in welke soorten spellen. Dit kan variëren van strategische spellen
 die planning vereisen tot actiespellen die snelle beslissingen vragen.
 \section{Onderzoeksvragen}
-\subsection{Hoofdvraag}
+\subsection*{Hoofdvraag}
 Hoe beïnvloeden de specifieke kenmerken van computerspellen de effectiviteit
 van verschillende reinforcement learning-algoritmes in het optimaliseren van
 spelprestaties?
-\subsection{Deelvragen}
+\subsection*{Deelvragen}
 Om beter te begrijpen hoe de kenmerken van computerspellen de prestaties van
 verschillende reinforcement learning (RL) algoritmes beïnvloeden, hebben we
 drie belangrijke deelvragen opgesteld
@@ -291,7 +321,7 @@ toestand \( x' \). De overgangswaarschijnlijkheidsmatrix \( P \) bevat de
 waarschijnlijkheden van het overgaan van de ene toestand naar de volgende
 toestand, gegeven een bepaalde actie.
 
-\subsection{Markov-eigenschap}
+\subsection*{Markov-eigenschap}
 
 MDP werkt onder de Markov-aanname, wat betekent dat de volgende toestand en
 beloning alleen afhangen van het huidige toestand-actiepaar en niet van enige
@@ -317,7 +347,7 @@ In een MDP gaat een agent verder in tijdstappen \(t = 0, 1, 2, \ldots, T\) waar
 de horizon \(T\) zowel eindig als oneindig kan zijn. Hierin is \(T\) oneindig
 tenzij anders aangegeven.
 
-\subsection{Overgangswaarschijnlijkheidsmatrix}
+\subsection*{Overgangswaarschijnlijkheidsmatrix}
 
 Wanneer de set van alle toestanden \(\mathcal{X}\) en de set van alle acties
 \(\mathcal{A}\) eindig zijn, d.w.z. \(|\mathcal{X}|, |\mathcal{A}| < \infty\),
@@ -333,7 +363,7 @@ dimensies zijn als volgt:
     \item De volgende toestand \(x'\).
 \end{itemize}
 
-\subsection{Beleid}
+\subsection*{Beleid}
 
 In RL is een beleid de strategie die een agent volgt om beslissingen te nemen.
 Het bepaalt welke actie een agent moet uitvoeren, gegeven de huidige toestand
@@ -353,7 +383,7 @@ van de omgeving. Er zijn twee hoofdtypen beleid:
           \end{itemize}
 \end{itemize}
 
-\subsection{Verwachtingswaarde}
+\subsection*{Verwachtingswaarde}
 
 De verwachtingswaarde \(\mathbb{E}[X]\) (Expected value), of het gemiddelde,
 van een willekeurige variabele \(X\) is een manier om het gemiddelde resultaat
@@ -364,14 +394,14 @@ gelijk is aan 3,5.
 
 \textbf{Geconditioneerde verwachtingswaarde} \(\mathbb{E}[a|b]\): het gemiddelde van \(a\) berekenen, gegeven de voorwaarde \(b\).
 
-\subsection{Kortingsfactor}
+\subsection*{Kortingsfactor}
 
 De kortingsfactor \(\gamma\) is een getal tussen 0 en 1 dat het gewicht bepaalt
 van toekomstige beloningen ten opzichte van onmiddellijke beloningen. Bij een
 lage kortingsfactor hebben toekomstige beloningen weinig invloed. Bij een
 kortingsfactor van 1 hebben alle beloningen evenveel invloed.
 
-\subsection{Waardefunctie}
+\subsection*{Waardefunctie}
 
 De waardefunctie \(V(x)\) geeft de verwachte waarde van de totale beloning die
 een agent zal ontvangen vanaf de toestand \(x\) als hij het beleid \(\pi\)
@@ -387,7 +417,7 @@ kortingsfactor (\(\gamma \in [0,1]\)). Dan wordt elke beloning met een groter
 tijdstapje (verder in de toekomst) kleiner en heeft dus minder invloed op de
 verwachte waarde.
 
-\subsection{Q-functie}
+\subsection*{Q-functie}
 
 De Q-functie \(Q(x,a)\) geeft de verwachte waarde van de totale beloning die
 een agent zal ontvangen vanaf de toestand \(x\) en na het nemen van actie
@@ -408,7 +438,7 @@ Waarde functie en Q-functie zijn gerelateerd aan elkaar op deze manier:
     V(x) = \mathbb{E}_{a \sim \pi(\cdot|x)}[Q(x,a)]
 \]
 
-\subsection{Bellman vergelijking}
+\subsection*{Bellman vergelijking}
 
 De Q-functie en de waardefunctie in RL moeten voldoen aan
 consistentievoorwaarden, bekend als de Bellman-vergelijkingen. Voor een gegeven
@@ -431,7 +461,7 @@ volgt worden gedefinieerd:
     \item \(r(x,a)\) is de beloning van actie \(a\) in toestand \(x\).
 \end{itemize}
 
-\subsection{Evaluatie en Controle}
+\subsection*{Evaluatie en Controle}
 
 Er zijn twee problemen in RL:
 \begin{itemize}
@@ -469,13 +499,250 @@ Er zijn twee problemen in RL:
           \]
 \end{itemize}
 
-\section{Belangrijke Algoritmes}
+\section{Q-Learning}
+Q-Learning is een reinforcement learning algoritme dat gebruik maakt van een
+Q-tabel. Hierin de Q-waarden voor alle combinaties van toestanden en actie's. Met behulp van deze tabel
+kiest agent de volgende actie.
+
+\subsection*{Proces}
+.
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,text centered, draw=black, fill=red!30]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!30]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+
+        % Knopen plaatsen
+        \node (start) [startstop] {Start Training};
+        \node (trainingInit) [process, below of=start] {Initialiseer Q-table en hyperparameters};
+        \node (startEpisode) [process, below of=trainingInit] {Start nieuwe episode};
+        \node (episodeInit) [process, below of=startEpisode] {Initialiseer game variabele};
+        \node (startTimestep) [process, below of=episodeInit] {Start nieuwe tijdstap};
+        \node (getstate) [process, below of=startTimestep] {Verzamel Huidige Staat};
+        \node (decideexplore) [decision, below of=getstate, yshift=-0.25cm] {Is Actie Exploratie?};
+        \node (explore) [process, below left=of decideexplore, xshift=1cm] {Kies Willekeurige Actie};
+        \node (exploit) [process, below right=of decideexplore, xshift=-2cm] {Kies Actie met hoogste Q-waarde};
+        \node (executeaction) [process, below of=decideexplore, yshift=-1.5cm] {Voer Actie Uit en Update Richting};
+        \node (determinereward) [process, below of=executeaction] {Bepaal Beloning};
+        \node (updateq) [process, below of=determinereward] {Update Q-table};
+        \node (checkgameover) [decision, below of=updateq] {Is het Spel Afgelopen?};
+        \node (checktrainingover) [decision, below of=checkgameover, yshift=-0.5cm] {Is de training Afgelopen?};
+        \node (stop) [startstop, below of=checktrainingover, yshift=-0.5cm] {Einde};
+
+        % Pijlen tekenen
+        \draw [arrow] (start) -- (trainingInit);
+        \draw [arrow] (trainingInit) -- (startEpisode);
+        \draw [arrow] (startEpisode) -- (episodeInit);
+        \draw [arrow] (episodeInit) -- (startTimestep);
+        \draw [arrow] (startTimestep) -- (getstate);
+        \draw [arrow] (getstate) -- (decideexplore);
+        \draw [arrow] (decideexplore) -| node[anchor=east] {Ja} (explore);
+        \draw [arrow] (decideexplore) -| node[anchor=west] {Nee} (exploit);
+        \draw [arrow] (explore) |- (executeaction);
+        \draw [arrow] (exploit) |- (executeaction);
+        \draw [arrow] (executeaction) -- (determinereward);
+        \draw [arrow] (determinereward) -- (updateq);
+        \draw [arrow] (updateq) -- (checkgameover);
+        \draw [arrow] (checkgameover) -- node[anchor=east] {Ja} (checktrainingover);
+        \draw [arrow] (checkgameover) -| node[pos=0.05, anchor=north, align=center] {Nee} (7.5,-4) -- (startTimestep);
+        \draw [arrow] (checktrainingover) -- node[anchor=east] {Ja} (stop);
+        \draw [arrow] (checktrainingover) -| node[pos=0.05, anchor=north, align=center] {Nee} (8,-2) -- (startEpisode);
+    \end{tikzpicture}
+    \caption{Flowchart van het Q-Learning Algoritme}\label{fig:ql_flowchart}
+\end{figure}
+
+\subsection*{Algorithm}
+In dit document wordt het Q-learning algoritme beschreven in Algoritme  \ref{alg:Q-learning}.
+
+
+\begin{algorithm}
+    \caption{Q-Learning Algoritme}\label{alg:Q-learning}
+    \begin{algorithmic}
+        \State \textbf{Initialisatie:} Stel $Q(s, a)$ willekeurig in voor alle toestanden $s$ en acties $a$
+        \For{elke episode}
+            \State Initialiseer begin-toestand $s$
+            \While{$s$ is niet een terminale toestand}
+                \State Kies actie $a$ in toestand $s$ op basis van een beleid $\pi$
+                \State Voer actie $a$ uit, observeer beloning $r$ en de volgende toestand $s'$
+                \State Update de Q-waarde:
+                \[
+                    Q(s, a) \gets Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
+                \]
+                \State $s \gets s'$
+            \EndWhile
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+\newpage
+
+\section{Deep Q-Network}
+.
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=red!30]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!30]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+
+        % Knopen plaatsen
+        \node (start) [startstop] {Start Training};
+        \node (initNetwork) [process, below of=start] {Initialiseer Q-Network en hyperparameters};
+        \node (initMemory) [process, below of=initNetwork] {Initialiseer Experience Replay Buffer};
+        \node (startEpisode) [process, below of=initMemory] {Start nieuwe episode};
+        \node (episodeInit) [process, below of=startEpisode] {Initialiseer game variabele};
+        \node (startTimestep) [process, below of=episodeInit] {Start nieuwe tijdstap};
+        \node (getstate) [process, below of=startTimestep] {Verzamel Huidige Staat};
+        \node (decideexplore) [decision, below of=getstate, yshift=-0.25cm] {Is Actie Exploratie?};
+        \node (explore) [process, below left=of decideexplore, xshift=1cm] {Kies Willekeurige Actie};
+        \node (exploit) [process, below right=of decideexplore, xshift=-1cm] {Kies Actie via Q-Network};
+        \node (executeaction) [process, below of=decideexplore, yshift=-1.5cm] {Voer Actie Uit en Update Richting};
+        \node (determinereward) [process, below of=executeaction] {Bepaal Beloning en Volgende Staat};
+        \node (storememory) [process, below of=determinereward] {Sla in Replay Buffer op};
+        \node (updatenetwork) [process, below of=storememory] {Update Q-Network met Replay Buffer};
+        \node (checkgameover) [decision, below of=updatenetwork] {Is het Spel Afgelopen?};
+        \node (checktrainingover) [decision, below of=checkgameover, yshift=-0.5cm] {Is de training Afgelopen?};
+        \node (stop) [startstop, below of=checktrainingover, yshift=-0.5cm] {Einde};
+
+        % Pijlen tekenen
+        \draw [arrow] (start) -- (initNetwork);
+        \draw [arrow] (initNetwork) -- (initMemory);
+        \draw [arrow] (initMemory) -- (startEpisode);
+        \draw [arrow] (startEpisode) -- (episodeInit);
+        \draw [arrow] (episodeInit) -- (startTimestep);
+        \draw [arrow] (startTimestep) -- (getstate);
+        \draw [arrow] (getstate) -- (decideexplore);
+        \draw [arrow] (decideexplore) -| node[anchor=east] {Ja} (explore);
+        \draw [arrow] (decideexplore) -| node[anchor=west] {Nee} (exploit);
+        \draw [arrow] (explore) |- (executeaction);
+        \draw [arrow] (exploit) |- (executeaction);
+        \draw [arrow] (executeaction) -- (determinereward);
+        \draw [arrow] (determinereward) -- (storememory);
+        \draw [arrow] (storememory) -- (updatenetwork);
+        \draw [arrow] (updatenetwork) -- (checkgameover);
+        \draw [arrow] (checkgameover) -- node[anchor=east] {Ja} (checktrainingover);
+        \draw [arrow] (checkgameover) -| node[pos=0.05, anchor=north, align=center] {Nee} (7.5,-5) -- (startTimestep);
+        \draw [arrow] (checktrainingover) -- node[anchor=east] {Ja} (stop);
+        \draw [arrow] (checktrainingover) -| node[pos=0.05, anchor=north, align=center] {Nee} (8,-3) -- (startEpisode);
+    \end{tikzpicture}
+    \caption{Flowchart van het DQN Algoritme}\label{fig:dqn_flowchart}
+\end{figure}
+
+/newpage
+\section{DDPG}
+.
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=red!30]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!30]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+
+        % Knopen plaatsen
+        \node (start) [startstop] {Start Training};
+        \node (initNetworks) [process, below of=start] {Initialiseer Actor, Critic en Target Netwerken};
+        \node (initMemory) [process, below of=initNetworks] {Initialiseer Experience Replay Buffer};
+        \node (startEpisode) [process, below of=initMemory] {Start nieuwe episode};
+        \node (episodeInit) [process, below of=startEpisode] {Initialiseer game variabele};
+        \node (startTimestep) [process, below of=episodeInit] {Start nieuwe tijdstap};
+        \node (getstate) [process, below of=startTimestep] {Verzamel Huidige Staat};
+        \node (decideexplore) [decision, below of=getstate, yshift=-0.25cm] {Is Actie Exploratie?};
+        \node (explore) [process, below left=of decideexplore, xshift=1cm] {Kies Willekeurige Actie (Exploratie)};
+        \node (exploit) [process, below right=of decideexplore, xshift=-2cm] {Kies Actie via Actor Netwerk};
+        \node (executeaction) [process, below of=decideexplore, yshift=-1.5cm] {Voer Actie Uit en Verzameld Resultaat};
+        \node (determinereward) [process, below of=executeaction] {Bepaal Beloning en Volgende Staat};
+        \node (storememory) [process, below of=determinereward] {Sla in Replay Buffer op};
+        \node (updatenetworks) [process, below of=storememory] {Update Actor en Critic Netwerken met Replay Buffer};
+        \node (updatetargets) [process, below of=updatenetworks] {Update Actor en Critic Target Netwerken};
+        \node (checkgameover) [decision, below of=updatetargets] {Is het Spel Afgelopen?};
+        \node (checktrainingover) [decision, below of=checkgameover, yshift=-0.5cm] {Is de training Afgelopen?};
+        \node (stop) [startstop, below of=checktrainingover, yshift=-0.5cm] {Einde};
+
+        % Pijlen tekenen
+        \draw [arrow] (start) -- (initNetworks);
+        \draw [arrow] (initNetworks) -- (initMemory);
+        \draw [arrow] (initMemory) -- (startEpisode);
+        \draw [arrow] (startEpisode) -- (episodeInit);
+        \draw [arrow] (episodeInit) -- (startTimestep);
+        \draw [arrow] (startTimestep) -- (getstate);
+        \draw [arrow] (getstate) -- (decideexplore);
+        \draw [arrow] (decideexplore) -| node[anchor=east] {Ja} (explore);
+        \draw [arrow] (decideexplore) -| node[anchor=west] {Nee} (exploit);
+        \draw [arrow] (explore) |- (executeaction);
+        \draw [arrow] (exploit) |- (executeaction);
+        \draw [arrow] (executeaction) -- (determinereward);
+        \draw [arrow] (determinereward) -- (storememory);
+        \draw [arrow] (storememory) -- (updatenetworks);
+        \draw [arrow] (updatenetworks) -- (updatetargets);
+        \draw [arrow] (updatetargets) -- (checkgameover);
+        \draw [arrow] (checkgameover) -- node[anchor=east] {Ja} (checktrainingover);
+        \draw [arrow] (checkgameover) -| node[pos=0.05, anchor=north, align=center] {Nee} (7.5,-5) -- (startTimestep);
+        \draw [arrow] (checktrainingover) -- node[anchor=east] {Ja} (stop);
+        \draw [arrow] (checktrainingover) -| node[pos=0.05, anchor=north, align=center] {Nee} (8,-3) -- (startEpisode);
+    \end{tikzpicture}
+    \caption{Flowchart van het DDPG Algoritme}\label{fig:ddpg_flowchart}
+\end{figure}
+
+\section{AplhaZero}
+
+,
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=red!30]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!30]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+
+        % Knopen plaatsen
+        \node (start) [startstop] {Start Training};
+        \node (initNetwork) [process, below of=start] {Initialiseer Policy-Value Netwerk};
+        \node (startEpisode) [process, below of=initNetwork] {Start Zelf-Spel Episode};
+        \node (episodeInit) [process, below of=startEpisode] {Initialiseer Bordconfiguratie};
+        \node (startTimestep) [process, below of=episodeInit] {Start nieuwe tijdstap};
+        \node (mcts) [process, below of=startTimestep] {Voer Monte Carlo Boomzoek uit};
+        \node (selectaction) [process, below of=mcts] {Kies Actie via MCTS Beleidsdistributie};
+        \node (executeaction) [process, below of=selectaction] {Voer Actie Uit en Verander Bordconfiguratie};
+        \node (checkgameover) [decision, below of=executeaction] {Is het Spel Afgelopen?};
+        \node (storegame) [process, below of=checkgameover, yshift=-0.5cm] {Sla het Spel en Resultaten op};
+        \node (trainnetwork) [process, below of=storegame, yshift=-0.5cm] {Train Netwerk op Zelf-Spel Data};
+        \node (checktrainingover) [decision, below of=trainnetwork, yshift=-0.5cm] {Is de training Afgelopen?};
+        \node (stop) [startstop, below of=checktrainingover, yshift=-0.5cm] {Einde};
+
+        % Pijlen tekenen
+        \draw [arrow] (start) -- (initNetwork);
+        \draw [arrow] (initNetwork) -- (startEpisode);
+        \draw [arrow] (startEpisode) -- (episodeInit);
+        \draw [arrow] (episodeInit) -- (startTimestep);
+        \draw [arrow] (startTimestep) -- (mcts);
+        \draw [arrow] (mcts) -- (selectaction);
+        \draw [arrow] (selectaction) -- (executeaction);
+        \draw [arrow] (executeaction) -- (checkgameover);
+        \draw [arrow] (checkgameover) -- node[anchor=east] {Ja} (storegame);
+        \draw [arrow] (checkgameover) -| node[anchor=north] {Nee} (startTimestep);
+        \draw [arrow] (storegame) -- (trainnetwork);
+        \draw [arrow] (trainnetwork) -- (checktrainingover);
+        \draw [arrow] (checktrainingover) -- node[anchor=east] {Ja} (stop);
+        \draw [arrow] (checktrainingover) -| node[anchor=north] {Nee} (startEpisode);
+    \end{tikzpicture}
+    \caption{Flowchart van het AlphaZero Algoritme}\label{fig:alphazero_flowchart}
+\end{figure}
+
+
 
 \section{Artificiële Leermethodes}
 
 \section{Computerspellen}
 
 \chapter{Onderzoeksmethoden}
+\section{Q-Learning}
 
 \chapter{Analyse en Resultaten}
 
