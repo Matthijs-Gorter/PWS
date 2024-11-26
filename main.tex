@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
+\usepackage{lipsum}
 \usepackage{setspace}
 \usepackage{tocbibind}
 \usepackage{array} 
@@ -79,7 +80,7 @@ style=apa,
     \rule{\linewidth}{0.4mm}
 
     \vspace{1.5cm}
-    \includegraphics[width=0.2\textwidth]{logo-clz.png} \\
+    \includegraphics[width=0.2\textwidth]{assets/logo-clz.png} \\
     \vspace{1.5cm}
     \large
     \textbf{Matthijs Gorter} \\
@@ -94,13 +95,24 @@ style=apa,
 
 \chapter*{Voorwoord}
 \addcontentsline{toc}{chapter}{Voorwoord} % Voeg toe aan de inhoudsopgave
-Voorwoord inhoud hier. Bedank mensen die geholpen hebben, beschrijf het doel van het profielwerkstuk en eventuele persoonlijke motieven of ervaringen.
 
-\vspace{1cm}
-\noindent
-Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\
-Christelijk Lyceum Zeist \\
-Februari 2025
+Toen we begonnen na te denken over een onderwerp voor ons profielwerkstuk,
+wilden we graag een thema kiezen dat zowel uitdagend als actueel was.
+Kunstmatige intelligentie fascineert ons al enige tijd, vooral vanwege de
+invloed die het heeft op onze toekomst en de vele toepassingen die het nu al
+kent. Het idee om ons te verdiepen in reinforcement learning ontstond omdat
+deze tak van KI niet alleen theoretisch interessant is, maar ook praktisch
+ontzettend krachtig is.
+
+Reinforcement learning staat aan de basis van indrukwekkende prestaties, zoals
+zelflerende spelprogramma’s, geavanceerde robotsystemen en zelfrijdende auto’s.
+De manier waarop een computer ‘leert’ door beloningen en straffen sprak ons
+aan, omdat het lijkt op hoe wij als mensen leren. Het leek ons daarom een
+perfecte uitdaging om dit complexe onderwerp te onderzoeken en te begrijpen hoe
+het precies werkt.
+
+Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\ Christelijk Lyceum Zeist
+\\ Februari 2025
 
 \chapter*{Notatie}
 \addcontentsline{toc}{chapter}{Notatie} % Voeg toe aan de Inhoudsopgave
@@ -142,14 +154,58 @@ Februari 2025
 \tableofcontents
 \newpage
 \pagenumbering{arabic}  % Overschakelen naar Arabische nummering
+
 \chapter{Inleiding}
-Introductie Onderwerp \\ Onderwerpkeuze verantwoorden \\
-Onderzoeksvraag/Hoofdvraag met eventuele hypothese \\ Deelvragen \\ Wat zijn de
-specifieke kenmerken van verschillende soorten computerspellen? \\ Welke
-reinforcement learning-algoritmes zijn beschikbaar en wat zijn hun kenmerken?
-\\ Hoe beïnvloeden de spelkenmerken de prestatie van reinforcement
-learning-algoritmes? \\ klein stukje theorie als inleiding op het
-theorie-onderdeel \\ werkplan in grote lijnen, opbouw van verslag \\
+Reinforcement Learning (RL) is een subdiscipline binnen de kunstmatige
+intelligentie (KI) die zich richt op het trainen van een agent om optimale
+acties te ondernemen binnen een specifieke omgeving. Een agent is een entiteit
+die leert en acties onderneemt. Bij een zelfrijdende auto is het
+besturingssysteem de agent, en bij een schaakspel is de schaker de agent.
+
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+    \vspace{-6.5\baselineskip}
+    De omgeving is alles waarmee de agent interageert en die reageert op de acties van
+    de agent. Bij een zelfrijdende auto is dit de weg waar de auto op rijdt en de
+    voertuigen om de auto heen. Bij een schaakspel is dit het schaakbord. De agent
+    leert door interactie met zijn omgeving. De agent ontvangt beloningen of
+    straffen (negatieve beloningen) als gevolg van zijn acties. Het doel van de
+    agent is om een strategie te ontwikkelen die de cumulatieve beloning
+    maximaliseert over tijd.
+\end{minipage}
+\hfill % Ruimte tussen de twee minipages
+\begin{minipage}[t]{0.3\textwidth} % Breedte aanpassen naar wens
+    \centering
+    \begin{tikzpicture}[auto, thick, node distance=2cm, >=Stealth]
+        % Nodes
+        \node[draw, rectangle, rounded corners] (agent) {Agent};
+        \node[draw, rectangle, rounded corners, below=of agent] (environment) {Omgeving};
+
+        % Actie-pijl
+        \draw[->] (agent.east) to[bend left=60] node[midway, right] {$A_t$} (environment.east);
+
+        % Toestand-pijl
+        \draw[->] (environment.north) to node[midway, right] {$S_{t}$} (agent.south);
+
+        % Beloning-pijl
+        \draw[->] (environment.west) to[bend left=60] node[midway, left] {$R_{t}$} (agent.west);
+    \end{tikzpicture}
+    \captionof{figure}{RL model tussen agent en omgeving.}
+    \label{fig:rl_model}
+\end{minipage}
+
+Dit proces vindt plaats door middel van een vallen en opstaan aanpak, waarbij
+de agent beloningen ontvangt voor correcte acties en straffen voor incorrecte
+acties(negatieve beloningen). Het uiteindelijke doel is het maximaliseren van
+de cumulatieve beloning over tijd.
+
+Computerspellen vormen een ideaal testplatform voor RL vanwege de veelzijdige
+uitdagingen die ze bieden, zoals dynamische omgevingen, complexe regels en
+onvoorspelbare scenario’s. RL heeft bewezen effectief te zijn in spellen met
+zowel discrete als continue actie- en toestandruimtes, variërend van
+actiespellen zoals Snake tot strategische spellen zoals Schaken. Het toepassen
+van RL in gaming vereist een diep begrip van zowel de kenmerken van de spellen
+als de algoritmes die worden ingezet.
 \section{Doel van het onderzoek}
 Het doel van dit onderzoek is om te begrijpen hoe de kenmerken van
 verschillende computerspellen de effectiviteit van verschillende reinforcement
@@ -185,8 +241,7 @@ drie belangrijke deelvragen opgesteld
           zijn en wat hen uniek maakt. Sommige algoritmes zijn beter in het leren van eenvoudige
           taken, terwijl andere juist goed zijn in het omgaan met complexe situaties.
 
-    \item\subsubsection*{Hoe beïnvloeden de spelkenmerken de prestatie van
-              reinforcement learning-algoritmes?}
+    \item\subsubsection*{Hoe beïnvloeden de spelkenmerken de prestatie van reinforcement learning-algoritmes?}
 
           Deze vraag gaat in op het belangrijkste deel van het onderzoek: het verband
           tussen de kenmerken van een spel en hoe goed een RL-algoritme presteert. We
@@ -197,41 +252,6 @@ drie belangrijke deelvragen opgesteld
           het beste werken voor bepaalde soorten spellen en waarom dat zo is.
 
 \end{enumerate}
-\section{Experimenten}
-In dit onderzoek willen we kijken hoe verschillende reinforcement learning (RL)
-algoritmes presteren in verschillende computerspellen. We hebben drie spellen
-gekozen: Snake, Schaken, en Mario Super Bros. Elk spel heeft zijn eigen
-kenmerken en uitdagingen, en we zullen drie RL-algoritmes testen: Deep
-Q-Network (DQN), Proximal Policy Optimization (PPO), en AlphaZero (of Deep
-Deterministic Policy Gradient (DDPG) als AlphaZero niet lukt). Het doel is om
-te ontdekken hoe goed elk algoritme werkt in elk spel en hoe de kenmerken van
-het spel de prestaties van de algoritmes beïnvloeden.
-\begin{enumerate}
-    \item\subsection*{Snake} Snake is een simpel actiespel waar je een slang bestuurt die appels eet om
-          langer te worden, terwijl je ervoor zorgt dat hij zichzelf niet raakt. Het spel
-          vereist snelle beslissingen en het vooruitzicht zodat je je zelf niet opsluit.
-          Het doel van het experiment met Snake is om te onderzoeken hoe de RL-algoritmes
-          presteren in een omgeving met beperkte ruimte en snel veranderende situaties.
-          We zullen kijken hoe snel elk algoritme leert, hoe stabiel de prestaties zijn
-          en wat de uiteindelijke score is. \item\subsection*{Schaken} Schaken is een complex bordspel met een grote hoeveelheid mogelijke zetten en
-          uitkomsten. Dit experiment is bedoeld om te bepalen hoe de RL-algoritmes omgaan
-          met de grote hoeveelheid mogelijkheden en de noodzaak om
-          lange-termijnstrategieën te ontwikkelen. We zullen meten hoe snel de algoritmes
-          leren, hoe goed de strategieën zijn die ze ontwikkelen (gecontroleerd door een
-          schaakprogramma), en hoe consistent de prestaties zijn in verschillende
-          schaaksituaties.
-
-    \item\subsection*{Mario Super Bros}
-          Mario Super Bros, is een platformspel waarin de speler een personage bestuurt
-          dat door verschillende levels moet navigeren, obstakels moet vermijden en
-          vijanden moet verslaan. Dit spel combineert elementen van actie en planning,
-          met veel variatie in speelomgevingen en uitdagingen. Het doel van het
-          experiment met Mario Super Bros is om te onderzoeken hoe de RL-algoritmes
-          presteren in een dynamische omgeving waar zowel snelheid als strategie nodig
-          zijn. We zullen beoordelen hoe snel de algoritmes leren, hoe stabiel de
-          prestaties zijn, en hoeveel levels succesvol worden voltooid.
-\end{enumerate}
-
 \section{Hypothese}
 We verwachten dat:
 \begin{enumerate}
@@ -251,55 +271,14 @@ We verwachten dat:
 \section{Relevantie van het Onderzoek}
 Dit onderzoek laat effectiviteit van reinforcement learning algoritmes in
 verschillende omgevingen laat zien, wat bijdraagt aan het beter gebruik van
-AI-systemen. Deze kennis kan niet alleen worden toegepast binnen de
+KI-systemen. Deze kennis kan niet alleen worden toegepast binnen de
 game-industrie, maar ook in andere sectoren zoals de gezondheidszorg,
 zelfrijdende auto's en robotica.
 
 \chapter{Theoretisch Kader}
 
 \section{Definitie}
-Reinforcement Learning (RL) is een tak binnen kunstmatige intelligentie waarin
-een agent leert door interactie met zijn omgeving. Een agent is een entiteit
-die leert en acties onderneemt. Bij een zelfrijdende auto is het
-besturingssysteem de agent, en bij een schaakspel is de schaker de agent. De
-omgeving is alles waarmee de agent interageert en die reageert op de acties van
-de agent. Bij een zelfrijdende auto is dit de weg waar de auto op rijdt en de
-voertuigen om de auto heen. Bij een schaakspel is dit het schaakbord.
-
-\noindent
-\begin{minipage}[t]{0.65\textwidth}
-    \vspace{-6.5\baselineskip}
-    De agent leert door interactie met zijn omgeving. De agent ontvangt beloningen
-    of straffen (negatieve beloningen) als gevolg van zijn acties. Het doel van de
-    agent is om een strategie te ontwikkelen die de cumulatieve beloning
-    maximaliseert over tijd. Bij Super Mario Bros (1985) is Mario de agent en de
-    agent krijgt een beloning als Mario richting de eindslag beweegt (meestal naar
-    rechts) en als Mario een coin of een power up oppakt en Mario krijgt een straf
-    als Mario sterft en hij krijgt elke seconde straf zodat hij zo snel mogelijk
-    het level wilt voltooien.
-\end{minipage}
-\hfill % Ruimte tussen de twee minipages
-\begin{minipage}[t]{0.3\textwidth} % Breedte aanpassen naar wens
-    \centering
-    \begin{tikzpicture}[auto, thick, node distance=2cm, >=Stealth]
-        % Nodes
-        \node[draw, rectangle, rounded corners] (agent) {Agent};
-        \node[draw, rectangle, rounded corners, below=of agent] (environment) {Omgeving};
-        
-        % Actie-pijl
-        \draw[->] (agent.east) to[bend left=60] node[midway, right] {$A_t$} (environment.east);
-        
-        % Toestand-pijl
-        \draw[->] (environment.north) to node[midway, right] {$S_{t}$} (agent.south);
-        
-        % Beloning-pijl
-        \draw[->] (environment.west) to[bend left=60] node[midway, left] {$R_{t}$} (agent.west);
-    \end{tikzpicture}
-    \captionof{figure}{RL model tussen agent en omgeving.}
-    \label{fig:rl_model}
-\end{minipage}
-
-Een actie naar de beslissing die een agent neemt bij elke stap in een
+Een actie is de beslissing die een agent neemt bij elke stap in een
 besluitvormingsproces. Acties worden aangeduid met \( a \) en worden gekozen
 uit een reeks mogelijke acties \( \mathcal{A} \). Elke door de agent genomen
 actie beïnvloedt de interactie met de omgeving, wat leidt tot een verandering
@@ -597,6 +576,10 @@ agent de volgende actie.
 \section{Q-Learning}
 
 \chapter{Analyse en Resultaten}
+
+\section{Snake}
+
+\includegraphics[width=1\textwidth]{assets/Q-LearningGrafiek.png}
 
 \chapter{Conclusie}
 

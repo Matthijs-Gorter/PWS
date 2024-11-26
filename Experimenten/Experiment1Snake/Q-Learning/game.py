@@ -11,7 +11,7 @@ snakeSpeed = 15
 windowX, windowY = 800, 600
 
 # Q Learning
-alpha, gamma, epsilon, epsilonDecay = 0.001, 0.99, 1, 0.99
+alpha, gamma, epsilon, epsilonDecay = 0.001, 0.95, 1, 0.995
 nActions, nStates = 3, 128
 Q = np.zeros((nStates, nActions))
 
@@ -97,7 +97,7 @@ def startNewGame(training):
     direction = 'RIGHT'
     score = 0
     gameIsOver = False
-
+    turnsAfterLastApple = 0
     # Main Function
     while True:
         current_state = getState(snake_position, fruit_position, snake_body, direction)
@@ -124,7 +124,6 @@ def startNewGame(training):
             elif direction == "RIGHT":
                 direction = "DOWN"
 
-        # Moving the snake
         if direction == 'UP':
             snake_position[1] -= 20
         if direction == 'DOWN':
@@ -134,24 +133,25 @@ def startNewGame(training):
         if direction == 'RIGHT':
             snake_position[0] += 20
 
-
         reward = 0
 
-        # Snake body growing mechanism
+        # Snake body growing 
         snake_body.insert(0, list(snake_position))
         if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
             score += 1
-            reward = 10  # Give a positive reward for eating the fruit
+            reward = 10  
             fruit_spawn = False
+            turnsAfterLastApple = 0
         else:
             snake_body.pop()
 
         if not fruit_spawn:
-            fruit_position = [random.randrange(1, (windowX // 20)) * 20,
-                              random.randrange(1, (windowY // 20)) * 20]
-            while tuple(fruit_position) in snake_body:
+            while True:
                 fruit_position = [random.randrange(1, (windowX // 20)) * 20,
-                                  random.randrange(1, (windowY // 20)) * 20]
+                                random.randrange(1, (windowY // 20)) * 20]
+                # Ensure fruit does not spawn in the snake's body
+                if tuple(fruit_position) not in map(tuple, snake_body):
+                    break
 
         fruit_spawn = True
         gameWindow.fill(black)
@@ -163,25 +163,22 @@ def startNewGame(training):
             pygame.draw.rect(gameWindow, red, pygame.Rect(fruit_position[0], fruit_position[1], 20, 20))
 
         # Game Over conditions
-        if snake_position[0] < 0 or snake_position[0] > windowX - 20 or snake_position[1] < 0 or snake_position[1] > windowY - 20:
-            reward = -10  # Give a negative reward for dying
+        if snake_position[0] < 0 or snake_position[0] > windowX - 20 or snake_position[1] < 0 or snake_position[1] > windowY - 20 or turnsAfterLastApple > 300:
+            reward = -10 
             gameOver(score,training)
             gameIsOver = True
 
-
         for block in snake_body[1:]:
             if snake_position[0] == block[0] and snake_position[1] == block[1]:
-                reward = -10  # Give a negative reward for dying
+                reward = -10
                 gameOver(score,training)
                 gameIsOver = True
-
 
         # Get next state after the action
         next_state = getState(snake_position, fruit_position, snake_body, direction)
     
         # Update the Q-table
         updateQTable(current_state, actionIndex, reward, next_state)
-
         
         # Frame Per Second / Refresh Rate
         if training:
@@ -197,6 +194,9 @@ def startNewGame(training):
         
         if gameIsOver:
             return score
+        
+        turnsAfterLastApple += 1
+
 
 def showScore(choice, color, font, size, score):
     score_font = pygame.font.SysFont(font, size)
@@ -224,15 +224,14 @@ def train(numGames):
         games.append(i)
         scores.append(startNewGame(True))
         epsilon *= epsilonDecay
-        
         if i % 100 == 0:
             print(i)
             
             
 start_time = time.time()            
-train(25000)    
+train(5000)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
-    
+      
 with open('games_scores.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Game', 'Score'])  # header

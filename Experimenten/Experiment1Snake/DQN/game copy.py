@@ -2,11 +2,16 @@ import pygame
 import time
 import random
 import numpy as np
+import time
 import csv
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from collections import deque
+import torch_directml
+
+#Device waarop DQN berekenen worden gedaan is gpu
+device = torch_directml.device()
 
 # Game
 snakeSpeed = 15
@@ -30,24 +35,26 @@ RIGHT_TURN = {"UP": "RIGHT", "RIGHT": "DOWN", "DOWN": "LEFT", "LEFT": "UP"}
 
 
 # Deep Q Learning
-alpha, gamma, epsilon, epsilonDecay = 0.005, 0.97, 1, 0.995
+alpha, gamma, epsilon, epsilonDecay = 0.001, 0.95, 1, 0.995
 nActions, nStates = 3, 6
-replay_memory = deque(maxlen=50000)
+replay_memory = deque(maxlen=10000)
 Q = np.zeros((nStates, nActions))
-batch_size = 256
+batch_size = 64
 
 class DQNetwork(nn.Module):
     def __init__(self, state_size, action_size):
         super(DQNetwork, self).__init__()
         self.fc1 = nn.Linear(state_size, 128)
-        self.fc2 = nn.Linear(128, action_size)
+        self.fc2 = nn.Linear(128, 128)
+        self.fc3 = nn.Linear(128, action_size)
     
     def forward(self, x):
         x = torch.relu(self.fc1(x))
-        return self.fc2(x)
+        x = torch.relu(self.fc2(x))
+        return self.fc3(x)
     
-dqn = DQNetwork(nStates, nActions)
-optimizer = optim.Adam(dqn.parameters(), lr=alpha)
+dqn = DQNetwork(nStates, nActions).to(device)
+optimizer = torch.optim.SGD(dqn.parameters(), lr=alpha)
 criterion = nn.MSELoss()
 
 def getState(snake_position, fruit_position, snake_body, direction):
@@ -61,11 +68,13 @@ def getState(snake_position, fruit_position, snake_body, direction):
         checkCollision([snake_position[0] + direction_vector[0], snake_position[1] + direction_vector[1]], snake_body),
         checkCollision([snake_position[0] + right_vector[0], snake_position[1] + right_vector[1]], snake_body),
         checkCollision([snake_position[0] + left_vector[0], snake_position[1] + left_vector[1]], snake_body),
-        int(np.sign(direction_vector[0]) == np.sign(food_direction[0]) or np.sign(direction_vector[1]) == np.sign(food_direction[1])),
-        int(np.sign(right_vector[0]) == np.sign(food_direction[0]) or np.sign(right_vector[1]) == np.sign(food_direction[1])),
-        int(np.sign(left_vector[0]) == np.sign(food_direction[0]) or np.sign(left_vector[1]) == np.sign(food_direction[1])),
+        int(direction_vector[0] * food_direction[0] > 0 or direction_vector[1] * food_direction[1] > 0),
+        int(right_vector[0] * food_direction[0] > 0 or right_vector[1] * food_direction[1] > 0),
+        int(left_vector[0] * food_direction[0] > 0 or left_vector[1] * food_direction[1] > 0),
     ]
     return np.array(state, dtype=np.float32)
+
+
 
 def checkCollision(position, snake_body):
     return (position[0] < 0 or position[0] >= windowX or
@@ -78,14 +87,12 @@ def chooseAction(state):
         return np.random.randint(nActions)
     else:
         with torch.no_grad():
-            state_tensor = torch.FloatTensor(state).unsqueeze(0)
+            state_tensor = torch.FloatTensor(state).unsqueeze(0).to(device)
             q_values = dqn(state_tensor)
             return torch.argmax(q_values).item()  
         
 def updateReplayMemory(current_state, action, reward, next_state, done):
     replay_memory.append((current_state, action, reward, next_state, done))
-    if len(replay_memory) > batch_size:
-        trainDQN()
 
 def trainDQN():
     if len(replay_memory) < batch_size:
@@ -99,11 +106,12 @@ def trainDQN():
     next_states_array = np.array(next_states, dtype=np.float32)
 
     # Converteer naar tensors
-    states_tensor = torch.FloatTensor(states_array)
-    next_states_tensor = torch.FloatTensor(next_states_array)
-    actions_tensor = torch.LongTensor(actions).unsqueeze(1)
-    rewards_tensor = torch.FloatTensor(rewards)
-    dones_tensor = torch.FloatTensor(dones)
+    states_tensor = torch.FloatTensor(states_array).to(device)
+    next_states_tensor = torch.FloatTensor(next_states_array).to(device)
+    actions_tensor = torch.LongTensor(actions).unsqueeze(1).to(device)
+    rewards_tensor = torch.FloatTensor(rewards).to(device)
+    dones_tensor = torch.FloatTensor(dones).to(device)
+
 
     # Current Q-values
     current_q_values = dqn(states_tensor).gather(1, actions_tensor).squeeze(1)
@@ -118,6 +126,7 @@ def trainDQN():
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
+
 
 def startNewGame(training):
     global epsilon
@@ -262,15 +271,13 @@ def train(numGames):
     global epsilon
     for i in range(numGames):
         games.append(i)
-        score = startNewGame(True)
-        scores.append(score)
+        scores.append(startNewGame(True))
         epsilon *= epsilonDecay
         if i % 100 == 0:
-            print(f"Game {i}, Score: {score}")
-
+            print(i)
             
 start_time = time.time()            
-train(1000)    
+train(300)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
       
 with open('games_scores.csv', 'w', newline='') as csvfile:
