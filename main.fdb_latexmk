@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1732626780.2124 "main.bcf" "main.bbl" "main" 1732626788.29919 0
-  "main.bcf" 1732626788 133782 c7da42693cb6f4f5da8207105a47f63e "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1733075375.40039 -1
+  "main.bcf" 1733075375 133782 c7da42693cb6f4f5da8207105a47f63e "pdflatex"
   "references.bib" 1725538114 4049 1ea0862d89431531acbf07d36a2d99f5 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1732626785.12471 "c:/Users/matth/Developer/PWS/main.tex" "main.pdf" "main" 1732626788.29981 0
+["pdflatex"] 1733075372.19897 "c:/Users/matth/Developer/PWS/main.tex" "main.pdf" "main" 1733075375.40097 0
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1730840945 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/matth/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1723082193 24265332 4cb76a6909b72608f7473a5a715c90d0 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -24,6 +24,8 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmbxi10.tfm" 1256929440 17180 a5723008921cdcb0c5f4ebe997919b73 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr12.tfm" 1256929440 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr17.tfm" 1256929440 12156 ca1ae6a3c8564e89597f1f993fba1608 ""
+  "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr6.tfm" 1256929440 12048 c1068d0f4772be9b0ec447692e1d6d82 ""
+  "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr8.tfm" 1256929440 12064 9b9ade9f64cb32ce1d9a88d21fbd5c2d ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmri12.tfm" 1256929440 17144 271aaf9ebb339934b04110dc5211fba4 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/lmex10.tfm" 1256929440 992 ce925c9346c7613270a79afbee98c070 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/lmmi12.tfm" 1256929440 1524 753b192b18f2991794f9d41a8228510b ""
@@ -230,13 +232,13 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "assets/Q-LearningGrafiek.png" 1732028060 813177 2a98357fa84a2d32ad8d698075e66443 ""
   "assets/logo-clz.png" 1723084649 36205 a7d80d8df9bf0fbfb7c030627ce2715b ""
-  "c:/Users/matth/Developer/PWS/main.tex" 1732626779 29201 79ec31caabb3220b9e9dd10b20f2c593 ""
-  "main.aux" 1732626788 4880 511e9d08d9217b6f4e14271371721692 "pdflatex"
+  "c:/Users/matth/Developer/PWS/main.tex" 1733075368 50024 df2852a8dc1ca968ff9928d53c460f90 ""
+  "main.aux" 1733075375 10017 0c3c7821d23c65a3928190453a5320c5 "pdflatex"
   "main.bbl" 1732626781 20055 3f9fd73b5c307fa1d6b5e3c35d91b5ba "biber main"
-  "main.out" 1732626788 2766 75e2fd7f92c9d1b394c3ee1c397cfa32 "pdflatex"
-  "main.run.xml" 1732626788 2355 c7b4ca8847ee7d70d486d862e120ebef "pdflatex"
-  "main.tex" 1732626779 29201 79ec31caabb3220b9e9dd10b20f2c593 ""
-  "main.toc" 1732626788 1678 95ff233d0e8907131ea8645607e8aa03 "pdflatex"
+  "main.out" 1733075375 8761 715c5cec534730df9d016a3a0163ce6c "pdflatex"
+  "main.run.xml" 1733075375 2355 c7b4ca8847ee7d70d486d862e120ebef "pdflatex"
+  "main.tex" 1733075368 50024 df2852a8dc1ca968ff9928d53c460f90 ""
+  "main.toc" 1733075375 5103 efe9ac658b9e48bacc7e431acb65c88a "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"

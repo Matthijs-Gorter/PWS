@@ -8,274 +8,276 @@ import torch.nn as nn
 import torch.optim as optim
 from collections import deque
 
-# Game
+# Game settings
 snakeSpeed = 15
-windowX, windowY = 800, 600
+windowWidth, windowHeight = 800, 600
 
 # Logging
-games, scores = [], []
+gameHistory, scoreHistory = [], []
 
 # Colors
-black, white, red, green = (0, 0, 0), (255, 255, 255), (255, 0, 0), (0, 255, 0)
+BLACK, WHITE, RED, GREEN = (0, 0, 0), (255, 255, 255), (255, 0, 0), (0, 255, 0)
 
-# Pygame
+# Pygame initialization
 pygame.init()
 pygame.display.set_caption('Q_Learning_Snake')
-gameWindow = pygame.display.set_mode((windowX, windowY))
-FPS = pygame.time.Clock()
+gameWindow = pygame.display.set_mode((windowWidth, windowHeight))
+fpsClock = pygame.time.Clock()
 
+# Directions
 DIRECTIONS = {"UP": (0, -20), "DOWN": (0, 20), "LEFT": (-20, 0), "RIGHT": (20, 0)}
 LEFT_TURN = {"UP": "LEFT", "LEFT": "DOWN", "DOWN": "RIGHT", "RIGHT": "UP"}
 RIGHT_TURN = {"UP": "RIGHT", "RIGHT": "DOWN", "DOWN": "LEFT", "LEFT": "UP"}
 
+# Deep Q-Learning settings
+learningRate, discountFactor, epsilon, epsilonDecay = 0.005, 0.97, 1, 0.995
+numActions, numStates = 3, 6
+replayMemory = deque(maxlen=50000)
+batchSize = 256
 
-# Deep Q Learning
-alpha, gamma, epsilon, epsilonDecay = 0.005, 0.97, 1, 0.995
-nActions, nStates = 3, 6
-replay_memory = deque(maxlen=50000)
-Q = np.zeros((nStates, nActions))
-batch_size = 256
-
+# Neural network for DQN
 class DQNetwork(nn.Module):
-    def __init__(self, state_size, action_size):
+    def __init__(self, stateSize, actionSize):
         super(DQNetwork, self).__init__()
-        self.fc1 = nn.Linear(state_size, 128)
-        self.fc2 = nn.Linear(128, action_size)
-    
+        self.fc1 = nn.Linear(stateSize, 128)
+        self.fc2 = nn.Linear(128, actionSize)
     def forward(self, x):
         x = torch.relu(self.fc1(x))
         return self.fc2(x)
-    
-dqn = DQNetwork(nStates, nActions)
-optimizer = optim.Adam(dqn.parameters(), lr=alpha)
+
+dqn = DQNetwork(numStates, numActions)
+optimizer = optim.Adam(dqn.parameters(), lr=learningRate)
 criterion = nn.MSELoss()
 
-def getState(snake_position, fruit_position, snake_body, direction):
-    direction_vector = DIRECTIONS[direction]
-    left_vector = DIRECTIONS[LEFT_TURN[direction]]
-    right_vector = DIRECTIONS[RIGHT_TURN[direction]]
+# debug
+p1Time = 0
+p2Time = 0
+p3Time = 0
+p4Time = 0
+gameTime = 0 
 
-    food_direction = (fruit_position[0] - snake_position[0], fruit_position[1] - snake_position[1])
+def initializeGame():
+    """Initialize the snake, body, direction, and score."""
+    snakePos = [300, 300]
+    snakeBody = [[300, 300], [280, 300], [260, 300], [240, 300]]
+    direction = "RIGHT"
+    score = 0
+    return snakePos, snakeBody, direction, score
+
+def getState(snakePos, fruitPos, snakeBody, direction):
+    """Get the current state representation for the agent."""
+    directionVector = DIRECTIONS[direction]
+    leftVector = DIRECTIONS[LEFT_TURN[direction]]
+    rightVector = DIRECTIONS[RIGHT_TURN[direction]]
+
+    foodDirection = (fruitPos[0] - snakePos[0], fruitPos[1] - snakePos[1])
 
     state = [
-        checkCollision([snake_position[0] + direction_vector[0], snake_position[1] + direction_vector[1]], snake_body),
-        checkCollision([snake_position[0] + right_vector[0], snake_position[1] + right_vector[1]], snake_body),
-        checkCollision([snake_position[0] + left_vector[0], snake_position[1] + left_vector[1]], snake_body),
-        int(np.sign(direction_vector[0]) == np.sign(food_direction[0]) or np.sign(direction_vector[1]) == np.sign(food_direction[1])),
-        int(np.sign(right_vector[0]) == np.sign(food_direction[0]) or np.sign(right_vector[1]) == np.sign(food_direction[1])),
-        int(np.sign(left_vector[0]) == np.sign(food_direction[0]) or np.sign(left_vector[1]) == np.sign(food_direction[1])),
+        checkCollision([snakePos[0] + directionVector[0], snakePos[1] + directionVector[1]], snakeBody),
+        checkCollision([snakePos[0] + rightVector[0], snakePos[1] + rightVector[1]], snakeBody),
+        checkCollision([snakePos[0] + leftVector[0], snakePos[1] + leftVector[1]], snakeBody),
+        int(np.sign(directionVector[0]) == np.sign(foodDirection[0]) or 
+            np.sign(directionVector[1]) == np.sign(foodDirection[1])),
+        int(np.sign(rightVector[0]) == np.sign(foodDirection[0]) or 
+            np.sign(rightVector[1]) == np.sign(foodDirection[1])),
+        int(np.sign(leftVector[0]) == np.sign(foodDirection[0]) or 
+            np.sign(leftVector[1]) == np.sign(foodDirection[1])),
     ]
     return np.array(state, dtype=np.float32)
 
-def checkCollision(position, snake_body):
-    return (position[0] < 0 or position[0] >= windowX or
-            position[1] < 0 or position[1] >= windowY or
-            tuple(position) in snake_body)
+def generateFruit(snakeBody):
+    """Generate a fruit position that does not overlap the snake."""
+    while True:
+        fruitPos = [random.randrange(1, (windowWidth // 20)) * 20, random.randrange(1, (windowHeight // 20)) * 20]
+        if tuple(fruitPos) not in map(tuple, snakeBody):
+            break
+    return fruitPos, True
 
+def updateDirection(currentDirection, actionIndex):
+    """Update the snake's direction based on the action index."""
+    actions = ["LEFT", "STRAIGHT", "RIGHT"]
+    action = actions[actionIndex]
+    if action == "LEFT":
+        return LEFT_TURN[currentDirection]
+    elif action == "RIGHT":
+        return RIGHT_TURN[currentDirection]
+    return currentDirection
+
+def checkCollision(position, snakeBody):
+    """Check if a position collides with the wall or the snake's body."""
+    return (position[0] < 0 or position[0] >= windowWidth or
+            position[1] < 0 or position[1] >= windowHeight or
+            tuple(position) in snakeBody)
+
+def moveSnake(snakePos, snakeBody, fruitPos, fruitSpawn, direction, score):
+    """Move the snake and update the game state."""
+    snakePos[0] += DIRECTIONS[direction][0]
+    snakePos[1] += DIRECTIONS[direction][1]
+
+    reward = -0.5  # Default reward for surviving
+    done = False
+
+    # Check if snake eats the fruit
+    if snakePos == fruitPos:
+        score += 1
+        reward = 10
+        fruitSpawn = False
+    else:
+        snakeBody.pop()
+
+    # Spawn new fruit if eaten
+    if not fruitSpawn:
+        fruitPos, fruitSpawn = generateFruit(snakeBody)
+
+    # Check for collisions
+    if checkCollision(snakePos, snakeBody):
+        reward = -10
+        done = True
+
+    # Add the new head position
+    snakeBody.insert(0, list(snakePos))
+
+    return snakePos, fruitPos, fruitSpawn, score, done, reward
+
+def updateReplayMemory(state, action, reward, nextState, done):
+    """Store experiences in replay memory and train the network."""
+    replayMemory.append((state, action, reward, nextState, done))
+    if len(replayMemory) > batchSize:
+        trainDQN()
+        
 def chooseAction(state):
+    """Choose an action using epsilon-greedy policy."""
     global epsilon
     if np.random.rand() < epsilon:
-        return np.random.randint(nActions)
+        return np.random.randint(numActions)
     else:
         with torch.no_grad():
-            state_tensor = torch.FloatTensor(state).unsqueeze(0)
-            q_values = dqn(state_tensor)
-            return torch.argmax(q_values).item()  
+            stateTensor = torch.FloatTensor(state).unsqueeze(0)
+            qValues = dqn(stateTensor)
+            return torch.argmax(qValues).item()
         
-def updateReplayMemory(current_state, action, reward, next_state, done):
-    replay_memory.append((current_state, action, reward, next_state, done))
-    if len(replay_memory) > batch_size:
-        trainDQN()
-
 def trainDQN():
-    if len(replay_memory) < batch_size:
+    """Train the DQN model using replay memory."""
+    if len(replayMemory) < batchSize:
         return
+    
+    batch = random.sample(replayMemory, batchSize)
+    states, actions, rewards, nextStates, dones = zip(*batch)
 
-    batch = random.sample(replay_memory, batch_size)
-    states, actions, rewards, next_states, dones = zip(*batch)
+    # Convert to tensors
+    statesTensor = torch.FloatTensor(np.array(states, dtype=np.float32))
+    nextStatesTensor = torch.FloatTensor(np.array(nextStates, dtype=np.float32))
+    actionsTensor = torch.LongTensor(actions).unsqueeze(1)
+    rewardsTensor = torch.FloatTensor(rewards)
+    donesTensor = torch.FloatTensor(dones)
 
-    # Zet lijsten om naar numpy-arrays
-    states_array = np.array(states, dtype=np.float32)
-    next_states_array = np.array(next_states, dtype=np.float32)
+    # Compute current Q-values
+    currentQValues = dqn(statesTensor).gather(1, actionsTensor).squeeze(1)
 
-    # Converteer naar tensors
-    states_tensor = torch.FloatTensor(states_array)
-    next_states_tensor = torch.FloatTensor(next_states_array)
-    actions_tensor = torch.LongTensor(actions).unsqueeze(1)
-    rewards_tensor = torch.FloatTensor(rewards)
-    dones_tensor = torch.FloatTensor(dones)
-
-    # Current Q-values
-    current_q_values = dqn(states_tensor).gather(1, actions_tensor).squeeze(1)
-
-    # Target Q-values
+    # Compute target Q-values
     with torch.no_grad():
-        next_q_values = dqn(next_states_tensor).max(1)[0]
-        target_q_values = rewards_tensor + (gamma * next_q_values * (1 - dones_tensor))
+        nextQValues = dqn(nextStatesTensor).max(1)[0]
+        targetQValues = rewardsTensor + (discountFactor * nextQValues * (1 - donesTensor))
 
-    # Update the network
-    loss = criterion(current_q_values, target_q_values)
+    # Optimize the network
+    loss = criterion(currentQValues, targetQValues)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
-def startNewGame(training):
-    global epsilon
-    snake_position = [300, 300]
+def renderGame(snakeBody, fruitPos, score):
+    """Render the game using pygame."""
+    gameWindow.fill(BLACK)
 
-    # Defining first 4 blocks of snake body
-    snake_body = [[300, 300],
-                [280, 300],
-                [260, 300],
-                [240, 300],
-                [230, 300]]
+    # Draw the snake
+    for pos in snakeBody:
+        pygame.draw.rect(gameWindow, GREEN, pygame.Rect(pos[0], pos[1], 20, 20))
 
-    fruit_position = [random.randrange(1, (windowX // 20)) * 20,
-                    random.randrange(1, (windowY // 20)) * 20]
+    # Draw the fruit
+    pygame.draw.rect(gameWindow, RED, pygame.Rect(fruitPos[0], fruitPos[1], 20, 20))
 
-    fruit_spawn = True
-    direction = 'RIGHT'
-    score = 0
-    done = False
-    turnsAfterLastApple = 0
-    # Main Function
-    while not done:
-        current_state = getState(snake_position, fruit_position, snake_body, direction)
-        actionIndex = chooseAction(current_state)
-        action = ["LEFT", "STRAIGHT","RIGHT"][actionIndex]
-        
-        if action == 'LEFT':
-            if direction == "UP":
-                direction = "LEFT"
-            elif direction == "DOWN":
-                direction = "RIGHT"
-            elif direction == "LEFT":
-                direction = "DOWN"  # Snake turns down if it's already going left
-            elif direction == "RIGHT":
-                direction = "UP"
+    # Display the score
+    showScore(1, WHITE, 'times new roman', 20, score)
 
-        elif action == 'RIGHT':
-            if direction == "UP":
-                direction = "RIGHT"
-            elif direction == "DOWN":
-                direction = "LEFT"
-            elif direction == "LEFT":
-                direction = "UP"
-            elif direction == "RIGHT":
-                direction = "DOWN"
-
-        if direction == 'UP':
-            snake_position[1] -= 20
-        if direction == 'DOWN':
-            snake_position[1] += 20
-        if direction == 'LEFT':
-            snake_position[0] -= 20
-        if direction == 'RIGHT':
-            snake_position[0] += 20
-
-        reward = 0
-
-        # Snake body growing 
-        snake_body.insert(0, list(snake_position))
-        if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
-            score += 1
-            reward = 10  
-            fruit_spawn = False
-            turnsAfterLastApple = 0
-        else:
-            snake_body.pop()
-
-        if not fruit_spawn:
-            while True:
-                fruit_position = [random.randrange(1, (windowX // 20)) * 20,
-                                random.randrange(1, (windowY // 20)) * 20]
-                # Ensure fruit does not spawn in the snake's body
-                if tuple(fruit_position) not in map(tuple, snake_body):
-                    break
-
-        fruit_spawn = True
-        gameWindow.fill(black)
-
-        if not training:    
-            # Drawing the snake and the fruit
-            for pos in snake_body:
-                pygame.draw.rect(gameWindow, green, pygame.Rect(pos[0], pos[1], 20, 20))
-            pygame.draw.rect(gameWindow, red, pygame.Rect(fruit_position[0], fruit_position[1], 20, 20))
-
-        # Game Over conditions
-        if snake_position[0] < 0 or snake_position[0] > windowX - 20 or snake_position[1] < 0 or snake_position[1] > windowY - 20 or turnsAfterLastApple > 300:
-            reward = -10 
-            gameOver(score,training)
-            done = True
-
-        for block in snake_body[1:]:
-            if snake_position[0] == block[0] and snake_position[1] == block[1]:
-                reward = -10
-                gameOver(score,training)
-                done = True
-
-        # Get next state after the action
-        next_state = getState(snake_position, fruit_position, snake_body, direction)
-    
-        # Update the Q-table en the Replay memory 
-        trainDQN()
-        replay_memory.append((current_state, actionIndex, reward, next_state, done))
-
-        # Frame Per Second / Refresh Rate
-        if training:
-            FPS.tick(10000000)
-        else:
-            # Displaying score continuously
-            showScore(1, white, 'times new roman', 20, score)
-
-            # Refresh game screen
-            pygame.display.update()
-
-            FPS.tick(snakeSpeed)
-        
-        if done:
-            return score
-        
-        turnsAfterLastApple += 1
+    # Refresh the display
+    pygame.display.update()
 
 def showScore(choice, color, font, size, score):
-    score_font = pygame.font.SysFont(font, size)
-    score_surface = score_font.render('Score : ' + str(score), True, color)
-    score_rect = score_surface.get_rect()
-    
-    gameWindow.blit(score_surface, score_rect)
-
-def gameOver(score, training):
-    if not training:
-        font = pygame.font.SysFont('times new roman', 50)
-        gameOverText = font.render(
-            'Your Score is : ' + str(score), True, red)
-        gameOverRect = gameOverText.get_rect()
-        gameOverRect.midtop = (windowX / 2, windowY / 4)
-        gameWindow.blit(gameOverText, gameOverRect)
-        pygame.display.flip()
-        time.sleep(2)
-        pygame.quit()
-        quit()
+    """Display the score on the game window."""
+    scoreFont = pygame.font.SysFont(font, size)
+    scoreSurface = scoreFont.render(f'Score: {score}', True, color)
+    scoreRect = scoreSurface.get_rect()
+    gameWindow.blit(scoreSurface, scoreRect)
 
 def train(numGames):
+    """Train the DQN model by playing multiple games."""
     global epsilon
-    for i in range(numGames):
-        games.append(i)
-        score = startNewGame(True)
-        scores.append(score)
-        epsilon *= epsilonDecay
-        if i % 100 == 0:
-            print(f"Game {i}, Score: {score}")
+    pygame.time.Clock().tick(10000000)
+    for gameIndex in range(numGames):
+        gameHistory.append(gameIndex)
+        score = startGame(isTraining=True)
+        scoreHistory.append(score)
+        epsilon = max(epsilon * epsilonDecay, 0.01)  # Ensure epsilon does not reach 0
 
-            
-start_time = time.time()            
-train(1000)    
-print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
-      
-with open('games_scores.csv', 'w', newline='') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['Game', 'Score'])  # header
-    writer.writerows(zip(games, scores))  # data
+        if gameIndex % 100 == 0:
+            print(f"Game {gameIndex}, Score: {score}")
 
-startNewGame(False)
+def saveResultsToCSV(filename="games_scores.csv"):
+    """Save game results to a CSV file."""
+    with open(filename, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Game', 'Score'])
+        writer.writerows(zip(gameHistory, scoreHistory))
+
+def startGame(isTraining):
+    """Start a new game and manage game loop."""
+    global epsilon
+    global p1Time
+    global p2Time
+    global p3Time
+    global p4Time
+    global gameTime
+    snakePos, snakeBody, direction, score = initializeGame()
+    fruitPos, fruitSpawn = generateFruit(snakeBody)
+
+    startGameTime = time.time()
+    while True:
+        startTime = time.time()
+        state = getState(snakePos, fruitPos, snakeBody, direction)
+        actionIndex = chooseAction(state)
+        direction = updateDirection(direction, actionIndex)
+        p1Time += time.time() - startTime
+
+        startTime = time.time()
+        snakePos, fruitPos, fruitSpawn, score, done, reward = moveSnake(
+            snakePos, snakeBody, fruitPos, fruitSpawn, direction, score
+        )
+        p2Time += time.time() - startTime
+
+        startTime = time.time()
+        nextState = getState(snakePos, fruitPos, snakeBody, direction)
+        p3Time += time.time() - startTime
+        
+        startTime = time.time()
+        updateR eplayMemory(state, actionIndex, reward, nextState, done)
+        p4Time += time.time() - startTime
+        if not isTraining:
+            renderGame(snakeBody, fruitPos, score)
+        
+        if done:
+            break
+    gameTime += time.time() - startGameTime
+    return score
+
+# Start training
+startTime = time.time()
+train(100)
+print(f"Training completed in {(time.time() - startTime):.2f} seconds")
+print("game",gameTime)
+print(1,p1Time)
+print(2,p2Time)
+print(3,p3Time)
+print(4,p4Time)
+# Save results and start a human-playable game
+saveResultsToCSV()
+startGame(isTraining=False)

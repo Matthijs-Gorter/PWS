@@ -277,7 +277,202 @@ zelfrijdende auto's en robotica.
 
 \chapter{Theoretisch Kader}
 
-\section{Definitie}
+Reinforcement Learning (RL) opereert binnen het kader van Markov Decision
+Processes (MDP's), die een wiskundige basis bieden voor het modelleren van
+sequentiële beslissingsproblemen. Dit hoofdstuk bespreekt de fundamentele
+concepten en wiskundige formuleringen die ten grondslag liggen aan RL,
+gestructureerd rond vier kernonderdelen: de basiselementen van MDP's, de
+Markov-eigenschap en overgangsdynamiek, beleid en waarde-functies, en de
+Bellman-vergelijkingen.
+
+\section{Fundamentele Elementen van MDP's}
+
+\subsection{Toestandsruimte}
+Laat (\(\mathcal{X}\)) de toestandsruimte zijn, waarbij elke toestand (\(x \in
+\mathcal{X}\)) de huidige situatie of staat is van de omgeving waarin de agent
+opereert. Op de aanvangsstap (\(t = 0\)) begint de agent in een initiële
+toestand (\(x_0\)). Naarmate het proces vordert, bevindt de agent zich in
+nieuwe toestanden gebaseerd op zijn acties.
+
+\subsection{Actieruimte}
+Laat (\(\mathcal{A}\)) de actieruimte zijn, waarbij elke actie (\(a \in
+\mathcal{A}\)) een mogelijke beslissing van de agent vertegenwoordigt. De
+interactie tussen de agent en de omgeving verloopt in discrete tijdstappen (\(t
+= 0, 1, 2, \ldots, T\)), waarbij de horizon (\(T\)) eindig of oneindig kan
+zijn.
+
+\subsection{Beloningsfunctie}
+De beloningsfunctie (\(r: \mathcal{X} \times \mathcal{A} \to \mathbb{R}\))
+koppelt toestand-actieparen aan beloningen, waarbij (\(r(x,a)\)) de directe
+beloning vertegenwoordigt die wordt ontvangen na het uitvoeren van actie
+(\(a\)) in toestand (\(x\)).
+
+\section{Markov-eigenschap en Overgangsdynamiek}
+
+\subsection{De Markov-eigenschap}
+Het onderscheidende kenmerk van MDP's is de Markov-eigenschap, die stelt dat de
+toekomstige toestand alleen afhankelijk is van de huidige toestand en actie,
+onafhankelijk van de geschiedenis:
+\[
+    p(x_{t+1}|x_t,a_t,x_{t-1},a_{t-1},\ldots,x_0,a_0) = p(x_{t+1}|x_t,a_t)
+\]
+Voorbeeld van het Markov-eigenschap:
+\begin{itemize}
+    \item \textbf{Snake}: De toekomstige toestand (positie van de slang en voedsel) is volledig bepaald door de huidige toestand (huidige positie en locatie van het voedsel) en de actie (richting van beweging) zonder afhankelijk te zijn van de geschiedenis van eerdere bewegingen.
+\end{itemize}
+
+Voorbeeld van geen Markov-eigenschap:
+\begin{itemize}
+    \item \textbf{Poker}: De beslissingen in poker zijn afhankelijk van niet alleen de huidige hand, maar ook van de geschiedenis van inzetten en het gedrag van andere spelers in vorige rondes.
+\end{itemize}
+
+\subsection{Overgangswaarschijnlijkheidsfunctie}
+Voor eindige toestands- en actieruimten (\(|\mathcal{X}|, |\mathcal{A}| <
+\infty\)) worden de overgangsdynamieken beschreven door een
+waarschijnlijkheidsfunctie (\(p: \mathcal{X} \times \mathcal{A} \times
+\mathcal{X} \to [0,1]\)), waarbij (\(p(x'|x,a)\)) de waarschijnlijkheid
+vertegenwoordigt om over te gaan naar toestand (\(x'\)) gegeven de huidige
+toestand (\(x\)) en actie (\(a\)).
+
+\section{Beleid en Verwachte Waarden}
+
+\subsection{Beleid}
+In RL is een beleid de strategie die een agent volgt om beslissingen te nemen.
+Het bepaalt welke actie een agent moet uitvoeren, gegeven de huidige toestand
+van de omgeving. Een beleid in reinforcement learning kan op twee manieren
+worden gedefinieerd:
+
+\begin{itemize}
+    \item \textbf{Deterministisch Beleid:} \\
+          \(\pi: \mathcal{X} \to \mathcal{A}\), waarbij \(a_t = \pi(x_t)\) \\
+          Voor elke toestand \(x_t\) schrijft het beleid exact één actie \(a_t\) voor.
+
+    \item \textbf{Stochastisch Beleid:} \\
+          \(\pi: \mathcal{X} \times \mathcal{A} \to [0,1]\), waarbij \(\pi(a|x)\) de waarschijnlijkheid geeft van het kiezen van actie \(a\) in toestand \(x\) \\
+          Voor een gegeven toestand \(x\) definieert het beleid een waarschijnlijkheidsverdeling over mogelijke acties.
+\end{itemize}
+
+\subsection{Verwachte Waarden}
+De verwachtingswaarde \(\mathbb{E}[X]\) (Expected value), of het gemiddelde,
+van een willekeurige variabele \(X\) is een manier om het gemiddelde resultaat
+te berekenen dat je zou verwachten als je een groot aantal experimenten
+uitvoert. Bijvoorbeeld, als \(X\) een dobbelsteenworp vertegenwoordigt, dan is
+\(\mathbb{E}[X]\) het gemiddelde van de uitkomsten 1, 2, 3, 4, 5, en 6, wat
+gelijk is aan 3,5. De conditionele verwachting (\(\mathbb{E}[X|Y]\)) geeft de
+verwachte waarde van (\(X\)) gegeven (\(Y\)).
+
+\subsection{Kortingsfactor}
+De kortingsfactor (\(\gamma \in [0,1]\)) bepaalt het gewicht bepaalt van
+toekomstige beloningen ten opzichte van onmiddellijke beloningen, waarbij:
+
+\begin{itemize}
+    \item (\(\gamma = 0\)) alleen directe beloningen hebben invloed
+    \item (\(\gamma = 1\)) alle toekomstige beloningen zijn even invloedrijk
+    \item (\(0 < \gamma < 1\)) een korting toepast op toekomstige beloningen
+\end{itemize}
+
+\section{Waarde-functies en Bellman-vergelijkingen}
+De toestandswaarde-functie geeft aan hoe goed een bepaalde toestand is, terwijl
+de Q-functie aangeeft hoe goed een actie in een bepaalde toestand is.
+\subsection{Toestandswaarde-functie}
+De toestandswaarde-functie (\(V^\pi: \mathcal{X} \to \mathbb{R}\)) onder beleid
+(\(\pi\)) wordt gedefinieerd als:
+\[
+    V^\pi(x) = \mathbb{E}_\pi\left[\sum_{t=0}^\infty \gamma^t r_t \mid x_0 = x\right]
+\]
+Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
+ontvangen vanaf de toestand \(x\).
+\subsection{Q-functie}
+De Q-functie (\(Q^\pi: \mathcal{X} \times \mathcal{A} \to \mathbb{R}\)) onder
+beleid (\(\pi\)) wordt gedefinieerd als:
+\[
+    Q^\pi(x,a) = \mathbb{E}_\pi\left[\sum_{t=0}^\infty \gamma^t r_t \mid x_0 = x, a_0 = a\right]
+\]
+Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
+ontvangen vanaf de toestand \(x\) en na het nemen van actie \(a\).
+
+\subsection{Bellman-vergelijkingen}
+De Bellman-vergelijkingen drukken de recursieve relatie uit tussen waarden van
+opeenvolgende toestanden:
+\begin{itemize}
+    \item Toestandswaarde Bellman-vergelijking:
+          \[
+              V^\pi(x) = \mathbb{E}_{a \sim \pi(\cdot|x), x' \sim p(\cdot|x,a)}[r(x,a) + \gamma V^\pi(x')]
+          \]
+    \item Actiewaarde Bellman-vergelijking:
+          \[
+              Q^\pi(x,a) = \mathbb{E}_{x' \sim p(\cdot|x,a), a' \sim \pi(\cdot|x')}[r(x,a) + \gamma Q^\pi(x',a')]
+          \]
+\end{itemize}
+De relatie tussen (\(V^\pi\)) en (\(Q^\pi\)) wordt gegeven door:
+\[
+    V^\pi(x) = \mathbb{E}_{a \sim \pi(\cdot|x)}[Q^\pi(x,a)]
+\]
+
+\section{Leerparadigma's}
+\subsection{Model-Based vs Model-Free Learning}
+\subsubsection{Model-Based Learning}
+Bij model-based learning construeert de agent expliciet een model (\(\hat{p}\))
+van de overgangsdynamiek en beloningsfunctie van de omgeving (\(\hat{r}\)). Het
+geleerde model benadert:
+
+\begin{itemize}
+    \item Overgangsfunctie: \(\hat{p}(x'|x,a) \approx p(x'|x,a)\)
+    \item Beloningsfunctie: \(\hat{r}(x,a) \approx r(x,a)\)
+\end{itemize}
+
+De agent kan dit model gebruiken voor:
+
+\begin{itemize}
+    \item \textit{Planning}: Het simuleren van trajecten zonder interactie met de omgeving.
+    \item \textit{Counterfactual reasoning}: Het evalueren van acties die niet daadwerkelijk zijn uitgevoerd.
+\end{itemize}
+
+\subsubsection{Model-Free Learning}
+Model-free methoden leren waardefuncties of beleidsregels direct uit ervaring,
+zonder een expliciet model te construeren. Deze methoden werken door:
+
+\begin{itemize}
+    \item Directe updates van waarde-schattingen.
+    \item Beleidsverbetering op basis van gesamplede trajecten.
+    \item Geen expliciete representatie van overgangsdynamiek.
+\end{itemize}
+
+\subsection{On-Policy vs Off-Policy Learning}
+\subsubsection{On-Policy Learning}
+On-policy methoden leren over het beleid dat momenteel wordt uitgevoerd. De
+update van de waardefunctie volgt:
+\[
+    \text{Target} = r + \gamma \mathbb{E}_{a' \sim \pi(\cdot|x')}[Q(x',a')]
+\]
+waarbij \(\pi\) zowel:
+
+\begin{itemize}
+    \item Het gedragsbeleid (dat ervaringen genereert) als
+    \item Het doelbeleid (dat wordt geleerd) is.
+\end{itemize}
+
+\subsubsection{Off-Policy Learning}
+Off-policy methoden leren over één beleid (\(\pi\)) terwijl een ander beleid
+(\(\mu\)) wordt gevolgd. Dit omvat:
+
+\begin{itemize}
+    \item \textit{Gedragsbeleid} (\(\mu\)): Gebruikt voor exploratie.
+    \item \textit{Doelbeleid} (\(\pi\)): Het beleid dat wordt geleerd.
+\end{itemize}
+
+De importance sampling ratio (\(\rho\)) corrigeert voor het verschil tussen de
+]beleidsregels:
+\[
+    \rho_t = \frac{\pi(a_t|x_t)}{\mu(a_t|x_t)}
+\]
+Dit maakt het mogelijk om te leren over optimaal gedrag terwijl een exploratief
+beleid wordt gevolgd.
+
+
+\chapter*{Theoretisch Kader}
+
+\section*{Definitie}
 Een actie is de beslissing die een agent neemt bij elke stap in een
 besluitvormingsproces. Acties worden aangeduid met \( a \) en worden gekozen
 uit een reeks mogelijke acties \( \mathcal{A} \). Elke door de agent genomen
@@ -483,13 +678,42 @@ Er zijn twee problemen in RL:
           \]
 \end{itemize}
 
-\section{Q-Learning}
+\chapter{Kenmerken van specifieke Algoritmes}
 
-Het Q-learning algoritme, dat zowel in Algoritme \ref{alg:Q-learning} als in de
-flowchart in Figuur \ref{fig:ql_flowchart} is weergegeven, is een reinforcement
-learning algoritme dat gebruik maakt van een Q-tabel. Hierin de Q-waarden voor
-alle combinaties van toestanden en actie's. Met behulp van deze tabel kiest
-agent de volgende actie.
+\section{Q-Learning}
+Q-learning, geïntroduceerd door Chris Watkins in 1989, is een van de
+belangrijkste vooruitgangen binnen reinforcement learning. Dit model-vrije,
+off-policy algoritme is een van de meest gebruikte algoritmen binnen
+reinforcement learning vanwege zijn eenvoud en effectiviteit.
+\subsection{Proces}
+Het proces van het Q-learning-algoritme, zoals weergegeven in
+\textbf{Algoritme~\ref{alg:Q-learning}} en de flowchart in
+\textbf{Figuur~\ref{fig:ql_flowchart}}, begint met het opstellen van een
+Q-tabel. Deze tabel bevat de Q-waarden voor alle combinaties van toestanden en
+acties. Aan het begin zijn alle waarden ingesteld op nul.
+
+Vervolgens start het spel, waarbij de agent de volgende actie bepaalt. Hierbij
+heeft de agent twee mogelijkheden:
+\begin{itemize}
+    \item Exploratie: De agent voert een willekeurige actie uit om nieuwe informatie te
+          verkennen.
+    \item Exploitatie: De agent selecteert een actie op basis van de bestaande Q-tabel,
+          waarbij de actie met de hoogste Q-waarde in de huidige toestand wordt gekozen.
+\end{itemize}
+
+De keuze tussen exploratie en exploitatie wordt bepaald door de parameter
+$\epsilon$. De kans dat de agent een willekeurige actie uitvoert (exploratie)
+is gelijk aan $\epsilon$. Aan het begin van de training is $\epsilon$ gelijk
+aan 1, en deze waarde neemt exponentieel af naarmate de training vordert. Tegen
+het einde van de training is $\epsilon$ vrijwel 0.
+
+Nadat een actie is uitgevoerd, ontvangt de agent een beloning. Op basis van
+deze beloning wordt de Q-waarde voor de combinatie van de uitgevoerde actie en
+de huidige toestand bijgewerkt in de Q-tabel. Dit proces wordt herhaald totdat
+de training is voltooid.
+\subsection{Convergentie en Optimaliteit}
+\subsection{Voordelen en Beperkingen}
+\subsection{Toepassingen van Q-learning}
 
 \begin{algorithm}
     \caption{Q-Learning Algoritme}\label{alg:Q-learning}
@@ -562,15 +786,173 @@ agent de volgende actie.
 
 \section{Deep Q-Network}
 
-\section{DDPG}
-
 \section{AplhaZero}
 
-,
+\chapter{Kenmerken van specifieke Computerspellen}
+Er zijn talloze computerspellen met diverse en uitdagende omgevingen voor de
+toepassing van reinforcement learning (RL)-algoritmes. Spellen onderling kunnen
+erg van elkaar variëren onder andere in structuur, dynamiek, complexiteit, en
+tijdsduur. Al deze aspecten kunnen dergelijke invloed hebben op de
+effectiviteit van RL-algoritmes. Elk type spel stelt specifieke eisen aan een
+RL-algoritme, afhankelijk van aspecten zoals de omvang van de toestandsruimte,
+de regels en beperkingen, en de vereiste strategische vaardigheden.
 
-\section{Artificiële Leermethodes}
+In dit hoofdstuk worden de specifieke kenmerken van vier computerspellen met
+elkaar vergeleken: een \textit{auto-racespel} waar de agent het
+autobesturingssysteem is, \textit{Snake} waar de agent de slang is,
+\textit{Schaken} waar de agent de schaker is en \textit{Super Mario Bros} waar
+de agent Mario is. Een overzicht van alle speleigenschappen is te zien in Tabel
+??.
 
-\section{Computerspellen}
+\section{Indeling en Strategische Diepgang van Spellen} Spellen kunnen worden ingedeeld op basis van hun genre en de mate van
+strategische diepgang die nodig is om succesvol te zijn. Actie- en
+platformspellen, zoals \textit{Super Mario Bros}, hebben een gemiddelde
+strategische diepgang. Het doel is obstakels te overwinnen, vijanden te
+ontwijken of verslaan en tegelijkertijd gouden munten te verzamelen. Dit soort
+spellen vereist doorgaans korte termijn optimalisatie en directe reacties.
+
+Strategiespellen, zoals \textit{Schaken}, vragen daarentegen om diepgaande
+planning en vooruitdenken. Hier moet een speler of agent een reeks mogelijke
+toekomstige toestanden analyseren en anticiperen op de acties van een
+tegenstander. De strategische diepgang maakt leren complex, omdat beloningen
+vaak cumulatief en pas aan het einde van het spel duidelijk worden. Dergelijke
+spellen vereisen geavanceerde reinforcement learning (RL)-algoritmes die
+langetermijnplanning ondersteunen.
+
+Puzzel-/actiespellen, zoals \textit{Snake}, zijn minder afhankelijk van
+strategie. Hier draait het om patroonherkenning en korte termijn optimalisatie,
+waarbij eenvoudige RL-algoritmes voldoende zijn om succesvol te leren. Het doel
+is bijvoorbeeld appels te verzamelen zonder jezelf te raken, waarbij de
+beloningsstructuur rechtlijnig is.
+
+Simulatie- en racegames, zoals een racespel met een zelfrijdende auto, richten
+zich op efficiënt en veilig navigeren over een parcours. Hier ligt de nadruk op
+het optimaliseren van gedrag in een gesimuleerde omgeving, vaak zonder de
+noodzaak van complexe planningsstrategieën.
+
+Deze variatie in genres en strategische eisen bepaalt welk type RL-algoritme
+het meest geschikt is voor een spel. Complexere spellen met hogere strategische
+diepgang vereisen geavanceerdere algoritmes, terwijl eenvoudigere spellen vaak
+volstaan met directe responsmechanismen.
+
+\section{Indeling van Spellen}
+\textit{Super Mario Bros} valt binnen het genre van actie- en platformspellen. Het doel van het spel is over hindernissen springen en vijanden te ontwijken en verslaan en tegelijkertijd gouden munten te verzamelen. \textit{Schaken} daarentegen is een strategiespel, dat volledig turn-based is en gericht op denkvermogen, vooruitdenken en strategische planning. \textit{Snake} wordt vaak als een puzzel-/actiespel beschouwd, waarbij het doel is een appel te eten terwijl je niet jezelf raakt; hier is patroonherkenning belangrijk. Een zelfrijdende auto in een racespel valt binnen het genre van simulatie en racegames. Het draait om het efficiënt en veilig navigeren over een parcours. Dit wordt vaak gebruikt bij offline racespellen waar je tegen de computer speelt.
+
+\section{Strategische Diepgang}
+De mate van strategische diepgang in een spel is een van de belangrijkste
+factoren die bepalen welk type RL-algoritme geschikt is. Strategie verwijst
+naar het vermogen om vooruit te denken en acties te plannen die op lange
+termijn voordelig zijn. Dit varieert sterk tussen spellen.
+
+Strategische spellen, zoals \textit{Schaken}, vereisen vereisen dat een agent
+ver vooruit denkt en een reeks mogelijke toekomstige toestanden analyseert.
+Hier is langetermijnplanning essentieel. De agent moet niet alleen rekening
+houden met de huidige toestand, maar ook anticiperen op de mogelijke acties van
+een tegenstander en de daaropvolgende uitkomsten. Bij strategische spellen is
+het leren complex, omdat beloningen vaak cumulatief en pas aan het einde van
+het spel duidelijk worden.
+
+Aan de andere kant zijn er spellen zoals \textit{Snake}, waarin strategie een
+veel minder belangrijke rol speelt. In deze spellen zijn acties vaak gebaseerd
+op eenvoudige regels en is de beste keuze meestal direct duidelijk. Het succes
+van een speler hangt hier voornamelijk af van korte termijn optimalisatie.
+Dergelijke spellen vereisen relatief eenvoudige RL-algoritmes, die zijn
+ontworpen om direct te reageren op beloningen of straffen zonder complexe
+planningsstrategieën. De eenvoudige structuur en beloningsmechanismen maken het
+leerproces rechtlijnig en efficiënt.
+
+\section{Beslissingsdynamiek en Tijdgevoeligheid}
+De snelheid waarmee de omgeving van een spel verandert, bepaalt in grote mate
+hoe moeilijk het is voor een RL-agent om effectief te leren en te reageren.
+
+De beslissingsdynamiek verschilt sterk tussen de spellen. \textit{Super Mario
+    Bros} vereist snelle real-time beslissingen. De agent moet op het juiste moment
+springen of een vijand ontwijken, en timing is hierbij cruciaal. Bij
+\textit{Schaken} is er juist geen tijdsdruk; de agent kan lang “nadenken” over
+elke zet. \textit{Snake} zit er tussenin: hoewel het spel niet zo snel is als
+\textit{Mario}, zit er wel een kleine tijdsdruk achter, maar dit is meestal
+verwaarloosbaar. Timing en patroonherkenning worden belangrijker naarmate het
+spel vordert. Bij een zelfrijdende auto in een racespel ligt de
+beslissingsdynamiek real-time. Hier zijn snelheid en precisie van beslissingen
+belangrijk, omdat milliseconden het verschil kunnen maken tussen een
+succesvolle race en een botsing.
+
+\section{Complexiteit}
+De complexiteit van de regels en doelen varieert sterk. \textit{Super Mario
+    Bros} heeft relatief eenvoudige regels: de agent moet vijanden vermijden en
+verslaan, munten verzamelen, en het einde van het level bereiken. De
+complexiteit van de vijanden en het terrein neemt echter toe naarmate de levels
+moeilijker worden. \textit{Schaken} heeft relatief eenvoudige basisregels: zes
+verschillende stukken met elk unieke bewegingsmogelijkheden. Het doel, het
+schaakmat zetten van de tegenstander, vereist echter strategisch inzicht en
+planning. Dit maakt \textit{Schaken} bijzonder uitdagend voor een RL-agent
+vanwege de enorme toestandsruimte en de langetermijnplanning die nodig is.
+\textit{Snake} heeft zeer eenvoudige regels: de agent moet voedsel verzamelen
+en mag niet botsen met de muur of zichzelf. De uitdaging ligt in de toenemende
+snelheid en lengte van de slang. Een zelfrijdende auto in een racespel heeft
+daarentegen te maken met complexe regels die gebaseerd zijn op realistische
+fysica. Het doel is simpel: zo snel mogelijk de finish bereiken.
+
+\subsection{Regels en Beperkingen}
+De complexiteit en het aantal regels in een spel spelen een cruciale rol in de
+uitdaging die een RL-agent tegenkomt.
+
+\subsubsection{Spellen met veel regels en vaste patronen}
+Spellen zoals 4-op-een-rij of boter-kaas-en-eieren hebben een voorspelbare
+structuur en strikte regels. De mogelijke zetten en uitkomsten zijn beperkt,
+wat het spel eenvoudiger maakt om te modelleren. RL-algoritmes kunnen hier
+profiteren van waarschijnlijkheidsmodellen en gestructureerde planning. De
+voorspelbaarheid van deze spellen vermindert de onzekerheid in het leerproces.
+Een RL-agent kan relatief eenvoudig een optimale strategie leren door alle
+mogelijke acties te analyseren en te kiezen voor de meest belonende uitkomst.
+
+\subsubsection{Spellen met weinig regels en veel vrijheid}
+Spellen zoals GTA of Call of Duty bieden een grote mate van keuzevrijheid. De
+speler kan vrij bewegen in een open wereld, interacties aangaan en talloze
+acties uitvoeren. Deze spellen hebben een enorme toestandsruimte, die
+driedimensionaal en dynamisch is. Dergelijke spellen vereisen een flexibel en
+adaptief RL-algoritme. Het is onrealistisch voor een RL-agent om alle mogelijke
+acties en toestanden volledig te doorzoeken. Algoritmes zoals Proximal Policy
+Optimization (PPO) zijn hier geschikt. PPO gebruikt stochastische
+beleidsmodellen en leert door te experimenteren met acties, waarbij het snel
+aanpassingen kan maken op basis van feedback.
+
+\section{Dynamiek en Tijdgevoeligheid}
+De snelheid waarmee de omgeving van een spel verandert, bepaalt in grote mate
+hoe moeilijk het is voor een RL-agent om effectief te leren en te reageren.
+
+\subsection{Turn-based spellen}
+Spellen zoals \textit{Schaken} of Monopoly bieden de speler voldoende tijd om
+de optimale actie te berekenen. Omdat de omgeving niet continu verandert, kan
+een RL-algoritme worden ingezet om een uitgebreide analyse te maken van alle
+mogelijke uitkomsten van een actie. Dit type algoritme is bijzonder effectief
+in spellen waar de agent kan profiteren van gestructureerde planning en
+voorspelbare omgevingen.
+
+\subsection{Realtime spellen}
+In spellen zoals \textit{Mario Bros} of Tetris veranderen de omstandigheden
+continu. Obstakels bewegen, vijanden verschijnen en de tijdsdruk vereist snelle
+besluitvorming. Voor deze spellen zijn algoritmes nodig die snel leren en
+direct reageren, met neurale netwerken, waardoor het algoritme in real-time
+beslissingen kan nemen op basis van eerdere ervaringen.
+
+\section{Beloningsstructuur}
+Beloningen vormen de kern van RL en bepalen hoe een agent leert. De manier
+waarop beloningen worden toegekend, varieert sterk tussen spellen.
+
+\subsection{Directe beloningen}
+Spellen zoals \textit{Snake} bieden onmiddellijke feedback. Elke actie
+resulteert direct in een beloning (zoals punten voor het eten van voedsel) of
+een straf (zoals botsingen). RL-algoritmes die afhankelijk zijn van directe
+beloningen werken goed in deze context, omdat ze snel leren welke acties
+voordelig zijn.
+
+\subsection{Cumulatieve beloningen}
+In strategische spellen zoals \textit{Schaken} worden beloningen vaak pas aan
+het einde van het spel toegekend. Dit vereist dat de agent leert om acties te
+nemen die op lange termijn voordelig zijn. Het leren wordt complexer omdat de
+agent beloningen moet toeschrijven aan acties die mogelijk vele stappen eerder
+werden ondernomen.
 
 \chapter{Onderzoeksmethoden}
 \section{Q-Learning}
