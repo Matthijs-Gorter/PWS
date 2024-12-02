@@ -18,46 +18,52 @@
 \contentsline {section}{\numberline {2.3}Beleid en Verwachte Waarden}{6}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Beleid}{6}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Verwachte Waarden}{6}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Kortingsfactor}{6}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Waarde-functies en Bellman-vergelijkingen}{7}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Toestandswaarde-functie}{7}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Q-functie}{7}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Bellman-vergelijkingen}{7}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Leerparadigma's}{8}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Model-Based vs Model-Free Learning}{8}{subsection.2.5.1}%
-\contentsline {subsubsection}{Model-Based Learning}{8}{subsection.2.5.1}%
-\contentsline {subsubsection}{Model-Free Learning}{8}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}On-Policy vs Off-Policy Learning}{8}{subsection.2.5.2}%
-\contentsline {subsubsection}{On-Policy Learning}{8}{subsection.2.5.2}%
-\contentsline {subsubsection}{Off-Policy Learning}{9}{subsection.2.5.2}%
-\contentsline {chapter}{\numberline {3}Kenmerken van specifieke Algoritmes}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Q-Learning}{15}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Proces}{15}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Convergentie en Optimaliteit}{16}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Voordelen en Beperkingen}{16}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Toepassingen van Q-learning}{16}{subsection.3.1.4}%
-\contentsline {section}{\numberline {3.2}Deep Q-Network}{18}{section.3.2}%
-\contentsline {section}{\numberline {3.3}AplhaZero}{18}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Kenmerken van specifieke Computerspellen}{19}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Indeling en Strategische Diepgang van Spellen}{19}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Indeling van Spellen}{20}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Strategische Diepgang}{20}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Beslissingsdynamiek en Tijdgevoeligheid}{21}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Complexiteit}{21}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Regels en Beperkingen}{22}{subsection.4.5.1}%
-\contentsline {subsubsection}{Spellen met veel regels en vaste patronen}{22}{subsection.4.5.1}%
-\contentsline {subsubsection}{Spellen met weinig regels en veel vrijheid}{22}{subsection.4.5.1}%
-\contentsline {section}{\numberline {4.6}Dynamiek en Tijdgevoeligheid}{22}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Turn-based spellen}{22}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Realtime spellen}{23}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Beloningsstructuur}{23}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Directe beloningen}{23}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Cumulatieve beloningen}{23}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {5}Onderzoeksmethoden}{24}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Q-Learning}{24}{section.5.1}%
-\contentsline {chapter}{\numberline {6}Analyse en Resultaten}{25}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Snake}{25}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Conclusie}{26}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Discussie}{27}{chapter.8}%
-\contentsline {chapter}{Appendix}{28}{chapter*.7}%
-\contentsline {chapter}{Bibliografie}{29}{chapter*.8}%
+\contentsline {section}{\numberline {2.4}Leerparameters in Reinforcement Learning}{6}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Leerpercentage}{6}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Kortingsfactor}{7}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Exploratieparameter}{7}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Waarde-functies}{8}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Toestandswaarde-functie}{8}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Q-functie}{8}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Leerparadigma's}{8}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Model-Based vs Model-Free Learning}{8}{subsection.2.6.1}%
+\contentsline {subsubsection}{Model-Based Learning}{8}{subsection.2.6.1}%
+\contentsline {subsubsection}{Model-Free Learning}{9}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}On-Policy vs Off-Policy Learning}{9}{subsection.2.6.2}%
+\contentsline {subsubsection}{On-Policy Learning}{9}{subsection.2.6.2}%
+\contentsline {subsubsection}{Off-Policy Learning}{9}{subsection.2.6.2}%
+\contentsline {chapter}{\numberline {3}Kenmerken van specifieke Algoritmes}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Q-Learning}{11}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Proces}{11}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Convergentie en Optimaliteit}{12}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Voordelen en Beperkingen}{12}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Toepassingen van Q-learning}{12}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Deep Q-Network}{14}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Proces}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Verbeteringen op Klassiek Q-learning}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Voordelen en Beperkingen}{14}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Toepassingen}{16}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}AplhaZero}{16}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Kenmerken van specifieke Computerspellen}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Indeling en Strategische Diepgang van Spellen}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Indeling van Spellen}{18}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Strategische Diepgang}{18}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Beslissingsdynamiek en Tijdgevoeligheid}{19}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Complexiteit}{19}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Regels en Beperkingen}{20}{subsection.4.5.1}%
+\contentsline {subsubsection}{Spellen met veel regels en vaste patronen}{20}{subsection.4.5.1}%
+\contentsline {subsubsection}{Spellen met weinig regels en veel vrijheid}{20}{subsection.4.5.1}%
+\contentsline {section}{\numberline {4.6}Dynamiek en Tijdgevoeligheid}{20}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Turn-based spellen}{20}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Realtime spellen}{21}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Beloningsstructuur}{21}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Directe beloningen}{21}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Cumulatieve beloningen}{21}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {5}Onderzoeksmethoden}{22}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Q-Learning}{22}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Analyse en Resultaten}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Snake}{23}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Conclusie}{24}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Discussie}{25}{chapter.8}%
+\contentsline {chapter}{Appendix}{26}{chapter*.7}%
+\contentsline {chapter}{Bibliografie}{27}{chapter*.8}%

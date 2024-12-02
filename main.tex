@@ -118,33 +118,38 @@ Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\ Christelijk Lyceum Zeist
 \addcontentsline{toc}{chapter}{Notatie} % Voeg toe aan de Inhoudsopgave
 \begin{table}[h]
     \begin{tabular}{>{\raggedright}p{2.5cm} >{\raggedright\arraybackslash}p{10cm}}
-        \textbf{Variabele}       & \textbf{Definitie}                                \\
-        \rule{\linewidth}{0.4mm} & \rule{\linewidth}{0.4mm}                          \\
-        $t$                      & Tijdstap                                          \\
-        $T$                      & Laatste tijdstap van een episode (horizon)        \\
-        $x$                      & Toestand (state)                                  \\
-        $x_t$                    & Toestand op tijdstip $t$                          \\
-        $x'$                     & Toestand een tijdstap na $x$                      \\
-        $\mathcal{X}$            & Set van alle toestanden                           \\
-        $a$                      & Actie                                             \\
-        $\mathcal{A}$            & Alle mogelijke acties                             \\
-        $a_t$                    & Actie op tijdstip $t$                             \\
-        $r$                      & Beloning (reward)                                 \\
-        $\mathcal{R}$            & Set van mogelijke beloningen                      \\
-        $r_t$                    & Beloning op tijdstip $t$                          \\
-        $r(x, a)$                & Beloningsfunctie                                  \\
-        $\mu$                    & Deterministisch beleid                            \\
-        $\pi$                    & Stochastisch beleid                               \\
-        $\pi^*$                  & Optimale stochastisch beleid                      \\
-        $\gamma$                 & Kortingsfactor tussen 0 en 1                      \\
-        $p(x'|x, a)$             & Overgangswaarschijnlijkheidsfunctie               \\
-        $\mathcal{P}$            & Overgangswaarschijnlijkheidsmatrix                \\
-        $V(x)$                   & Waardefunctie                                     \\
-        $Q(x, a)$                & Q-functie                                         \\
-        $Q^*(x, a)$              & Q-functie met het optimale beleid                 \\
-        $\mathbb{E}[X]$          & Verwachtingswaarde van variabele $X$              \\
-        $\mathbb{E}[a|b]$        & Geconditioneerde verwachtingswaarde               \\
-        $\mathbb{E}_{\pi}[X]$    & Verwachtingswaarde als beleid $\pi$ wordt gevolgd \\
+        \textbf{Variabele}       & \textbf{Definitie}                          \\
+        \rule{\linewidth}{0.4mm} & \rule{\linewidth}{0.4mm}                    \\
+        $t$                      & Tijdstap                                    \\
+        $T$                      & Laatste tijdstap van een episode (horizon)  \\
+        $x$                      & Toestand (state)                            \\
+        $x_t$                    & Toestand op tijdstap $t$                    \\
+        $x'$                     & De volgende toestand                        \\
+        $\mathcal{X}$            & Toestandsruimte                             \\
+        $a$                      & Actie                                       \\
+        $\mathcal{A}$            & Actieruimte                                 \\
+        $a_t$                    & Actie op tijdstip $t$                       \\
+        $r$                      & Beloning (reward)                           \\
+        $\mathcal{R}$            & Beloningsruimte                             \\
+        $r_t$                    & Beloning op tijdstip $t$                    \\
+        $r(x, a)$                & Beloningsfunctie                            \\
+        $\mu$                    & Deterministisch beleid                      \\
+        $\pi$                    & Stochastisch beleid                         \\
+        $\pi^*$                  & Optimale stochastisch beleid                \\
+        $\alpha$                 & Leersnelheid tussen 0 en 1                  \\
+        $\gamma$                 & Kortingsfactor tussen 0 en 1                \\
+        $\epsilon$               & Exploratieparameter tussen 0 en 1           \\
+        $p(x'|x, a)$             & Overgangswaarschijnlijkheidsfunctie         \\
+        $V(x)$                   & Waardefunctie                               \\
+        $Q(x, a)$                & Q-functie                                   \\
+        $\mathbb{E}[X]$          & Verwachtingswaarde van variabele $X$        \\
+        $\theta$                 & De gewichten van het hoofd neuraal netwerk  \\
+        $\theta^-$               & De gewichten van het target netwerk         \\
+        $\Phi$                   & De voorbewerkte toestand                    \\
+        $\mathcal{D}$            & Replay-geheugen voor opslag van transities. \\
+        $\mathcal{N}$            & Capaciteit van het replay-geheugen          \\
+        $y_j$                    & Doelwaarde voor training                    \\
+
     \end{tabular}
     \caption{Notatie}
 \end{table}
@@ -361,17 +366,66 @@ uitvoert. Bijvoorbeeld, als \(X\) een dobbelsteenworp vertegenwoordigt, dan is
 gelijk is aan 3,5. De conditionele verwachting (\(\mathbb{E}[X|Y]\)) geeft de
 verwachte waarde van (\(X\)) gegeven (\(Y\)).
 
-\subsection{Kortingsfactor}
-De kortingsfactor (\(\gamma \in [0,1]\)) bepaalt het gewicht bepaalt van
-toekomstige beloningen ten opzichte van onmiddellijke beloningen, waarbij:
+\section{Leerparameters in Reinforcement Learning}
 
+Bij reinforcement learning spelen verschillende hyperparameters een cruciale
+rol in het leerproces van de agent. Drie van de belangrijkste parameters zijn
+het leerpercentage (\(\alpha\)), de kortingsfactor (\(\gamma\)), en de
+exploratieparameter (\(\epsilon\)). Deze worden hieronder uitgelegd.
+
+\subsection{Leerpercentage}
+
+Het leerpercentage (\(\alpha\)) bepaalt hoe sterk nieuwe informatie wordt
+gewogen ten opzichte van bestaande kennis.
+
+De waarde van \(\alpha\) ligt tussen \(0\) en \(1\):
 \begin{itemize}
-    \item (\(\gamma = 0\)) alleen directe beloningen hebben invloed
-    \item (\(\gamma = 1\)) alle toekomstige beloningen zijn even invloedrijk
-    \item (\(0 < \gamma < 1\)) een korting toepast op toekomstige beloningen
+    \item Als \(\alpha = 0\): De agent leert niets; bestaande kennis blijft onveranderd.
+    \item Als \(\alpha = 1\): Alleen nieuwe informatie wordt gebruikt; bestaande kennis
+          wordt genegeerd.
+    \item Voor \(0 < \alpha < 1\): Oude en nieuwe informatie worden gecombineerd, wat
+          doorgaans de voorkeur heeft.
 \end{itemize}
 
-\section{Waarde-functies en Bellman-vergelijkingen}
+\subsection{Kortingsfactor}
+
+De kortingsfactor (\(\gamma\)) bepaalt hoe belangrijk toekomstige beloningen
+zijn in vergelijking met onmiddellijke beloningen. Het beïnvloedt de totale
+beloning die de agent probeert te maximaliseren. De totale beloning wordt
+gedefinieerd als:
+
+\[
+    R = \sum_{t=0}^\infty \gamma^t r_t
+\]
+
+Waarbij \(r_t\) de beloning is die ontvangen wordt op tijdstip \(t\). De waarde
+van \(\gamma\) varieert meestal tussen \(0\) en \(1\):
+\begin{itemize}
+    \item Als \(\gamma = 0\): Alleen directe beloningen worden overwogen.
+    \item Als \(\gamma = 1\): Toekomstige beloningen zijn even belangrijk als directe
+          beloningen.
+    \item Voor \(0 < \gamma < 1\): Toekomstige beloningen worden gedisconteerd, met een
+          lagere waarde naarmate ze verder in de toekomst liggen.
+\end{itemize}
+
+\subsection{Exploratieparameter}
+
+De exploratieparameter (\(\epsilon\)) wordt gebruikt in de epsilon-greedy
+strategie om een balans te vinden tussen exploratie (het verkennen van nieuwe
+acties) en exploitatie (het uitvoeren van de momenteel beste actie). De
+strategie werkt als volgt. Met kans \(\epsilon\): Kies een willekeurige actie
+(exploratie). Anders kiest de agent de actie die momenteel de hoogste geschatte
+Q-waarde heeft (exploitatie).
+
+De waarde van \(\epsilon\) bepaalt het gedrag van de agent:
+\begin{itemize}
+    \item Als \(\epsilon = 0\): De agent exploiteert alleen, wat kan leiden tot
+          suboptimale oplossingen.
+    \item Als \(\epsilon = 1\): De agent verkent alleen, zonder gericht gebruik van
+          kennis.
+\end{itemize}
+
+\section{Waarde-functies}
 De toestandswaarde-functie geeft aan hoe goed een bepaalde toestand is, terwijl
 de Q-functie aangeeft hoe goed een actie in een bepaalde toestand is.
 \subsection{Toestandswaarde-functie}
@@ -390,24 +444,6 @@ beleid (\(\pi\)) wordt gedefinieerd als:
 \]
 Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
 ontvangen vanaf de toestand \(x\) en na het nemen van actie \(a\).
-
-\subsection{Bellman-vergelijkingen}
-De Bellman-vergelijkingen drukken de recursieve relatie uit tussen waarden van
-opeenvolgende toestanden:
-\begin{itemize}
-    \item Toestandswaarde Bellman-vergelijking:
-          \[
-              V^\pi(x) = \mathbb{E}_{a \sim \pi(\cdot|x), x' \sim p(\cdot|x,a)}[r(x,a) + \gamma V^\pi(x')]
-          \]
-    \item Actiewaarde Bellman-vergelijking:
-          \[
-              Q^\pi(x,a) = \mathbb{E}_{x' \sim p(\cdot|x,a), a' \sim \pi(\cdot|x')}[r(x,a) + \gamma Q^\pi(x',a')]
-          \]
-\end{itemize}
-De relatie tussen (\(V^\pi\)) en (\(Q^\pi\)) wordt gegeven door:
-\[
-    V^\pi(x) = \mathbb{E}_{a \sim \pi(\cdot|x)}[Q^\pi(x,a)]
-\]
 
 \section{Leerparadigma's}
 \subsection{Model-Based vs Model-Free Learning}
@@ -469,215 +505,6 @@ De importance sampling ratio (\(\rho\)) corrigeert voor het verschil tussen de
 Dit maakt het mogelijk om te leren over optimaal gedrag terwijl een exploratief
 beleid wordt gevolgd.
 
-
-\chapter*{Theoretisch Kader}
-
-\section*{Definitie}
-Een actie is de beslissing die een agent neemt bij elke stap in een
-besluitvormingsproces. Acties worden aangeduid met \( a \) en worden gekozen
-uit een reeks mogelijke acties \( \mathcal{A} \). Elke door de agent genomen
-actie beïnvloedt de interactie met de omgeving, wat leidt tot een verandering
-in de toestand en een daaruit voortvloeiende beloning.
-
-Een toestand \( x \) vertegenwoordigt de huidige situatie of staat van de
-omgeving waarin de agent opereert. Dit wordt aangeduid met \( x \) en maakt
-deel uit van de toestandsruimte \( \mathcal{X} \). Bij de aanvangsstap \( t = 0
-\), begint de agent in een initiële toestand \( x_0 \) die willekeurig wordt
-bepaald door een verdeling \( p \). Naarmate het proces vordert, bevindt de
-agent zich in nieuwe toestanden gebaseerd op zijn acties.
-
-Een beloning \( r \) is een feedbackwaarde die wordt ontvangen nadat de agent
-een actie heeft uitgevoerd in een bepaalde toestand. Deze beloning wordt
-bepaald door de beloningsfunctie \( r(x, a) \). De beloningsmatrix \( R \)
-bevat de onmiddellijke beloningen voor elke combinatie van toestand en actie.
-
-Een overgang beschrijft de verandering van de huidige toestand naar de volgende
-toestand als gevolg van een actie die door de agent wordt genomen. De
-waarschijnlijkheid van overgang wordt bepaald door de
-overgangswaarschijnlijkheidsfunctie \( p(x'|x, a) \), die afhangt van de
-huidige toestand \( x \), de genomen actie \( a \) en leidt tot een nieuwe
-toestand \( x' \). De overgangswaarschijnlijkheidsmatrix \( P \) bevat de
-waarschijnlijkheden van het overgaan van de ene toestand naar de volgende
-toestand, gegeven een bepaalde actie.
-
-\subsection*{Markov-eigenschap}
-
-MDP werkt onder de Markov-aanname, wat betekent dat de volgende toestand en
-beloning alleen afhangen van het huidige toestand-actiepaar en niet van enige
-eerdere geschiedenis. Deze eigenschap vereenvoudigt het besluitvormingsmodel
-door zich alleen te concentreren op de huidige situatie.
-
-Voorbeeld van een MDP:
-\begin{itemize}
-    \item \textbf{Snake}: De toekomstige toestand (positie van de slang en voedsel) is volledig bepaald door de huidige toestand (huidige positie en locatie van het voedsel) en de actie (richting van beweging) zonder afhankelijk te zijn van de geschiedenis van eerdere bewegingen.
-\end{itemize}
-
-Voorbeeld van geen MDP:
-\begin{itemize}
-    \item \textbf{Poker}: De beslissingen in poker zijn afhankelijk van niet alleen de huidige hand, maar ook van de geschiedenis van inzetten en het gedrag van andere spelers in vorige rondes.
-\end{itemize}
-
-Voorbeeld van een twijfelgeval:
-\begin{itemize}
-    \item \textbf{Schaak}: Elke positie op het bord (toestand) en mogelijke zetten (acties) bepalen de volgende positie, maar strategieën kunnen afhankelijk zijn van eerdere zetten.
-\end{itemize}
-
-In een MDP gaat een agent verder in tijdstappen \(t = 0, 1, 2, \ldots, T\) waar
-de horizon \(T\) zowel eindig als oneindig kan zijn. Hierin is \(T\) oneindig
-tenzij anders aangegeven.
-
-\subsection*{Overgangswaarschijnlijkheidsmatrix}
-
-Wanneer de set van alle toestanden \(\mathcal{X}\) en de set van alle acties
-\(\mathcal{A}\) eindig zijn, d.w.z. \(|\mathcal{X}|, |\mathcal{A}| < \infty\),
-kan de overgangswaarschijnlijkheidsfunctie \(p(x'|x,a)\) worden weergegeven als
-een overgangsmatrix.
-
-De grootte van de overgangswaarschijnlijkheidsmatrix is \(|\mathcal{X}| \times
-|\mathcal{X}| \times |\mathcal{A}|\). Dit is een driedimensionale matrix. De
-dimensies zijn als volgt:
-\begin{itemize}
-    \item De huidige toestand \(x\).
-    \item De genomen actie \(a\).
-    \item De volgende toestand \(x'\).
-\end{itemize}
-
-\subsection*{Beleid}
-
-In RL is een beleid de strategie die een agent volgt om beslissingen te nemen.
-Het bepaalt welke actie een agent moet uitvoeren, gegeven de huidige toestand
-van de omgeving. Er zijn twee hoofdtypen beleid:
-
-\begin{itemize}
-    \item \textbf{Deterministisch Beleid}:
-          \begin{itemize}
-              \item \textbf{Formule:} \(a_t = \pi(s_t)\)
-              \item \textbf{Beschrijving:} Voor elke toestand \(s_t\) kiest het beleid altijd dezelfde actie \(a_t\). Het resultaat is volledig voorspelbaar zolang de toestand bekend is.
-          \end{itemize}
-
-    \item \textbf{Stochastisch Beleid}:
-          \begin{itemize}
-              \item \textbf{Formule:} \(a_t \sim \pi(\cdot|s_t)\)
-              \item \textbf{Beschrijving:} Voor een gegeven toestand \(s_t\) kiest het beleid een actie \(a_t\) volgens een waarschijnlijkheidsverdeling. Dit betekent dat de actie die wordt gekozen afhankelijk is van kans, wat leidt tot variabiliteit in het gedrag van de agent.
-          \end{itemize}
-\end{itemize}
-
-\subsection*{Verwachtingswaarde}
-
-De verwachtingswaarde \(\mathbb{E}[X]\) (Expected value), of het gemiddelde,
-van een willekeurige variabele \(X\) is een manier om het gemiddelde resultaat
-te berekenen dat je zou verwachten als je een groot aantal experimenten
-uitvoert. Bijvoorbeeld, als \(X\) een dobbelsteenworp vertegenwoordigt, dan is
-\(\mathbb{E}[X]\) het gemiddelde van de uitkomsten 1, 2, 3, 4, 5, en 6, wat
-gelijk is aan 3,5.
-
-\textbf{Geconditioneerde verwachtingswaarde} \(\mathbb{E}[a|b]\): het gemiddelde van \(a\) berekenen, gegeven de voorwaarde \(b\).
-
-\subsection*{Kortingsfactor}
-
-De kortingsfactor \(\gamma\) is een getal tussen 0 en 1 dat het gewicht bepaalt
-van toekomstige beloningen ten opzichte van onmiddellijke beloningen. Bij een
-lage kortingsfactor hebben toekomstige beloningen weinig invloed. Bij een
-kortingsfactor van 1 hebben alle beloningen evenveel invloed.
-
-\subsection*{Waardefunctie}
-
-De waardefunctie \(V(x)\) geeft de verwachte waarde van de totale beloning die
-een agent zal ontvangen vanaf de toestand \(x\) als hij het beleid \(\pi\)
-volgt.
-
-\[
-    V(x) := \mathbb{E}_{\pi}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid x_0 = x\right]
-\]
-
-Hierin is \(\sum_{t=0}^{\infty} \gamma^t r_t\) de som van alle beloningen
-waarbij elke beloning wordt vermenigvuldigd met \(\gamma^t\) als de
-kortingsfactor (\(\gamma \in [0,1]\)). Dan wordt elke beloning met een groter
-tijdstapje (verder in de toekomst) kleiner en heeft dus minder invloed op de
-verwachte waarde.
-
-\subsection*{Q-functie}
-
-De Q-functie \(Q(x,a)\) geeft de verwachte waarde van de totale beloning die
-een agent zal ontvangen vanaf de toestand \(x\) en na het nemen van actie
-\(a\), als hij daarna het beleid \(\pi\) volgt.
-
-\[
-    Q(x,a) := \mathbb{E}_{\pi}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid x_0 = x, a_0 = a\right]
-\]
-
-\noindent waarin \(a_0 = a\) betekent dat de eerste actie \(a\) is.
-
-De waardefunctie geeft aan hoe goed een bepaalde toestand is, terwijl de
-Q-functie aangeeft hoe goed een actie in een bepaalde toestand is.
-
-Waarde functie en Q-functie zijn gerelateerd aan elkaar op deze manier:
-
-\[
-    V(x) = \mathbb{E}_{a \sim \pi(\cdot|x)}[Q(x,a)]
-\]
-
-\subsection*{Bellman vergelijking}
-
-De Q-functie en de waardefunctie in RL moeten voldoen aan
-consistentievoorwaarden, bekend als de Bellman-vergelijkingen. Voor een gegeven
-beleid \(\pi\), kunnen de waardefunctie \(V(x)\) en de Q-functie \(Q(x,a)\) als
-volgt worden gedefinieerd:
-
-\[
-    V(x) = \mathbb{E}_{a \sim \pi(\cdot|x), x' \sim p(\cdot|x,a)}[r(x,a) + \gamma V(x')]
-\]
-
-\[
-    Q(x,a) = \mathbb{E}_{x' \sim p(\cdot|x,a), a' \sim \pi(\cdot|x')}[r(x,a) + \gamma Q(x',a')]
-\]
-
-\noindent waarin:
-\begin{itemize}
-    \item \(a \sim \pi(\cdot|x)\) betekent dat actie \(a\) de actie is volgens beleid \(\pi\) in toestand \(x\).
-    \item \(x' \sim p(\cdot|x,a)\) betekent dat toestand \(x'\) volgt uit toestand \(x\) en actie \(a\) volgens de overgangswaarschijnlijkheidsfunctie \(p\).
-    \item \(a' \sim \pi(\cdot|x')\) betekent dat de volgende actie \(a'\) de actie is volgens beleid \(\pi\) in de nieuwe toestand \(x'\).
-    \item \(r(x,a)\) is de beloning van actie \(a\) in toestand \(x\).
-\end{itemize}
-
-\subsection*{Evaluatie en Controle}
-
-Er zijn twee problemen in RL:
-\begin{itemize}
-    \item \textbf{Evaluatie:} Het eerste probleem in RL is evaluatie. Het doel is om te berekenen hoe goed een bepaald beleid \(\pi\) presteert. Dit wordt gedaan door te kijken naar de waarde functie \(V(x)\) of de Q-functie \(Q(x,a)\).
-
-          Waarom is evaluatie een probleem?
-          \begin{itemize}
-              \item \textbf{Complexiteit van de omgeving:} In een dynamische omgeving kan het moeilijk zijn om te voorspellen welke beloningen een agent zal ontvangen vanuit een bepaalde toestand, vooral als de omgeving verandert zonder dat de agent verandert.
-              \item \textbf{Variabiliteit van beloningen:} Beloningen kunnen stochastisch zijn, wat betekent dat dezelfde actie in dezelfde toestand verschillende uitkomsten kan hebben.
-              \item \textbf{Lange termijn effecten:} Het effect van een bepaalde actie wordt pas later zichtbaar.
-          \end{itemize}
-
-          Het evaluatieprobleem wordt meestal beschouwd als een subroutine van het tweede
-          probleem: controle.
-
-    \item \textbf{Controle:} Bij controle is het doel om het beleid \(\pi\) te vinden dat de waarde functie maximaliseert over de initiële toestanden \(x \sim \rho\).
-
-          \[
-              \max_{\pi} \mathbb{E}_{x \sim \rho}[V(x)]
-          \]
-
-          \noindent waarin \(x \sim \rho\) betekent dat de toestand \(x\) van de agent komt uit een vooraf gedefinieerde verzameling toestanden, waarbij elke toestand een bepaalde kans heeft om gekozen te worden.
-
-          Waarom is controle een probleem?
-          \begin{itemize}
-              \item \textbf{Exploratie vs. exploitatie:} De agent moet een balans vinden tussen het verkennen van nieuwe acties om betere beloningen te ontdekken (exploratie) en het uitbuiten van bekende acties die momenteel de hoogste beloning bieden (exploitatie).
-              \item \textbf{Dimensionale complexiteit:} In veel RL-toepassingen zijn er een groot aantal toestanden en acties, wat het zoeken naar het optimale beleid computationeel duur maakt.
-          \end{itemize}
-
-          Het optimale beleid \(\pi^*\) is het beleid dat de verwachte cumulatieve
-          beloning over tijd maximaliseert.
-
-          \[
-              Q^*(x,a) = \mathbb{E}_{x' \sim p(\cdot|x,a)}\left[r(x,a) + \gamma \max_{a'} Q^*(x',a')\right]
-          \]
-\end{itemize}
-
 \chapter{Kenmerken van specifieke Algoritmes}
 
 \section{Q-Learning}
@@ -709,11 +536,8 @@ het einde van de training is $\epsilon$ vrijwel 0.
 
 Nadat een actie is uitgevoerd, ontvangt de agent een beloning. Op basis van
 deze beloning wordt de Q-waarde voor de combinatie van de uitgevoerde actie en
-de huidige toestand bijgewerkt in de Q-tabel. Dit proces wordt herhaald totdat
-de training is voltooid.
-\subsection{Convergentie en Optimaliteit}
-\subsection{Voordelen en Beperkingen}
-\subsection{Toepassingen van Q-learning}
+de huidige toestand bijgewerkt in de Q-tabel zoals te zien is in formule
+\eqref{eq:Q-functie}. Dit proces wordt herhaald totdat de training is voltooid.
 
 \begin{algorithm}
     \caption{Q-Learning Algoritme}\label{alg:Q-learning}
@@ -725,9 +549,10 @@ de training is voltooid.
         \State Kies actie $a$ in toestand $s$ op basis van een beleid $\pi$
         \State Voer actie $a$ uit, observeer beloning $r$ en de volgende toestand $s'$
         \State Update de Q-waarde:
-        \[
-            Q(s, a) \gets Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]
-        \]
+        \begin{equation} \label{eq:Q-functie}
+            Q(x, a) \leftarrow Q(x, a) + \alpha \left[ r + \gamma \max_{a'} Q(x', a') - Q(x, a) \right]
+        \end{equation}
+
         \State $s \gets s'$
         \EndWhile
         \EndFor
@@ -782,10 +607,147 @@ de training is voltooid.
     \caption{Flowchart van het Q-Learning Algoritme}\label{fig:ql_flowchart}
 \end{figure}
 
+\subsection{Convergentie en Optimaliteit}
+\subsection{Voordelen en Beperkingen}
+\subsection{Toepassingen van Q-learning}
+
 \newpage
 
 \section{Deep Q-Network}
+Deep Q-Network (DQN), geïntroduceerd door DeepMind in 2013 combineert
+Q-learning met diepe neurale netwerken. Deze innovatie maakte het mogelijk om
+reinforcement learning toe te passen op problemen met grootte toestandruimtes,
+zoals pixels van videospellen.
 
+\subsection{Proces}
+Het Q-learning-algoritme, zoals weergegeven in \textbf{Algoritme~\ref{alg:DQN}}
+en de flowchart in \textbf{Figuur~\ref{fig:dqn_flowchart}} breidt het
+traditionele Q-learning uit door de Q-tabel te vervangen door een neuraal
+netwerk. Dit netwerk leert de mapping tussen toestanden en Q-waarden voor alle
+mogelijke acties. Het proces bestaat uit verschillende componenten die voor de
+stabiliteit en effectiviteit van het algoritme zorgen. DQN maakt gebruik van
+experience replay, waarbij ervaringen (toestand, actie, beloning, volgende
+toestand) worden opgeslagen in een replay buffer en willekeurig worden gebruikt
+voor training.
+
+Daarnaast wordt een tweede neuraal netwerk, het target network, ingezet om de
+doelwaarden te berekenen. Dit netwerk wordt regelmatig geüpdatet met de
+gewichten van het hoofdnetwerk, wat de training verder stabiliseert. Voor
+visuele inputs implementeert DQN convolutionele lagen die relevante informatie
+halen uit de pixels, dit maakt het algorithme goed in het verwerken van
+complexe visuele informatie.
+
+\begin{algorithm}
+    \caption{Deep Q-learning met Experience Replay (\cite{mnih-2013})}\label{alg:DQN}
+    \begin{algorithmic}
+        \State Initialiseer replay-geheugen $\mathcal{D}$ met capaciteit $N$
+        \State Initialiseer de actie-waarde functie $Q$ met willekeurige gewichten
+        \For{elke episode $1, \dots, M$}
+        \State Initialiseer sequentie $s_1 = \{x_1\}$ en preprocess $ \phi_1 = \phi(s_1)$
+        \For{$t = 1, \dots, T$}
+        \State Met kans $\epsilon$: kies een willekeurige actie $a_t$
+        \State Anders: kies $a_t = \arg\max_a Q^*(\phi(s_t), a; \theta)$
+        \State Voer actie $a_t$ uit in de omgeving en observeer beloning $r_t$ en beeld $x_{t+1}$
+        \State Stel $s_{t+1} = s_t, a_t, x_{t+1}$ en preprocess $\phi_{t+1} = \phi(s_{t+1})$
+        \State Sla transitie $(\phi_t, a_t, r_t, \phi_{t+1})$ op in $\mathcal{D}$
+        \State Neem een willekeurige minibatch van transities $(\phi_j, a_j, r_j, \phi_{j+1})$ uit $\mathcal{D}$
+        \State Bereken:
+        \[
+            y_j =
+            \begin{cases}
+                r_j                                              & \text{als } \phi_{j+1} \text{ terminaal is}      \\
+                r_j + \gamma \max_{a'} Q(\phi_{j+1}, a'; \theta) & \text{als } \phi_{j+1} \text{ niet terminaal is}
+            \end{cases}
+        \]
+        \State Voer een gradient-descent stap uit op $\left( y_j - Q(\phi_j, a_j; \theta) \right)^2$
+        \EndFor
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[node distance=0.8cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,text centered, draw=black, fill=red!0]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!0]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!0]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+
+        % Knopen plaatsen
+        \node (start) [startstop] {Start Training};
+        \node (init) [process, below of=start, yshift=-0.4cm] {Initialiseer replay-geheugen $\mathcal{D}$ en Q-functie};
+        \node (episode) [process, below of=init, yshift=-0.4cm] {Start nieuwe episode};
+        \node (initseq) [process, below of=episode, yshift=-0.4cm] {Initialiseer sequentie $s_1$ en $\phi_1$};
+        \node (timestep) [process, below of=initseq, yshift=-0.4cm] {Start nieuwe tijdstap};
+
+        \node (epsilon) [decision, below of=getstate, yshift=-0.25cm] {Is Actie Exploratie?};
+        \node (random) [process, below left=of decideexplore, xshift=1cm] {Kies Willekeurige Actie};
+        \node (maxq) [process, below right=of decideexplore, xshift=-2cm] {Kies Actie met hoogste Q-waarde};
+
+        \node (execute) [process, below=2.5cm of epsilon] {Voer actie uit, observeer $r_t$ en $x_{t+1}$};
+        \node (preprocess) [process, below of=execute, yshift=-0.4cm] {Update $s_{t+1}$ en bereken $\phi_{t+1}$};
+        \node (store) [process, below of=preprocess, yshift=-0.4cm] {Sla transitie op in $\mathcal{D}$};
+        \node (sample) [process, below of=store, yshift=-0.4cm] {Sample minibatch uit $\mathcal{D}$};
+        \node (update) [process, below of=sample, yshift=-0.4cm] {Update Q-functie met gradient descent};
+
+        \node (episodeend) [decision, below of=update, yshift=-1cm] {Episode afgelopen?};
+        \node (trainingend) [decision, below of=episodeend, yshift=-1cm] {Training afgelopen?};
+        \node (stop) [startstop, below of=trainingend, yshift=-0.4cm] {Einde Training};
+
+        % Pijlen tekenen
+        \draw [arrow] (start) -- (init);
+        \draw [arrow] (init) -- (episode);
+        \draw [arrow] (episode) -- (initseq);
+        \draw [arrow] (initseq) -- (timestep);
+        \draw [arrow] (timestep) -- (epsilon);
+        \draw [arrow] (epsilon) -| node[left] {Ja} (random);
+        \draw [arrow] (epsilon) -| node[right] {Nee} (maxq);
+        \draw [arrow] (random) |- (execute);
+        \draw [arrow] (maxq) |- (execute);
+        \draw [arrow] (execute) -- (preprocess);
+        \draw [arrow] (preprocess) -- (store);
+        \draw [arrow] (store) -- (sample);
+        \draw [arrow] (sample) -- (update);
+        \draw [arrow] (update) -- (episodeend);
+        \draw [arrow] (episodeend) -- node[right] {Ja} (trainingend);
+        \draw [arrow] (episodeend) -| node[near start, above] {Nee} ++(7,0) |- (timestep);
+        \draw [arrow] (trainingend) -- node[right] {Ja} (stop);
+        \draw [arrow] (trainingend) -| node[near start, above] {Nee} ++(8,0) |- (episode);
+    \end{tikzpicture}
+    \caption{Flowchart van het Deep Q-learning met Experience Replay Algoritme}
+    \label{fig:dqn_flowchart}
+\end{figure}
+\subsection{Verbeteringen op Klassiek Q-learning}
+DQN lost verschillende problemen van Q-learning op. Het neurale netwerken zorgt
+dat het algoritme in staat om effectief om te gaan met continue en
+hoog-dimensionale toestandsruimtes. Het netwerk bezit ook sterke
+generalisatie-eigenschappen, waardoor het patronen kan herkennen en toepassen
+op ongeziene toestanden. De stabiliteit van het leerproces wordt significant
+verbeterd door de introductie van experience replay en target networks, wat een
+belangrijke vooruitgang is ten opzichte van Q-learning methoden.
+
+\subsection{Voordelen en Beperkingen}
+De kracht van DQN ligt in zijn vermogen om complexe taken met visuele inputs
+effectief aan te pakken zonder dat handmatige feature-extractie nodig is. Het
+algoritme demonstreert uitstekende generalisatie-eigenschappen, waardoor het
+zich kan aanpassen aan nieuwe situaties binnen het geleerde domein. Deze
+voordelen worden echter vergezeld door enkele significante beperkingen. DQN is
+computationeel intensief en vereist grote hoeveelheden trainingsdata om tot
+goede resultaten te komen. Daarnaast is het algoritme gevoelig voor de keuze
+van hyperparameters, wat het optimalisatieproces complex maakt. Een andere
+uitdaging ligt in het verwerken van zeer lange-termijn afhankelijkheden, wat in
+bepaalde toepassingen een limiterende factor kan zijn.
+
+\subsection{Toepassingen}
+DQN heeft zijn effectiviteit bewezen in een breed scala aan
+toepassingsgebieden. In de context van videogames heeft het algoritme
+indrukwekkende resultaten behaald, met name bij het leren spelen van Atari 2600
+spellen op menselijk en bovenmenselijk niveau. In het domein van robotica en
+motion control biedt DQN nieuwe mogelijkheden voor het ontwikkelen van
+verfijnde besturingsstrategieën. Ook binnen resource management en autonome
+systemen heeft DQN zijn waarde bewezen door complexe beslissingsprocessen te
+optimaliseren. Deze succesvolle toepassingen demonstreren de veelzijdigheid en
+het potentieel van het algoritme in verschillende praktische contexten.
 \section{AplhaZero}
 
 \chapter{Kenmerken van specifieke Computerspellen}

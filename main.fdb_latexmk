@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1733075375.40039 -1
-  "main.bcf" 1733075375 133782 c7da42693cb6f4f5da8207105a47f63e "pdflatex"
-  "references.bib" 1725538114 4049 1ea0862d89431531acbf07d36a2d99f5 ""
+["biber main"] 1733080412.50507 "main.bcf" "main.bbl" "main" 1733099715.11596 0
+  "main.bcf" 1733099714 133910 8ade146783f5e046d3d121a48132eb42 "pdflatex"
+  "references.bib" 1733077011 4392 11120a4d9a9462f625b5c50ca6950e8f ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1733075372.19897 "c:/Users/matth/Developer/PWS/main.tex" "main.pdf" "main" 1733075375.40097 0
+["pdflatex"] 1733099711.72109 "c:/Users/matth/Developer/PWS/main.tex" "main.pdf" "main" 1733099715.11657 0
   "C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1730840945 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/matth/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1723082193 24265332 4cb76a6909b72608f7473a5a715c90d0 ""
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -232,13 +232,13 @@
   "C:/Users/matth/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "assets/Q-LearningGrafiek.png" 1732028060 813177 2a98357fa84a2d32ad8d698075e66443 ""
   "assets/logo-clz.png" 1723084649 36205 a7d80d8df9bf0fbfb7c030627ce2715b ""
-  "c:/Users/matth/Developer/PWS/main.tex" 1733075368 50024 df2852a8dc1ca968ff9928d53c460f90 ""
-  "main.aux" 1733075375 10017 0c3c7821d23c65a3928190453a5320c5 "pdflatex"
-  "main.bbl" 1732626781 20055 3f9fd73b5c307fa1d6b5e3c35d91b5ba "biber main"
-  "main.out" 1733075375 8761 715c5cec534730df9d016a3a0163ce6c "pdflatex"
-  "main.run.xml" 1733075375 2355 c7b4ca8847ee7d70d486d862e120ebef "pdflatex"
-  "main.tex" 1733075368 50024 df2852a8dc1ca968ff9928d53c460f90 ""
-  "main.toc" 1733075375 5103 efe9ac658b9e48bacc7e431acb65c88a "pdflatex"
+  "c:/Users/matth/Developer/PWS/main.tex" 1733099711 49562 bfa028c2f51327391d4f88c839e175be ""
+  "main.aux" 1733099714 11801 a614c86b263dcf931d6818a14f473985 "pdflatex"
+  "main.bbl" 1733080414 25683 1076bd0eacc053a0a9e4bd5fdf7c2b4c "biber main"
+  "main.out" 1733099714 9659 b103e7a948e72bf0b3ffc22bd4114e08 "pdflatex"
+  "main.run.xml" 1733099714 2355 c7b4ca8847ee7d70d486d862e120ebef "pdflatex"
+  "main.tex" 1733099711 49562 bfa028c2f51327391d4f88c839e175be ""
+  "main.toc" 1733099714 5620 de5d2d0184823f7c11a18f4c93d2fb14 "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"
