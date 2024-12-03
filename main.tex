@@ -318,9 +318,9 @@ beloning vertegenwoordigt die wordt ontvangen na het uitvoeren van actie
 Het onderscheidende kenmerk van MDP's is de Markov-eigenschap, die stelt dat de
 toekomstige toestand alleen afhankelijk is van de huidige toestand en actie,
 onafhankelijk van de geschiedenis:
-\[
+\begin{equation}
     p(x_{t+1}|x_t,a_t,x_{t-1},a_{t-1},\ldots,x_0,a_0) = p(x_{t+1}|x_t,a_t)
-\]
+\end{equation}
 Voorbeeld van het Markov-eigenschap:
 \begin{itemize}
     \item \textbf{Snake}: De toekomstige toestand (positie van de slang en voedsel) is volledig bepaald door de huidige toestand (huidige positie en locatie van het voedsel) en de actie (richting van beweging) zonder afhankelijk te zijn van de geschiedenis van eerdere bewegingen.
@@ -394,9 +394,9 @@ zijn in vergelijking met onmiddellijke beloningen. Het beïnvloedt de totale
 beloning die de agent probeert te maximaliseren. De totale beloning wordt
 gedefinieerd als:
 
-\[
+\begin{equation}
     R = \sum_{t=0}^\infty \gamma^t r_t
-\]
+\end{equation}
 
 Waarbij \(r_t\) de beloning is die ontvangen wordt op tijdstip \(t\). De waarde
 van \(\gamma\) varieert meestal tussen \(0\) en \(1\):
@@ -431,21 +431,21 @@ de Q-functie aangeeft hoe goed een actie in een bepaalde toestand is.
 \subsection{Toestandswaarde-functie}
 De toestandswaarde-functie (\(V^\pi: \mathcal{X} \to \mathbb{R}\)) onder beleid
 (\(\pi\)) wordt gedefinieerd als:
-\[
+\begin{equation}
     V^\pi(x) = \mathbb{E}_\pi\left[\sum_{t=0}^\infty \gamma^t r_t \mid x_0 = x\right]
-\]
+\end{equation}
 Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
 ontvangen vanaf de toestand \(x\).
 \subsection{Q-functie}
 De Q-functie (\(Q^\pi: \mathcal{X} \times \mathcal{A} \to \mathbb{R}\)) onder
 beleid (\(\pi\)) wordt gedefinieerd als:
-\[
+\begin{equation}
     Q^\pi(x,a) = \mathbb{E}_\pi\left[\sum_{t=0}^\infty \gamma^t r_t \mid x_0 = x, a_0 = a\right]
-\]
+\end{equation}
 Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
 ontvangen vanaf de toestand \(x\) en na het nemen van actie \(a\).
 
-\section{Leerparadigma's}
+\section{Leerstrategieën}
 \subsection{Model-Based vs Model-Free Learning}
 \subsubsection{Model-Based Learning}
 Bij model-based learning construeert de agent expliciet een model (\(\hat{p}\))
@@ -496,14 +496,6 @@ Off-policy methoden leren over één beleid (\(\pi\)) terwijl een ander beleid
     \item \textit{Gedragsbeleid} (\(\mu\)): Gebruikt voor exploratie.
     \item \textit{Doelbeleid} (\(\pi\)): Het beleid dat wordt geleerd.
 \end{itemize}
-
-De importance sampling ratio (\(\rho\)) corrigeert voor het verschil tussen de
-]beleidsregels:
-\[
-    \rho_t = \frac{\pi(a_t|x_t)}{\mu(a_t|x_t)}
-\]
-Dit maakt het mogelijk om te leren over optimaal gedrag terwijl een exploratief
-beleid wordt gevolgd.
 
 \chapter{Kenmerken van specifieke Algoritmes}
 
@@ -607,17 +599,177 @@ de huidige toestand bijgewerkt in de Q-tabel zoals te zien is in formule
     \caption{Flowchart van het Q-Learning Algoritme}\label{fig:ql_flowchart}
 \end{figure}
 
-\subsection{Convergentie en Optimaliteit}
-\subsection{Voordelen en Beperkingen}
-\subsection{Toepassingen van Q-learning}
+\subsection{Beperkingen}
+Een van de grootste beperkingen van Q-learning is schaalbaarheid. De
+toestandsruimte neem exponentieeel toe wanneer het aantaal dimensies toeneemt:
+\begin{equation}
+    |\mathcal{S}| = d^n
+\end{equation}
+waarbij $d$ het aantal mogelijke waarden per dimensie is en $n$ het aantal
+dimensies.
 
-\newpage
-
+Dit leidt tot hoge eisen aan geheugen en rekenkracht:
+\begin{equation}
+    \text{Complexiteit} = O(|\mathcal{S}| \times |\mathcal{A}|)
+\end{equation}
+\subsection{Toepassingen}
+\pagebreak
 \section{Deep Q-Network}
 Deep Q-Network (DQN), geïntroduceerd door DeepMind in 2013 combineert
 Q-learning met diepe neurale netwerken. Deze innovatie maakte het mogelijk om
 reinforcement learning toe te passen op problemen met grootte toestandruimtes,
 zoals pixels van videospellen.
+
+\subsection{Neuraal Netwerk}
+Het DQN maakt gebruikt van neurale-netwerkarchitectuur die is ontworpen om de
+optimale actie-waarde functie te benaderen. De netwerkarchitectuur,
+geïllustreerd in Figuur \ref{fig:neuraal-netwerk}, is een typisch neuraal
+netwerk in DQN.
+
+\begin{figure}[h]
+
+    \centering
+    \begin{tikzpicture}[
+            scale=2,
+            node distance=5cm,
+            every node/.style={
+                    draw=black!30,
+                    fill=white,
+                    rounded corners=0.1cm,
+                    minimum size=0.4cm,
+                    inner sep=0.05cm,
+                    text centered
+                },
+            input neuron/.style={
+                    draw=black!50,
+                    circle,
+                    minimum size=0.3cm
+                },
+            hidden neuron/.style={
+                    draw=black!50,
+                    circle,
+                    minimum size=0.3cm
+                },
+            output neuron/.style={
+                    draw=black!50,
+                    circle,
+                    minimum size=0.3cm
+                },
+            connecting line/.style={
+                    draw=black!20,
+                    line width=0.3pt
+                },
+            layer label/.style={
+                    text centered,
+                    draw=black!0,
+                    font=\small\sffamily
+                },
+            layer rectangle/.style={
+                    draw=blue!50,
+                    rounded corners,
+                    dashed,
+                    very thick
+                }
+        ]
+
+        % Input Layer
+        \foreach \i [count=\y] in {1,...,4} {
+                \node[input neuron] (input-\i) at (0, {-\y}) {$s_{\i}$};
+            }
+
+        % Hidden Layers
+        \foreach \j in {1,...,2} {
+                \foreach \i [count=\y] in {1,...,8} {
+                        \node[hidden neuron] (hidden\j-\i) at ({0.5 + 2 * \j}, {-4/9-\y*4/9}) {};
+                    }
+            }
+
+        % Output Layer
+        \foreach \i [count=\y] in {1,...,4} {
+                \node[output neuron] (output-\i) at (7, {-\y}) {$a_{\i}$};
+            }
+
+        % Connections
+        \foreach \i in {1,...,4} {
+                \foreach \j in {1,...,8} {
+                        \draw[connecting line] (input-\i) -- (hidden1-\j);
+                    }
+            }
+
+        \foreach \i in {1,...,8} {
+                \foreach \j in {1,...,8} {
+                        \draw[connecting line] (hidden1-\i) -- (hidden2-\j);
+                    }
+            }
+
+        \foreach \i in {1,...,8} {
+                \foreach \j in {1,...,4} {
+                        \draw[connecting line] (hidden2-\i) -- (output-\j);
+                    }
+            }
+
+        % Layer labels
+        \node[layer label] at (2.5, -0.50) {$h_1$};
+        \node[layer label] at (4.5, -0.50) {$h_2$};
+
+        % Layer rectangles
+        \draw[layer rectangle] (2.25, -0.70) rectangle (2.75, -4.25);
+        \draw[layer rectangle] (4.25, -0.70) rectangle (4.75, -4.25);
+
+    \end{tikzpicture}
+    \caption{Diagram van een typisch neuraal netwerk in een DQN met een invoerlaag, twee verborgen lagen en een uitvoerlaag.}
+    \label{fig:neuraal-netwerk}
+\end{figure}
+Het neurale netwerk wordt gekenmerkt door de volgende architecturale elementen:
+
+De \textbf{invoerlaag} bestaat uit een verzameling toestanden ${s_1, s_2,
+            \ldots, s_n}$, waarbij elke toestand een neuron is en een specifieke
+toestandseigenschap vastlegt. De \textbf{uitvoerlaag} bestaat verzameling
+acties ${a_1, a_2, \ldots, a_n}$, waarbij elke actie. De \textbf{verborgen
+    lagen} in een neuraal netwerk, genoteerd als \( h_1, h_2, \ldots, h_n \), zijn
+de lagen die zich bevinden tussen de invoerlaag en de uitvoerlaag. Deze
+verborgen lagen zijn belangrijk voor het leren en modelleren van complexe
+patronen in de data. Elk neuron in een verborgen laag voert een bewerking uit
+volgens de formule:
+
+\begin{equation}
+    h_j = f\left(\sum_{i} w_{ij} x_i + b_j\right),
+\end{equation}
+
+waarbij:
+\begin{itemize}
+    \item \( h_j \) de output van neuron \( j \) is,
+    \item \( x_i \) de invoerwaarden zijn,
+    \item \( w_{ij} \) de gewichten die de sterkte van de verbindingen tussen de invoer \( i \) en het neuron \( j \) vertegenwoordigen,
+    \item \( b_j \) de bias-term,
+    \item \( f(\cdot) \) de activatiefunctie.
+\end{itemize}
+
+In dit geval wordt de Rectified Linear Unit (ReLU) activatiefunctie gebruikt,
+gedefinieerd als:
+
+\begin{equation}
+    f(x) = \max(0, x).
+\end{equation}
+
+De ReLU introduceert niet-lineariteit door negatieve waarden naar nul te
+transformeren, terwijl positieve waarden onveranderd blijven. Deze
+niet-lineariteit stelt het netwerk in staat om complexe functies te benaderen
+die niet mogelijk zouden zijn met een louter lineaire transformatiestap.
+
+Door de toepassing van \( n \) verborgen lagen, wordt een complexe
+niet-lineaire transformatie uitgevoerd van de oorspronkelijke invoer \(
+\mathbf{x} \) naar de uiteindelijke uitvoer \( \mathbf{y} \), als volgt:
+
+\begin{equation}
+    \mathbf{y} = f_n\left(W_n f_{n-1}\left(W_{n-1} \cdots f_1\left(W_1 \mathbf{x} + \mathbf{b}_1\right) \cdots + \mathbf{b}_{n-1}\right) + \mathbf{b}_n\right),
+\end{equation}
+
+waarbij \( W_i \) de gewichtsmatrix van laag \( i \) en \( \mathbf{b}_i \) de
+bias-term van laag \( i \) vertegenwoordigen. Het gebruik van meerdere
+verborgen lagen met ReLU maakt het netwerk krachtig genoeg om complexe patronen
+te leren en invoeromstandigheden nauwkeurig te vertalen naar acties of
+beslissingen.
 
 \subsection{Proces}
 Het Q-learning-algoritme, zoals weergegeven in \textbf{Algoritme~\ref{alg:DQN}}
@@ -717,6 +869,7 @@ complexe visuele informatie.
     \caption{Flowchart van het Deep Q-learning met Experience Replay Algoritme}
     \label{fig:dqn_flowchart}
 \end{figure}
+
 \subsection{Verbeteringen op Klassiek Q-learning}
 DQN lost verschillende problemen van Q-learning op. Het neurale netwerken zorgt
 dat het algoritme in staat om effectief om te gaan met continue en
@@ -727,28 +880,126 @@ verbeterd door de introductie van experience replay en target networks, wat een
 belangrijke vooruitgang is ten opzichte van Q-learning methoden.
 
 \subsection{Voordelen en Beperkingen}
-De kracht van DQN ligt in zijn vermogen om complexe taken met visuele inputs
-effectief aan te pakken zonder dat handmatige feature-extractie nodig is. Het
-algoritme demonstreert uitstekende generalisatie-eigenschappen, waardoor het
-zich kan aanpassen aan nieuwe situaties binnen het geleerde domein. Deze
-voordelen worden echter vergezeld door enkele significante beperkingen. DQN is
-computationeel intensief en vereist grote hoeveelheden trainingsdata om tot
-goede resultaten te komen. Daarnaast is het algoritme gevoelig voor de keuze
-van hyperparameters, wat het optimalisatieproces complex maakt. Een andere
-uitdaging ligt in het verwerken van zeer lange-termijn afhankelijkheden, wat in
-bepaalde toepassingen een limiterende factor kan zijn.
+DQN is goed in complexe taken met visuele inputs effectief aan pakken zonder
+dat handmatige feature-extractie nodig is. Het algoritme heeft goede
+generalisatie-eigenschappen, waardoor het zich kan aanpassen aan nieuwe
+situaties binnen het geleerde domein. Deze voordelen worden echter vergezeld
+door enkele significante beperkingen. DQN is computationeel intensief en
+vereist grote hoeveelheden trainingsdata om tot goede resultaten te komen.
+Daarnaast is het algoritme gevoelig voor de keuze van hyperparameters, wat het
+optimalisatieproces complex maakt. Een andere uitdaging ligt in het verwerken
+van zeer lange-termijn afhankelijkheden, wat in bepaalde toepassingen een
+limiterende factor kan zijn.
 
 \subsection{Toepassingen}
-DQN heeft zijn effectiviteit bewezen in een breed scala aan
-toepassingsgebieden. In de context van videogames heeft het algoritme
-indrukwekkende resultaten behaald, met name bij het leren spelen van Atari 2600
-spellen op menselijk en bovenmenselijk niveau. In het domein van robotica en
-motion control biedt DQN nieuwe mogelijkheden voor het ontwikkelen van
-verfijnde besturingsstrategieën. Ook binnen resource management en autonome
-systemen heeft DQN zijn waarde bewezen door complexe beslissingsprocessen te
-optimaliseren. Deze succesvolle toepassingen demonstreren de veelzijdigheid en
-het potentieel van het algoritme in verschillende praktische contexten.
-\section{AplhaZero}
+DQN heeft zijn effectiviteit bewezen in veel toepassingsgebieden. In de context
+van videogames heeft het algoritme indrukwekkende resultaten behaald, met name
+bij het leren spelen van Atari 2600 spellen op menselijk en bovenmenselijk
+niveau. Bij robotica en motion control biedt DQN nieuwe mogelijkheden voor het
+ontwikkelen van verfijnde besturingsstrategieën. Ook binnen autonome systemen
+wordt DQN gebruikt door complexe beslissingsprocessen te optimaliseren. Deze
+succesvolle toepassingen demonstreren de veelzijdigheid en het potentieel van
+het algoritme in verschillende praktische contexten.
+
+\section{Deep Deterministic Policy Gradient}
+Deep Deterministic Policy Gradient (DDPG), ontwikkeld door onderzoekers van
+DeepMind in 2015, is een algoritme dat zich richt op continue actieruimtes. Als
+een uitbreiding op de policy gradient methoden en Actor-Critic architecturen,
+combineert DDPG de voordelen van deterministische beleidsoptimalisatie en
+neurale netwerken.
+
+\subsection{Actor-Critic model}
+
+Het Actor-Critic model is een model dat kenmerken van policy
+
+De Actor is verantwoordelijk voor het genereren van acties. Hij geeft de
+optimale actie bepaalt gegeven een specifieke toestand. De Actor word
+gedefinieerd door een functie:
+
+\begin{equation}
+    a = \pi_\theta(s)
+\end{equation}
+
+De Critic evalueert de kwaliteit van de door de Actor gegenereerde acties. Hij
+schat de waarde-functie $Q(s,a)$ of de staat-waarde functie $V(s)$. De Critic
+levert kritische informatie terug aan de Actor over de effectiviteit van zijn
+gegenereerde acties:
+
+\begin{equation}
+    Q(s,a) = \mathbb{E}[R_t | s_t = s, a_t = a]
+\end{equation}
+
+\subsubsection{Leerproces}
+
+Het unieke van het Actor-Critic model is de wederzijdse terugkoppeling tussen
+beide netwerken:
+
+1. De Actor genereert een actie op basis van de huidige toestand
+2. De Critic beoordeelt de kwaliteit van deze actie
+3. De Actor wordt bijgestuurd op basis van de feedback van de Critic
+
+De Actor wordt geüpdatet met een gradiënt die de verwachte beloning
+maximaliseert:
+
+\begin{equation}
+    \nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}[\nabla_\theta \log \pi_\theta(a|s) Q(s,a)]
+\end{equation}
+
+\subsubsection{Voordelen}
+- Geschikt voor zowel discrete als continue actieruimtes
+- Lagere variantie in gradiëntschatting
+- Mogelijkheid tot gelijktijdige optimalisatie van beleid en waarde-inschatting
+\subsection{Proces}
+\begin{algorithm}[h]
+    \caption{DDPG-algoritme \cite{lillicrap2019continuouscontroldeepreinforcement} \label{alg:ddpg}}
+    \begin{algorithmic}
+        \State Initialiseer willekeurig het critic-netwerk $Q(s, a | \theta^Q)$ en het actor-netwerk
+        $\mu(s | \theta^{\mu})$ met gewichten $\theta^{Q}$ en $\theta^{\mu}$.
+        \State Initialiseer het target netwerk $Q'$ en $\mu'$ met gewichten $\theta^{Q'}
+            \leftarrow \theta^{Q}$, $\theta^{\mu'} \leftarrow \theta^{\mu}$
+        \State Initialiseer de replay buffer $R$
+        \For{episode = 1, M}
+        \State Initialiseer een willekeurig proces $\mathcal{N}$ voor actie-exploratie
+        \State Ontvang de initiële waarnemingsstatus $s_1$
+        \For{t = 1, T}
+        \State Selecteer actie $a_t = \mu(s_t | \theta^{\mu}) + \mathcal{N}_t$
+        volgens het huidige beleid en exploratieruis
+        \State Voer actie $a_t$ uit en observeer beloning $r_t$ en nieuwe status $s_{t+1}$
+        \State Sla de transitie $(s_t, a_t, r_t, s_{t+1})$ op in $R$
+        \State Neem een willekeurige minibatch van $N$ transities $(s_i, a_i, r_i, s_{i+1})$ uit $R$
+        \State Bereken:
+        \begin{equation}
+            y_i = r_i + \gamma Q'(s_{i+1}, \mu'(s_{i+1} | \theta^{\mu'}) | \theta^{Q'})
+        \end{equation}
+
+        \State Update de critic door de volgende verliesfunctie te minimaliseren:
+        \begin{equation}
+            L = \frac{1}{N} \sum_i (y_i - Q(s_i, a_i | \theta^Q))^2
+        \end{equation}
+        \State Update de actor-policy met behulp van de volgende policy-gradient:
+        \begin{equation}
+            \nabla_{\theta^{\mu}} J \approx
+            \frac{1}{N} \sum_i
+            \nabla_{a} Q(s, a | \theta^Q)|_{s = s_i, a = \mu(s_i)}
+            \nabla_{\theta^\mu} \mu(s | \theta^\mu)|_{s_i}
+        \end{equation}
+        \State Update de targetnetwerken:
+        \begin{equation}
+            \theta^{Q'} \leftarrow \tau \theta^{Q} + (1 - \tau) \theta^{Q'}
+        \end{equation}
+        \begin{equation}
+            \theta^{\mu'} \leftarrow \tau \theta^{\mu} + (1 - \tau) \theta^{\mu'}
+        \end{equation}
+        \EndFor
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+\subsection{Verbeteringen op DQN}
+
+\subsection{Voordelen en Beperkingen}
+
+\subsection{Toepassingen}
 
 \chapter{Kenmerken van specifieke Computerspellen}
 Er zijn talloze computerspellen met diverse en uitdagende omgevingen voor de

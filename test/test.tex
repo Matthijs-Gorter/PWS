@@ -1,0 +1,17 @@
+\documentclass[border=5pt]{standalone}
+\usepackage{tikz}
+\usepackage{pgfmath}
+\usepackage{amsmath}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+
+\begin{document}
+\begin{equation}
+    \pi(a|s) = \begin{cases}
+        1-\epsilon             & \text{indien } a = \argmax_{a'}Q(s,a';\theta) \
+        \epsilon/|\mathcal{A}| & \text{anders}
+    \end{cases}
+\end{equation}
+\end{document}
+ 

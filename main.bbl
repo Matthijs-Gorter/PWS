@@ -35,6 +35,86 @@
       \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
     \endentry
+    \entry{lillicrap2019continuouscontroldeepreinforcement}{misc}{}{}
+      \name{author}{8}{}{%
+        {{un=0,uniquepart=base,hash=2a321a868e44d49baf52b5e2d816fb71}{%
+           family={Lillicrap},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima P.},
+           giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e0c5cec59a932511b2af6220473fad61}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={Jonathan\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4295e4094c426f01903ac60155866130}{%
+           family={Pritzel},
+           familyi={P\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=231312991eab5915498d6c19c2a8cd4e}{%
+           family={Heess},
+           familyi={H\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3b79ca47f08451987877fd8682e971e5}{%
+           family={Erez},
+           familyi={E\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=58112cb88a80c1bc045b6eaab26a8695}{%
+           family={Tassa},
+           familyi={T\bibinitperiod},
+           given={Yuval},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=89dbd30410c2085cd059f32c57d4593e}{%
+           family={Silver},
+           familyi={S\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e9929f8db9dd2c08064f17b4d9a7c551}
+      \strng{fullhash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{fullhashraw}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{bibnamehash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authorbibnamehash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authornamehash}{e9929f8db9dd2c08064f17b4d9a7c551}
+      \strng{authorfullhash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authorfullhashraw}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Continuous control with deep reinforcement learning}
+      \field{year}{2015}
+      \verb{eprint}
+      \verb 1509.02971
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1509.02971
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1509.02971
+      \endverb
+    \endentry
     \entry{10.5555/1795711}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=503d3d26ec6cb51d31d8013bf13acc0b}{%
@@ -185,6 +265,98 @@
       \verb{url}
       \verb https://doi.org/10.1002/9780470316887
       \endverb
+    \endentry
+    \entry{sanz2024dqn}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5a02b44747e2d95e1801644af819f944}{%
+           family={Sanz},
+           familyi={S\bibinitperiod},
+           given={Markel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{fullhash}{5a02b44747e2d95e1801644af819f944}
+      \strng{fullhashraw}{5a02b44747e2d95e1801644af819f944}
+      \strng{bibnamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorbibnamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authornamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorfullhash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorfullhashraw}{5a02b44747e2d95e1801644af819f944}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://markelsanz14.medium.com/introduction-to-reinforcement-learning-part-3-q-learning-with-neural-networks-algorithm-dqn-1e22ee928ecd}}
+      \field{note}{Accessed: 2024-12-03}
+      \field{title}{Introduction to Reinforcement Learning (Part 3): Q-Learning with Neural Networks Algorithm (DQN)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{silver2014deterministic}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=89dbd30410c2085cd059f32c57d4593e}{%
+           family={Silver},
+           familyi={S\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=56f0d34650d75bc4863946b239695751}{%
+           family={Lever},
+           familyi={L\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=231312991eab5915498d6c19c2a8cd4e}{%
+           family={Heess},
+           familyi={H\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6598b6ed3c197bb4292561d14d01436f}{%
+           family={Degris},
+           familyi={D\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9449802bcb467309c0ebced658096818}{%
+           family={Riedmiller},
+           familyi={R\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{4ccacac34637df06f749428b6ec5052e}
+      \strng{fullhash}{1df55ae175f24449994c9c4842700a18}
+      \strng{fullhashraw}{1df55ae175f24449994c9c4842700a18}
+      \strng{bibnamehash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authorbibnamehash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authornamehash}{4ccacac34637df06f749428b6ec5052e}
+      \strng{authorfullhash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authorfullhashraw}{1df55ae175f24449994c9c4842700a18}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 31st International Conference on Machine Learning (ICML)}
+      \field{title}{Deterministic Policy Gradient Algorithms}
+      \field{year}{2014}
+      \true{nocite}
     \endentry
     \entry{10.5555/3312046}{book}{}{}
       \name{author}{2}{}{%
@@ -275,6 +447,86 @@
       \verb https://spinningup.openai.com/en/latest/user/introduction.html
       \endverb
     \endentry
+    \entry{lillicrap2019continuouscontroldeepreinforcement}{misc}{}{}
+      \name{author}{8}{}{%
+        {{un=0,uniquepart=base,hash=2a321a868e44d49baf52b5e2d816fb71}{%
+           family={Lillicrap},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima P.},
+           giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e0c5cec59a932511b2af6220473fad61}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={Jonathan\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4295e4094c426f01903ac60155866130}{%
+           family={Pritzel},
+           familyi={P\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=231312991eab5915498d6c19c2a8cd4e}{%
+           family={Heess},
+           familyi={H\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3b79ca47f08451987877fd8682e971e5}{%
+           family={Erez},
+           familyi={E\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=58112cb88a80c1bc045b6eaab26a8695}{%
+           family={Tassa},
+           familyi={T\bibinitperiod},
+           given={Yuval},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=89dbd30410c2085cd059f32c57d4593e}{%
+           family={Silver},
+           familyi={S\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e9929f8db9dd2c08064f17b4d9a7c551}
+      \strng{fullhash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{fullhashraw}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{bibnamehash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authorbibnamehash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authornamehash}{e9929f8db9dd2c08064f17b4d9a7c551}
+      \strng{authorfullhash}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \strng{authorfullhashraw}{9f2f0357b439f9ae4a3953d81392aaa0}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Continuous control with deep reinforcement learning}
+      \field{year}{2015}
+      \verb{eprint}
+      \verb 1509.02971
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1509.02971
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1509.02971
+      \endverb
+    \endentry
     \entry{10.5555/1795711}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=503d3d26ec6cb51d31d8013bf13acc0b}{%
@@ -425,6 +677,98 @@
       \verb{url}
       \verb https://doi.org/10.1002/9780470316887
       \endverb
+    \endentry
+    \entry{sanz2024dqn}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5a02b44747e2d95e1801644af819f944}{%
+           family={Sanz},
+           familyi={S\bibinitperiod},
+           given={Markel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{fullhash}{5a02b44747e2d95e1801644af819f944}
+      \strng{fullhashraw}{5a02b44747e2d95e1801644af819f944}
+      \strng{bibnamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorbibnamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authornamehash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorfullhash}{5a02b44747e2d95e1801644af819f944}
+      \strng{authorfullhashraw}{5a02b44747e2d95e1801644af819f944}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://markelsanz14.medium.com/introduction-to-reinforcement-learning-part-3-q-learning-with-neural-networks-algorithm-dqn-1e22ee928ecd}}
+      \field{note}{Accessed: 2024-12-03}
+      \field{title}{Introduction to Reinforcement Learning (Part 3): Q-Learning with Neural Networks Algorithm (DQN)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{silver2014deterministic}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=89dbd30410c2085cd059f32c57d4593e}{%
+           family={Silver},
+           familyi={S\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=56f0d34650d75bc4863946b239695751}{%
+           family={Lever},
+           familyi={L\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=231312991eab5915498d6c19c2a8cd4e}{%
+           family={Heess},
+           familyi={H\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6598b6ed3c197bb4292561d14d01436f}{%
+           family={Degris},
+           familyi={D\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9449802bcb467309c0ebced658096818}{%
+           family={Riedmiller},
+           familyi={R\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{4ccacac34637df06f749428b6ec5052e}
+      \strng{fullhash}{1df55ae175f24449994c9c4842700a18}
+      \strng{fullhashraw}{1df55ae175f24449994c9c4842700a18}
+      \strng{bibnamehash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authorbibnamehash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authornamehash}{4ccacac34637df06f749428b6ec5052e}
+      \strng{authorfullhash}{1df55ae175f24449994c9c4842700a18}
+      \strng{authorfullhashraw}{1df55ae175f24449994c9c4842700a18}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 31st International Conference on Machine Learning (ICML)}
+      \field{title}{Deterministic Policy Gradient Algorithms}
+      \field{year}{2014}
+      \true{nocite}
     \endentry
     \entry{10.5555/3312046}{book}{}{}
       \name{author}{2}{}{%
