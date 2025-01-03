@@ -1,0 +1,19 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[3] Config.pm:311> INFO - Logfile is 'main.blg'
+[246] biber-MSWIN64:340> INFO - === 
+[334] Biber.pm:420> INFO - Reading 'main.bcf'
+[404] Biber.pm:991> INFO - Using all citekeys in bib section 0
+[418] Biber.pm:4463> INFO - Processing section 0
+[444] Biber.pm:4654> INFO - Looking for bibtex file 'references.bib' for section 0
+[485] bibtex.pm:1713> INFO - LaTeX decoding ...
+[517] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[720] UCollate.pm:68> INFO - Overriding locale 'nl-NL' defaults 'variable = shifted' with 'variable = non-ignorable'
+[720] UCollate.pm:68> INFO - Overriding locale 'nl-NL' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[720] Biber.pm:4283> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'nl-NL'
+[720] Biber.pm:4289> INFO - No sort tailoring available for locale 'nl-NL'
+[764] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[787] bbl.pm:779> INFO - Output to main.bbl
+[787] Biber.pm:131> WARN - article entry 'silver_dpg' (references.bib): Invalid format '2024-11-31' of date field 'urldate' - ignoring
+[788] Biber.pm:131> WARN - article entry 'ddpg' (references.bib): Invalid format '2024-11-31' of date field 'urldate' - ignoring
+[788] Biber.pm:131> WARN - legacy month field '13--18 Jul' in entry 'pmlr-v119-cobbe20a' is not an integer - this will probably not sort properly.
+[788] Biber.pm:133> INFO - WARNINGS: 3

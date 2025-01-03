@@ -1,17 +1,198 @@
-\documentclass[border=5pt]{standalone}
-\usepackage{tikz}
-\usepackage{pgfmath}
-\usepackage{amsmath}
+\documentclass{article}
+\usepackage[dutch]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[backend=biber,style=nature]{biblatex}
+\DeclareLanguageMapping{dutch}{dutch-apa}
+\addbibresource{references.bib}
 
-\usetikzlibrary{positioning}
-\usetikzlibrary{shapes.geometric}
+% Hyperref moet als laatste package komen
+\usepackage[hidelinks]{hyperref}  % hidelinks verwijdert de rode boxes rond links
+% Als je de rode boxes wilt behouden, gebruik dan gewoon \usepackage{hyperref}
 
+% Optioneel: pas de kleur van de links aan
+\hypersetup{
+    colorlinks=true,     % false: boxed links; true: colored links
+    linkcolor=black,     % color of internal links
+    citecolor=blue,      % color of citations
+    urlcolor=blue        % color of external urls
+}
+\title{Logboek PWS}
+\author{Groep}
+\date{2024}
+  
 \begin{document}
-\begin{equation}
-    \pi(a|s) = \begin{cases}
-        1-\epsilon             & \text{indien } a = \argmax_{a'}Q(s,a';\theta) \
-        \epsilon/|\mathcal{A}| & \text{anders}
-    \end{cases}
-\end{equation}
+\maketitle
+
+
+\section*{Groepsactiviteiten}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats} & \textbf{Activiteiten + Resultaten}                                                                                                                                                                                                                                                                                   \\
+    \hline
+    02-07-2024     & 3 uur         & School          & Onderzoek over AI, we leerden alle drie over reinforced learning, wat die inhield en wat we interessant vonden. PWS presentatie, deze heeft goed geholpen om te begrijpen wat we moeten doen. De bronnenlijst is gemaakt, deze duurt het langst. Hier zijn de bronnen ingezet waarvan wij denken dat ze handig zijn. \\
+    \hline
+    28/08/2024     & 1 uur         & School          & Overleg tijdens les                                                                                                                                                                                                                                                                                                  \\
+    \hline
+    04/09/2024     & 1 uur         & School          & Overleg tijdens les en taakverdeling gedeeltelijk geregeld                                                                                                                                                                                                                                                           \\
+    \hline
+    11/09/2024     & 1 uur         & School          & Inlezen onderwerp                                                                                                                                                                                                                                                                                                    \\
+    \hline
+    25/09/2024     & 1 uur         & School          & Overleg indeling schrijven                                                                                                                                                                                                                                                                                           \\
+    \hline
+    04/09/2024     & 1 uur 15 min  & School          & Inlezen onderwerp. Onderling plan van aanpak besproken                                                                                                                                                                                                                                                               \\
+    \hline
+    11/09/2024     & 1 uur         & School          & Taken en deadlines besproken. Taken verdeeld voor volgende pws uur. Verder ingelezen over onderwerp                                                                                                                                                                                                                  \\
+    \hline
+    02/10/2024     & 1 uur         & School          & Bronnenlijst overleg                                                                                                                                                                                                                                                                                                 \\
+    \hline
+    09/10/2024     & 1 uur         & School          & Voorwoord maken                                                                                                                                                                                                                                                                                                      \\
+    \hline
+    16/10/2024     & 1 uur         & School          & Onderzoek AI                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    23/10/2024     & 1 uur         & School          & Onderzoek RL                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    06/11/2024     & 1 uur         & School          & Inlezen                                                                                                                                                                                                                                                                                                              \\
+    \hline
+    13/11/2024     & 1 uur         & School          & Verder inlezen                                                                                                                                                                                                                                                                                                       \\
+    \hline
+    20/11/2024     & 1 uur         & School          & Layout maken                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    27/11/2024     & 1 uur         & School          & Meer samenvatten                                                                                                                                                                                                                                                                                                     \\
+    \hline
+    04/12/2024     & 1 uur         & School          & Overleg                                                                                                                                                                                                                                                                                                              \\
+    \hline
+\end{longtable}
+\section*{Matthijs}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                                                                                                                                                                                                                                    \\
+    \hline
+    06-07-2024     & 1 uur         & Thuis                   & Eerste Stanfords CS234 college bekeken uit de winter van 2019 \cite{stanford_cs234}. Het kopje Definitie van Reinforcement Learning geschreven. (Later besloten dit in de inleiding te zetten)                                                                      \\
+    \hline
+    29/07/2024     & 3 uur         & Thuis                   & Snake spel geschreven in python en github aangemaakt en begonnen met Q-learning te implementeren \cite{snake_game} \cite{python_docs}                                                                                                                             \\
+    \hline
+    30/07/2024     & 2 uur         & Thuis                   & Q-learning geïmplementeerd. Maar de agent leert nog slecht.                                                                                                                                                                                                           \\
+    \hline
+    31/07/2024     & 3 uur         & Thuis                   & Q-learning hyperparameters uitgetest en optimale gevonden.                                                                                                                                                                                                            \\
+    \hline
+    03/08/2024     & 2 uur         & Thuis                   & Kennis opgedaan over machine learning en andere types dan reinforcement learning en hoe het verschilt van super- en unsupervised learning \cite{ml_types}                                                                                                           \\
+    \hline
+    05/08/2024     & 3 uur         & Thuis                   & Begin gemaakt een theoretisch kader \cite{spinning_up}                                                                                                                                                                                                              \\
+    \hline
+    06/08/2024     & 2 uur         & Thuis                   & Theoretisch kader afgemaakt.                                                                                                                                                                                                                                          \\
+    \hline
+    08/08/2024     & 2 uur         & Thuis                   & LaTeX geleerd en eerste layout gemaakt van het PWS met alle kopjes.                                                                                                                                                                                                   \\
+    \hline
+    1/09/2024      & 3 uur         & Thuis                   & Voorstel gemaakt                                                                                                                                                                                                                                                      \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord gemaakt, overleg over de aanpak en het algemene idee.                                                                                                                                                                                                       \\
+    \hline
+    20/09/2024     & 2 uur         & Thuis                   & Het Q-learning algoritme tijdsefficiënter gemaakt met numpy en een bug gefixt in snake zodat er nu geen appel kan spawnen in de slang zelf \cite{numpy_docs}                                                                                                        \\
+    \hline
+    27/09/2024     & 4 uur         & Thuis                   & Script gemaakt voor resultaten van Q-learning in grafiek (5000 woorden, gebruik van Matplotlib). Hyperparameters uitgetest en optimale gevonden. Elke training kostte ongeveer 15 minuten. (gemiddeld score van beste waardes was 60 appels) \cite{matplotlib_docs} \\
+    \hline
+    24/10/2024     & 4 uur         & Thuis                   & Script gemaakt voor DQN algoritme met PyTorch \cite{pytorch_docs} \cite{pytorch_rl}                                                                                                                                                                               \\
+    \hline
+    17/11/2024     & 3 uur         & Thuis                   & Hoofdstuk Kenmerken van specifieke algoritmes begonnen. Introductie geschreven en DQN Algoritme vertaald \cite{delayed_rewards} \cite{multi_agent_rl}                                                                                                             \\
+    \hline
+    24/11/2024     & 3 uur         & Thuis                   & Sectie Deep Q-Network begonnen. Algoritme vertaald, proces beschreven \cite{dqn_nature}                                                                                                                                                                             \\
+    \hline
+    28/11/2024     & 1 uur         & Thuis                   & Flowchart van Deep Q-Network algoritme gemaakt en verder geschreven                                                                                                                                                                                                   \\
+    \hline
+    29/11/2024     & 3 uur         & Thuis                   & Kopje Neuraal Netwerk geschreven en diagram van neuraal netwerk in DQN gemaakt \cite{nn_math}                                                                                                                                                                       \\
+    \hline
+    31/11/2024     & 3 uur         & Thuis                   & Onderzoek over Deep Deterministic Policy Gradient en algoritme vertaald \cite{ddpg} \cite{silver_dpg}                                                                                                                                                             \\
+    \hline
+    2/12/2024      & 2 uur         & Thuis                   & Proces van DDPG geschreven.                                                                                                                                                                                                                                           \\
+    \hline
+    3/12/2024      & 2 uur         & Thuis                   & Actor-Critic model geschreven en figuur Flowchart van Actor Critic model gemaakt en Toepassingen geschreven.                                                                                                                                                          \\
+    \hline
+    4/12/2024      & 2 uur         & Thuis                   & Onderzoeksmethoden geschreven.                                                                                                                                                          \\
+    \hline
+    5/12/2024      & 1 uur         & Thuis                   & Puntes op de i gezet.                                                                                                                                                          \\
+    \hline
+\end{longtable}
+
+\section*{Thom}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                             \\
+    \hline
+    03/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{wiki_rl}                    \\
+    \hline
+    04/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{scribbr_rl}                 \\
+    \hline
+    05/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{geeksforgeeks_rl}           \\
+    \hline
+    06/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{oracle_rl}                  \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord maken, overleg over het idee                         \\
+    \hline
+    26/09/2024     & 2,5 uur       & Thuis                   & Layout maken van het verslag, verder inlezen over onderwerp    \\
+    \hline
+    01/10/2024     & 3 uur         & Thuis                   & Matthijs' theoretisch kader verbeterd                          \\
+    \hline
+    02/10/2024     & 3 uur         & Thuis                   & Uitleg theoretisch kader                                       \\
+    \hline
+    04/10/2024     & 3 uur         & Thuis                   & Herschrijven theoretisch kader                                 \\
+    \hline
+    06/10/2024     & 2 uur         & Thuis                   & Antwoorden deelvraag 1                                         \\
+    \hline
+    07/10/2024     & 3 uur         & Bij pepijn              & Inleiding herschreven. Plan van aanpak gemaakt.                \\
+    \hline
+    08/11/2024     & 3 uur         & Thuis                   & Herschrijven van tekst / nalezen versie voor controle moment 2 \\
+    \hline
+    03/12/2024     & 3 uur         & Thuis                   & Afmaken plaatjes maken                                         \\
+    \hline
+    04/12/2024     & 2 uur         & Thuis                   & Afmaken PWS voor controlemoment                                \\
+    \hline
+    05/12/2024     & 2 uur         & Thuis                   & Puntjes op i zetten                                            \\
+    \hline
+\end{longtable}
+\newpage
+\section*{Pepijn}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                                                                                         \\
+    \hline
+    30/08/2024     & 2 uur         & Thuis                   & Ingelezen onderwerp \cite{ai_basics} \cite{datacamp_ai}                                                                \\
+    \hline
+    1/09/2024      & 1 uur         & Thuis                   & Onderzoeksplan en -overzicht gemaakt(van het voorstel)                                                                     \\
+    \hline
+    03/09/2024     & 3 uur         & Thuis                   & Ingelezen over het onderwerp \cite{analytics_vidhya_rl} \cite{rl_guide}                                                \\
+    \hline
+    04/09/2024     & 1 uur         & Thuis                   & Inlezen over q-learning \cite{q_learning_tutorial}                                                                       \\
+    \hline
+    07/09/2024     & 3,5 uur       & Thuis                   & Inlezen over het onderwerp en Deep q learning \cite{dqn_guide} \cite{sutton_barto}                                     \\
+    \hline
+    9/09/2024      & 3 uur         & Thuis                   & Ingelezen over het onderwerp \cite{dqn_paper}                                                                            \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord gemaakt, overleg over de aanpak en het algemene idee.                                                            \\
+    \hline
+    07/10/2024     & 3 uur         & Thuis                   & Inleiding herschreven en lay-out van andere delen van het pws verbeterd. Plan van aanpak gemaakt voor de rest van het pws. \\
+    \hline
+    26/09/2024     & 3 uur         & Thuis                   & Inlezen over speleigenschappen \cite{pmlr-v119-cobbe20a} en begonnnen met het schrijven van deelvraag 2.                 \\
+    \hline
+    29/10/2024     & 3 uur         & Thuis                   & Verder gewerkt aan deelvraag 2 en bijna volledig uitgewerkt                                                                \\
+    \hline
+    30/10/2024     & 3 uur         & Thuis                   & Deelvraag 2 afgeschreven                                                                                                   \\
+    \hline
+    1/11/2024      & 2 uur         & Thuis                   & Alles nagelezen wat tot nu toe was gemaakt en de lay-out erg verbeterd.                                                    \\
+    \hline
+    08/11/2024     & 3 uur         & bij Thom                & Herschrijven van tekst /nalezen versie voor controle moment 2                                                              \\
+    \hline
+    26/11/2024     & 0,5 uur       & Thuis                   & Inleiding anders verwoord en fouten uit het pws gehaald                                                                    \\
+    \hline
+    03/12/2024     & 3 uur         & Thuis                   & Begonnen met deelvraag 3                                                                                                   \\
+    \hline
+    04/12/2024     & 2 uur         & Thuis                   & Deelvraag 3 afgemaakt en verbeterd                                                                                         \\
+    \hline
+    05/12/2024     & 3 uur         & Thuis                   & PWS nagelezen spelling verbeterd bronnotatie geregeld en puntjes op de i gezet.                                            \\
+    \hline
+\end{longtable}
+
+\printbibliography[title=Literatuurlijst]
+
 \end{document}
- 

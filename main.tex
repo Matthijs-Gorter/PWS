@@ -1,11 +1,14 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,11pt]{report}-
 \usepackage[utf8]{inputenc}
 \usepackage[dutch]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{lmodern}
 \usepackage{amsmath, amssymb}
+\usepackage{pdfpages} 
+
 \usepackage[T1]{fontenc}
+\usepackage{longtable}
 \usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -26,7 +29,7 @@
 \usepackage{listings}
 \usepackage[
 backend=biber,
-style=apa,
+style=nature,
 ]{biblatex}
 \addbibresource{references.bib}
 
@@ -37,37 +40,19 @@ style=apa,
 
 \nocite{*}
 
-% Define custom colors based on VSCode's default dark theme
-\definecolor{vscBackground}{HTML}{1E1E1E} % Dark background
-\definecolor{vscText}{HTML}{D4D4D4}       % Default text color (light grey)
-\definecolor{vscKeyword}{HTML}{569CD6}    % Blue for keywords
-\definecolor{vscBuiltin}{HTML}{4EC9B0}    % Light teal for built-in functions (e.g., def, return)
-\definecolor{vscString}{HTML}{D69D85}     % Salmon for strings
-\definecolor{vscComment}{HTML}{6A9955}    % Green for comments
-\definecolor{vscNumber}{HTML}{B5CEA8}     % Light green for numbers
-\definecolor{vscFunction}{HTML}{DCDCAA}   % Yellow for function names
-
-\lstset{
-    backgroundcolor=\color{vscBackground},   % Set background color
-    basicstyle=\ttfamily\color{vscText},     % Basic text style and color
-    keywordstyle=\color{vscKeyword}\bfseries, % Keywords in blue
-    identifierstyle=\color{vscText},         % Identifiers in default text color
-    commentstyle=\color{vscComment}\itshape, % Comments in italic green
-    stringstyle=\color{vscString},           % Strings in salmon
-    numberstyle=\color{vscNumber},           % Numbers in light green
-    frame=single,                            % Frame the code
-    breaklines=true,                         % Allow line breaking
-    showstringspaces=false,                  % Don't show spaces as underscores
-    language=Python,                         % Set language to Python
-    morekeywords={np},                       % Add 'np' as a keyword (numpy)
-    columns=fullflexible                    % Allow flexible column alignment
+\hypersetup{
+    colorlinks=true,     % false: boxed links; true: colored links
+    linkcolor=black,     % color of internal links
+    citecolor=blue,      % color of citations
+    urlcolor=blue        % color of external urls
 }
-
 \pagenumbering{Roman}  % Romeinse nummering
 
 \geometry{a4paper, top=3.5cm, bottom=3.5cm, left=2.5cm, right=2.5cm} 
 
-\begin{document}
+\begin{document} 
+
+\includepdf[pages=1]{cover.pdf}
 
 \begin{titlepage}
     \centering
@@ -98,7 +83,7 @@ style=apa,
 
 Toen we begonnen na te denken over een onderwerp voor ons profielwerkstuk,
 wilden we graag een thema kiezen dat zowel uitdagend als actueel was.
-Kunstmatige intelligentie fascineert ons al enige tijd, vooral vanwege de
+Kunstmatige intelligentie (KI) houdt ons al enige tijd bezig, vooral vanwege de
 invloed die het heeft op onze toekomst en de vele toepassingen die het nu al
 kent. Het idee om ons te verdiepen in reinforcement learning ontstond omdat
 deze tak van KI niet alleen theoretisch interessant is, maar ook praktisch
@@ -114,6 +99,9 @@ het precies werkt.
 Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\ Christelijk Lyceum Zeist
 \\ Februari 2025
 
+\tableofcontents
+\newpage
+\pagenumbering{arabic}  % Overschakelen naar Arabische nummering
 \chapter*{Notatie}
 \addcontentsline{toc}{chapter}{Notatie} % Voeg toe aan de Inhoudsopgave
 \begin{table}[h]
@@ -121,15 +109,15 @@ Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\ Christelijk Lyceum Zeist
         \textbf{Variabele}       & \textbf{Definitie}                          \\
         \rule{\linewidth}{0.4mm} & \rule{\linewidth}{0.4mm}                    \\
         $t$                      & Tijdstap                                    \\
-        $T$                      & Laatste tijdstap van een episode (horizon)  \\
-        $x$                      & Toestand (state)                            \\
+        $T$                      & Laatste tijdstap van een episode            \\
+        $x$                      & Toestand                                    \\
         $x_t$                    & Toestand op tijdstap $t$                    \\
         $x'$                     & De volgende toestand                        \\
         $\mathcal{X}$            & Toestandsruimte                             \\
         $a$                      & Actie                                       \\
         $\mathcal{A}$            & Actieruimte                                 \\
         $a_t$                    & Actie op tijdstip $t$                       \\
-        $r$                      & Beloning (reward)                           \\
+        $r$                      & Beloning                                    \\
         $\mathcal{R}$            & Beloningsruimte                             \\
         $r_t$                    & Beloning op tijdstip $t$                    \\
         $r(x, a)$                & Beloningsfunctie                            \\
@@ -156,21 +144,17 @@ Matthijs Gorter, Thom Brinkhorst, Pepijn van Iperen \\ Christelijk Lyceum Zeist
 
 \newpage
 
-\tableofcontents
-\newpage
-\pagenumbering{arabic}  % Overschakelen naar Arabische nummering
-
 \chapter{Inleiding}
-Reinforcement Learning (RL) is een subdiscipline binnen de kunstmatige
-intelligentie (KI) die zich richt op het trainen van een agent om optimale
-acties te ondernemen binnen een specifieke omgeving. Een agent is een entiteit
-die leert en acties onderneemt. Bij een zelfrijdende auto is het
-besturingssysteem de agent, en bij een schaakspel is de schaker de agent.
+Reinforcement Learning (RL) is een tak binnen de kunstmatige intelligentie die
+zich richt op het trainen van een agent om optimale acties te ondernemen binnen
+een specifieke omgeving. Een agent is een entiteit die leert en acties
+onderneemt. Bij een zelfrijdende auto is het besturingssysteem de agent, en bij
+een schaakspel is de schaker de agent.
 
 \noindent
 \begin{minipage}[t]{0.65\textwidth}
     \vspace{-6.5\baselineskip}
-    De omgeving is alles waarmee de agent interageert en die reageert op de acties van
+    De omgeving is alles waarmee de agent interacteert en die reageert op de acties van
     de agent. Bij een zelfrijdende auto is dit de weg waar de auto op rijdt en de
     voertuigen om de auto heen. Bij een schaakspel is dit het schaakbord. De agent
     leert door interactie met zijn omgeving. De agent ontvangt beloningen of
@@ -206,11 +190,9 @@ de cumulatieve beloning over tijd.
 
 Computerspellen vormen een ideaal testplatform voor RL vanwege de veelzijdige
 uitdagingen die ze bieden, zoals dynamische omgevingen, complexe regels en
-onvoorspelbare scenario’s. RL heeft bewezen effectief te zijn in spellen met
-zowel discrete als continue actie- en toestandruimtes, variërend van
-actiespellen zoals Snake tot strategische spellen zoals Schaken. Het toepassen
-van RL in gaming vereist een diep begrip van zowel de kenmerken van de spellen
-als de algoritmes die worden ingezet.
+onvoorspelbare scenario’s. RL wordt gebruikt in veel verschillende spellen,
+variërend van actiespellen zoals Snake tot strategische spellen zoals Schaken.
+
 \section{Doel van het onderzoek}
 Het doel van dit onderzoek is om te begrijpen hoe de kenmerken van
 verschillende computerspellen de effectiviteit van verschillende reinforcement
@@ -284,11 +266,8 @@ zelfrijdende auto's en robotica.
 
 Reinforcement Learning (RL) opereert binnen het kader van Markov Decision
 Processes (MDP's), die een wiskundige basis bieden voor het modelleren van
-sequentiële beslissingsproblemen. Dit hoofdstuk bespreekt de fundamentele
-concepten en wiskundige formuleringen die ten grondslag liggen aan RL,
-gestructureerd rond vier kernonderdelen: de basiselementen van MDP's, de
-Markov-eigenschap en overgangsdynamiek, beleid en waarde-functies, en de
-Bellman-vergelijkingen.
+sequentiële beslissingsproblemen. Dit hoofdstuk bespreekt belangrijke de
+concepten in RL.
 
 \section{Fundamentele Elementen van MDP's}
 
@@ -445,58 +424,6 @@ beleid (\(\pi\)) wordt gedefinieerd als:
 Deze functie geeft de verwachte waarde van de totale beloning die een agent zal
 ontvangen vanaf de toestand \(x\) en na het nemen van actie \(a\).
 
-\section{Leerstrategieën}
-\subsection{Model-Based vs Model-Free Learning}
-\subsubsection{Model-Based Learning}
-Bij model-based learning construeert de agent expliciet een model (\(\hat{p}\))
-van de overgangsdynamiek en beloningsfunctie van de omgeving (\(\hat{r}\)). Het
-geleerde model benadert:
-
-\begin{itemize}
-    \item Overgangsfunctie: \(\hat{p}(x'|x,a) \approx p(x'|x,a)\)
-    \item Beloningsfunctie: \(\hat{r}(x,a) \approx r(x,a)\)
-\end{itemize}
-
-De agent kan dit model gebruiken voor:
-
-\begin{itemize}
-    \item \textit{Planning}: Het simuleren van trajecten zonder interactie met de omgeving.
-    \item \textit{Counterfactual reasoning}: Het evalueren van acties die niet daadwerkelijk zijn uitgevoerd.
-\end{itemize}
-
-\subsubsection{Model-Free Learning}
-Model-free methoden leren waardefuncties of beleidsregels direct uit ervaring,
-zonder een expliciet model te construeren. Deze methoden werken door:
-
-\begin{itemize}
-    \item Directe updates van waarde-schattingen.
-    \item Beleidsverbetering op basis van gesamplede trajecten.
-    \item Geen expliciete representatie van overgangsdynamiek.
-\end{itemize}
-
-\subsection{On-Policy vs Off-Policy Learning}
-\subsubsection{On-Policy Learning}
-On-policy methoden leren over het beleid dat momenteel wordt uitgevoerd. De
-update van de waardefunctie volgt:
-\[
-    \text{Target} = r + \gamma \mathbb{E}_{a' \sim \pi(\cdot|x')}[Q(x',a')]
-\]
-waarbij \(\pi\) zowel:
-
-\begin{itemize}
-    \item Het gedragsbeleid (dat ervaringen genereert) als
-    \item Het doelbeleid (dat wordt geleerd) is.
-\end{itemize}
-
-\subsubsection{Off-Policy Learning}
-Off-policy methoden leren over één beleid (\(\pi\)) terwijl een ander beleid
-(\(\mu\)) wordt gevolgd. Dit omvat:
-
-\begin{itemize}
-    \item \textit{Gedragsbeleid} (\(\mu\)): Gebruikt voor exploratie.
-    \item \textit{Doelbeleid} (\(\pi\)): Het beleid dat wordt geleerd.
-\end{itemize}
-
 \chapter{Kenmerken van specifieke Algoritmes}
 
 \section{Q-Learning}
@@ -601,7 +528,7 @@ de huidige toestand bijgewerkt in de Q-tabel zoals te zien is in formule
 
 \subsection{Beperkingen}
 Een van de grootste beperkingen van Q-learning is schaalbaarheid. De
-toestandsruimte neem exponentieeel toe wanneer het aantaal dimensies toeneemt:
+toestandsruimte neemt exponentieel toe wanneer het aantal dimensies toeneemt:
 \begin{equation}
     |\mathcal{S}| = d^n
 \end{equation}
@@ -612,8 +539,6 @@ Dit leidt tot hoge eisen aan geheugen en rekenkracht:
 \begin{equation}
     \text{Complexiteit} = O(|\mathcal{S}| \times |\mathcal{A}|)
 \end{equation}
-\subsection{Toepassingen}
-\pagebreak
 \section{Deep Q-Network}
 Deep Q-Network (DQN), geïntroduceerd door DeepMind in 2013 combineert
 Q-learning met diepe neurale netwerken. Deze innovatie maakte het mogelijk om
@@ -665,7 +590,7 @@ netwerk in DQN.
                     font=\small\sffamily
                 },
             layer rectangle/.style={
-                    draw=blue!50,
+                    draw=black!50,
                     rounded corners,
                     dashed,
                     very thick
@@ -790,7 +715,7 @@ halen uit de pixels, dit maakt het algorithme goed in het verwerken van
 complexe visuele informatie.
 
 \begin{algorithm}
-    \caption{Deep Q-learning met Experience Replay (\cite{mnih-2013})}\label{alg:DQN}
+    \caption{Deep Q-learning met Experience Replay \cite{dqn_paper}}\label{alg:DQN}
     \begin{algorithmic}
         \State Initialiseer replay-geheugen $\mathcal{D}$ met capaciteit $N$
         \State Initialiseer de actie-waarde functie $Q$ met willekeurige gewichten
@@ -832,7 +757,7 @@ complexe visuele informatie.
         \node (initseq) [process, below of=episode, yshift=-0.4cm] {Initialiseer sequentie $s_1$ en $\phi_1$};
         \node (timestep) [process, below of=initseq, yshift=-0.4cm] {Start nieuwe tijdstap};
 
-        \node (epsilon) [decision, below of=getstate, yshift=-0.25cm] {Is Actie Exploratie?};
+        \node (epsilon) [decision, below of=timestep, yshift=-0.4cm] {Is Actie Exploratie?};
         \node (random) [process, below left=of decideexplore, xshift=1cm] {Kies Willekeurige Actie};
         \node (maxq) [process, below right=of decideexplore, xshift=-2cm] {Kies Actie met hoogste Q-waarde};
 
@@ -880,28 +805,24 @@ verbeterd door de introductie van experience replay en target networks, wat een
 belangrijke vooruitgang is ten opzichte van Q-learning methoden.
 
 \subsection{Voordelen en Beperkingen}
-DQN is goed in complexe taken met visuele inputs effectief aan pakken zonder
-dat handmatige feature-extractie nodig is. Het algoritme heeft goede
+DQN is goed in complexe taken met visuele inputs effectief aan pakken zonder je
+dat handmatige features moet selecteren. Het algoritme heeft goede
 generalisatie-eigenschappen, waardoor het zich kan aanpassen aan nieuwe
 situaties binnen het geleerde domein. Deze voordelen worden echter vergezeld
-door enkele significante beperkingen. DQN is computationeel intensief en
-vereist grote hoeveelheden trainingsdata om tot goede resultaten te komen.
-Daarnaast is het algoritme gevoelig voor de keuze van hyperparameters, wat het
-optimalisatieproces complex maakt. Een andere uitdaging ligt in het verwerken
-van zeer lange-termijn afhankelijkheden, wat in bepaalde toepassingen een
-limiterende factor kan zijn.
+door beperkingen. DQN is computationeel intensief, het vereist grote
+hoeveelheden trainingsdata om tot goede resultaten te komen. Daarnaast is het
+algoritme gevoelig voor de keuze van hyperparameters, wat het
+optimalisatieproces complex maakt.
 
 \subsection{Toepassingen}
-DQN heeft zijn effectiviteit bewezen in veel toepassingsgebieden. In de context
-van videogames heeft het algoritme indrukwekkende resultaten behaald, met name
-bij het leren spelen van Atari 2600 spellen op menselijk en bovenmenselijk
-niveau. Bij robotica en motion control biedt DQN nieuwe mogelijkheden voor het
-ontwikkelen van verfijnde besturingsstrategieën. Ook binnen autonome systemen
-wordt DQN gebruikt door complexe beslissingsprocessen te optimaliseren. Deze
-succesvolle toepassingen demonstreren de veelzijdigheid en het potentieel van
-het algoritme in verschillende praktische contexten.
+DQN wordt gebruikt in veel toepassingsgebieden. Bij van videogames heeft het
+algoritme indrukwekkende resultaten behaald, met name bij het leren spelen van
+Atari 2600 spellen op menselijk en bovenmenselijk niveau. Bij robotica en
+motion control biedt DQN nieuwe mogelijkheden voor het ontwikkelen van
+verfijnde besturingsstrategieën. Ook binnen autonome systemen wordt DQN
+gebruikt door complexe beslissingsprocessen te optimaliseren.
 
-\section{Deep Deterministic Policy Gradient}
+\section{Deep   Policy Gradient}
 Deep Deterministic Policy Gradient (DDPG), ontwikkeld door onderzoekers van
 DeepMind in 2015, is een algoritme dat zich richt op continue actieruimtes. Als
 een uitbreiding op de policy gradient methoden en Actor-Critic architecturen,
@@ -910,48 +831,70 @@ neurale netwerken.
 
 \subsection{Actor-Critic model}
 
-Het Actor-Critic model is een model dat kenmerken van policy
+Het DDPG-algoritme bestaat uit twee neurale netwerken: het Actor-netwerk en het
+Critic-netwerk. Het Actor-netwerk is genereerd de acties. Hij geeft de optimale
+actie bepaalt gegeven een specifieke toestand. Het Critic-netwerk evalueert de
+kwaliteit actie die de Actor gemaakt heeft. Hij schat de waarde-functie
+$Q(s,a)$. Het Critic-netwerk levert informatie terug aan de Actor over de
+effectiviteit van de acties. Dit model is weergegeven in Figuur
+\ref{fig:actorCriticFlowchart}
 
-De Actor is verantwoordelijk voor het genereren van acties. Hij geeft de
-optimale actie bepaalt gegeven een specifieke toestand. De Actor word
-gedefinieerd door een functie:
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[node distance=0.8cm, auto, >=latex']
+        % Definieer stijlen voor verschillende soorten knooppunten
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,text centered, draw=black, fill=red!0]
+        \tikzstyle{process} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=orange!0]
+        \tikzstyle{decision} = [rectangle, minimum width=1.5cm, minimum height=0.5cm, text centered, draw=black, fill=green!0]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
 
-\begin{equation}
-    a = \pi_\theta(s)
-\end{equation}
+        % Knopen plaatsen
+        \node (env) [process] {Omgeving};
+        \node (act) [process, below of=env, yshift=-0.5cm] {Actor};
+        \node (cri) [process, below of=act, yshift=-0.5cm] {Critic};
 
-De Critic evalueert de kwaliteit van de door de Actor gegenereerde acties. Hij
-schat de waarde-functie $Q(s,a)$ of de staat-waarde functie $V(s)$. De Critic
-levert kritische informatie terug aan de Actor over de effectiviteit van zijn
-gegenereerde acties:
+        % Pijlen tekenen
+        \draw [arrow] (env) -- node[left] {$x$} (act);
+        \draw [arrow] (cri) -- node[left] {$Q(x,a)$} (act);
+        \draw [arrow] (env) -| ++(2,0) |- node[pos=0.25, right] {$r, x$} (cri);
+        \draw [arrow] (act) -| ++(-2,0) |- node[pos=0.25, left] {$a$} (env);
 
-\begin{equation}
-    Q(s,a) = \mathbb{E}[R_t | s_t = s, a_t = a]
-\end{equation}
+    \end{tikzpicture}
+    \caption{Flowchart van het Actor Critic model.}
+    \label{fig:actorCriticFlowchart}
+\end{figure}
 
-\subsubsection{Leerproces}
+Een belangrijk voordeel van dit model is dat het geschikt is voor zowel
+discrete als continue actieruimten. Dit maakt het toepasbaar op veel
+verschillende problemen, van spellen tot robotica. Het Actor-Critic-model
+reduceert de variantie doordat de Critic een schatting maakt van de Q-functie.
+Dit zorgt voor een stabieler en robuuster leerproces, vooral in spellen met
+hoog-dimensionale toestandsruimten.
 
-Het unieke van het Actor-Critic model is de wederzijdse terugkoppeling tussen
-beide netwerken:
+Een ander voordeel van het Actor-Critic-model is dat het een gelijktijdige
+optimalisatie van het beleid en de waardefunctie mogelijk maakt. Bij DQN wordt
+het beleid indirect geoptimaliseerd door een $\epsilon$-greedy-strategie. In
+tegenstelling hiermee leert de Actor in het Actor-Critic-model met
+exploratieruis, wat leidt tot snellere en efficiëntere convergentie, vooral in
+situaties waarin een meer deterministisch beleid gewenst is.
 
-1. De Actor genereert een actie op basis van de huidige toestand
-2. De Critic beoordeelt de kwaliteit van deze actie
-3. De Actor wordt bijgestuurd op basis van de feedback van de Critic
-
-De Actor wordt geüpdatet met een gradiënt die de verwachte beloning
-maximaliseert:
-
-\begin{equation}
-    \nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}[\nabla_\theta \log \pi_\theta(a|s) Q(s,a)]
-\end{equation}
-
-\subsubsection{Voordelen}
-- Geschikt voor zowel discrete als continue actieruimtes
-- Lagere variantie in gradiëntschatting
-- Mogelijkheid tot gelijktijdige optimalisatie van beleid en waarde-inschatting
 \subsection{Proces}
+Het DDPG-algoritme, zoals weergegeven in Algoritme \ref{alg:ddpg}, begint met
+de initialisatie van het Actor-netwerk, het target Actor-netwerk, het
+Critic-netwerk, het target Critic-netwerk en de replay buffer. Tijdens elke
+episode genereert het algoritme exploratieruis op basis van een
+Ornstein-Uhlenbeck-ruisproces, dat wordt gebruikt om te bepalen of de agent
+kiest voor exploratie of exploitatie. De actieselectie wordt uitgevoerd door
+het Actor-netwerk, waarbij exploratieruis wordt toegevoegd om voldoende
+exploratie te waarborgen.
+
+Het leerproces omvat het samplen van willekeurige minibatches uit de replay
+buffer, het berekenen van doelwaarden en het updaten van zowel het Critic- als
+het Actor-netwerk. Hierbij wordt gebruikgemaakt van policy gradients en een
+soft update van de doelnetwerken. Dit draagt bij aan een stabiele optimalisatie
+van het beleid. -
 \begin{algorithm}[h]
-    \caption{DDPG-algoritme \cite{lillicrap2019continuouscontroldeepreinforcement} \label{alg:ddpg}}
+    \caption{DDPG-algoritme \cite{ddpg} \label{alg:ddpg}}
     \begin{algorithmic}
         \State Initialiseer willekeurig het critic-netwerk $Q(s, a | \theta^Q)$ en het actor-netwerk
         $\mu(s | \theta^{\mu})$ met gewichten $\theta^{Q}$ en $\theta^{\mu}$.
@@ -995,17 +938,18 @@ maximaliseert:
     \end{algorithmic}
 \end{algorithm}
 
-\subsection{Verbeteringen op DQN}
-
-\subsection{Voordelen en Beperkingen}
-
 \subsection{Toepassingen}
+De flexibiliteit en kracht van DDPG maken het geschikt voor een breed scala aan
+toepassingen, variërend van robotbesturing en autonome systemen tot complexe
+simulatieomgevingen. Door zijn vermogen om te leren in continue actieruimtes
+onderscheidt DDPG zich als een veelbelovende methode voor geavanceerde
+reinforcement learning-uitdagingen.
 
 \chapter{Kenmerken van specifieke Computerspellen}
 Er zijn talloze computerspellen met diverse en uitdagende omgevingen voor de
-toepassing van reinforcement learning (RL)-algoritmes. Spellen onderling kunnen
-erg van elkaar variëren onder andere in structuur, dynamiek, complexiteit, en
-tijdsduur. Al deze aspecten kunnen dergelijke invloed hebben op de
+toepassing van reinforcement learning (RL)-algoritmes. Spellen kunnen sterk van
+elkaar verschillen in aspecten zoals structuur, dynamiek, complexiteit en
+speeltijd. Al deze aspecten kunnen dergelijke invloed hebben op de
 effectiviteit van RL-algoritmes. Elk type spel stelt specifieke eisen aan een
 RL-algoritme, afhankelijk van aspecten zoals de omvang van de toestandsruimte,
 de regels en beperkingen, en de vereiste strategische vaardigheden.
@@ -1057,13 +1001,13 @@ factoren die bepalen welk type RL-algoritme geschikt is. Strategie verwijst
 naar het vermogen om vooruit te denken en acties te plannen die op lange
 termijn voordelig zijn. Dit varieert sterk tussen spellen.
 
-Strategische spellen, zoals \textit{Schaken}, vereisen vereisen dat een agent
-ver vooruit denkt en een reeks mogelijke toekomstige toestanden analyseert.
-Hier is langetermijnplanning essentieel. De agent moet niet alleen rekening
-houden met de huidige toestand, maar ook anticiperen op de mogelijke acties van
-een tegenstander en de daaropvolgende uitkomsten. Bij strategische spellen is
-het leren complex, omdat beloningen vaak cumulatief en pas aan het einde van
-het spel duidelijk worden.
+Strategische spellen, zoals \textit{Schaken}, vereisen dat een agent ver
+vooruit denkt en een reeks mogelijke toekomstige toestanden analyseert. Hier is
+langetermijnplanning essentieel. De agent moet niet alleen rekening houden met
+de huidige toestand, maar ook anticiperen op de mogelijke acties van een
+tegenstander en de daaropvolgende uitkomsten. Bij strategische spellen is het
+leren complex, omdat beloningen vaak cumulatief en pas aan het einde van het
+spel duidelijk worden.
 
 Aan de andere kant zijn er spellen zoals \textit{Snake}, waarin strategie een
 veel minder belangrijke rol speelt. In deze spellen zijn acties vaak gebaseerd
@@ -1167,21 +1111,314 @@ nemen die op lange termijn voordelig zijn. Het leren wordt complexer omdat de
 agent beloningen moet toeschrijven aan acties die mogelijk vele stappen eerder
 werden ondernomen.
 
+\chapter{De invloed van spelkenmerken  op Reinforcement Learning-Algoritmes}
+
+\section{Strategische Diepgang}
+\subsection*{Q-Learning:}
+Q-Learning presteert goed in spellen met een lage strategische diepgang, zoals
+Snake. Omdat Q-Learning gebruikmaakt van een Q-tabel die alleen de waarde van
+elke toestand-actiecombinatie opslaat. Wat het niet geschikt maakt voor spellen
+met een grote toestandsruimte of langetermijnstrategieën, zoals Schaken.
+
+\subsection*{DQN:}
+DQN breidt Q-Learning uit door neurale netwerken te gebruiken om Q-waarden te
+benaderen, wat het geschikter maakt voor spellen met een gemiddelde
+strategische diepgang, zoals Mario Bros. Het algoritme kan leren van zowel
+directe- als kortetermijnfeedback, maar mist de meer geavanceerde planning die
+nodig zijn voor spellen die een diepere strategie gebruiken.
+
+\subsection*{DDPG:}
+DDPG is gericht op continue actieruimtes en wordt minder beïnvloed door de
+strategische diepgang, maar eerder door de mate waarin de acties moeten worden
+afgestemd. Voor spellen zoals Mario Bros, waar timing en actiecontrole
+belangrijk zijn, kan DDPG strategieën leren door zowel korte- als
+langetermijnfeedback te gebruiken.
+
+\section{Regels en Beperkingen}
+\subsection*{Q-Learning:}
+Werkt het beste in spellen met eenvoudige regels en beperkte keuzevrijheid,
+zoals Snake. Door de vaste en voorspelbare omgeving kunnen de toestands- en
+actieruimtes volledig worden doorzocht, wat het leren relatief eenvoudig maakt.
+
+\subsection*{DQN:}
+Presteert goed in spellen met relatief meer complexiteit in regels, zoals Mario
+Bros. Door het gebruik van neurale netwerken kan het algoritme generalisaties
+maken, waardoor het beter omgaat met spellen met grotere toestandsruimtes en
+variabele regels.
+
+\subsection*{DDPG:}
+Bij spellen met een hoge keuzevrijheid, zoals een racespel, is DDPG beter in
+staat om acties nauwkeurig af te stemmen op een veranderende toestandsruimte.
+De flexibiliteit van DDPG maakt het een betere keuze voor omgevingen zonder
+strikte beperkingen.
+
+\section{Dynamiek en Tijdgevoeligheid}
+\subsection*{Q-Learning:}
+Het algoritme is minder geschikt voor real-time spellen vanwege zijn
+tabelgebaseerde aanpak. Voor spellen zoals Snake met beperkte snelheid en
+eenvoudige dynamiek kan Q-Learning goed werken. Het heeft moeite met een snel
+veranderende omgeving.
+
+\subsection*{DQN:}
+Werkt goed in real-time dynamische spellen zoals Mario Bros. Door gebruik te
+maken van neurale netwerken en technieken zoals experience replay, kan DQN
+beter omgaan met snelle veranderingen en real-time beslissingen.
+
+\subsection*{DDPG:}
+DDPG is bij het best geschikt voor dynamische spellen waar continue aanpassing
+bij nodig is, zoals een racespel of geavanceerde spellen. Het algoritme
+combineert actie-optimalisatie met de snelheid van beleidsupdates. Dit maakt
+het effectief in real-time situaties.
+
+\section{Beloningsstructuur}
+\subsection*{Q-Learning:}
+Werkt goed met directe beloningen, zoals in Snake. Omdat Q-Learning beloningen
+koppelt aan toestands-actiecombinaties, leert het snel in omgevingen waar
+feedback direct vergeven wordt.
+
+\subsection*{DQN:}
+Kan omgaan met zowel directe als cumulatieve beloningen, zoals in Mario Bros.
+Het algoritme gebruikt de neurale netwerken om toekomstige beloningen te
+voorspellen, wat helpt bij het optimaliseren van zowel kortetermijn- als
+langetermijnacties.
+
+\subsection*{DDPG:}
+Presteert beter in omgevingen met cumulatieve beloningen, zoals een complexe
+racespelomgeving. Het algoritme gebruikt de Actor-Critic-structuur om
+beloningen over langere tijd te maximaliseren en leert efficiënter in
+omgevingen met variabele beloningsstructuren.
+
+\section{Complexiteit van de Toestandsruimte}
+\subsection*{Q-Learning:}
+Functioneert alleen in spellen met een kleine toestandsruimte, zoals Snake.
+Omdat Q-Learning expliciet een Q-tabel opbouwt, wordt het onpraktisch voor
+spellen met grote toestandsruimtes, zoals Schaken of Mario Bros.
+
+\subsection*{DQN:}
+Kan omgaan met grotere toestandsruimtes dankzij het gebruik van neurale
+netwerken. Voor spellen zoals Mario Bros kan DQN gemakkelijker leren door
+patronen te herkennen en te generaliseren, zonder afhankelijk te zijn van een
+volledige tabel.
+
+\subsection*{DDPG:}
+Geschikt voor spellen met grote toestandsruimtes en continue actieruimtes. In
+moeilijke omgevingen zoals simulaties kan DDPG strategieën leren door
+geavanceerde Actor-Critic-modellen, wat schaalbaarheid mogelijk maakt.
+
+\section{Onvoorspelbaarheid}
+\subsection*{Q-Learning:}
+Is niet goed bestand tegen onvoorspelbaarheid. Het algoritme werkt het beste in
+deterministische omgevingen waar de uitkomsten van acties bekend en consistent
+zijn, zoals Snake.
+
+\subsection*{DQN:}
+Kan omgaan met enige onvoorspelbaarheid, zoals in Mario Bros, door gebruik te
+maken van schattingen en neurale netwerken om patronen te herkennen en aan te
+passen.
+
+\subsection*{DDPG:}
+Presteert het best in omgevingen met een hoge mate van onvoorspelbaarheid. Het
+algoritme past zich continu aan dankzij de Actor-Critic-structuur, wat het
+beter maakt in dynamische omgevingen waar acties verschillende eindresultaten
+kunnen opleveren.
+
 \chapter{Onderzoeksmethoden}
-\section{Q-Learning}
+In dit onderzoek bekijken we hoe goed verschillende reinforcement
+learning-algoritmes werken bij het spelen van computerspellen. We onderzoeken
+drie algoritmes: Q-Learning, Deep Q-Network (DQN) en Deep Deterministic Policy
+Gradient (DDPG). Deze drie zijn gekozen omdat ze samen een goed beeld geven van
+eenvoudige tot meer ingewikkelde methoden binnen reinforcement learning. We
+testen deze algorithme op het spel snake.
 
-\chapter{Analyse en Resultaten}
+\section{Technische Uitvoering}
+We hebben alle testen uitgevoerd met Python 3.8 \cite{python_docs} als
+programmeertaal. Voor het maken van de neurale netwerken gebruikten we PyTorch
+\cite{pytorch_docs}. De spelomgevingen hebben we gemaakt met Pygame
+\cite{pygame}. Voor het verwerken van getallen en het maken van grafieken
+gebruikten we NumPy \cite{numpy_docs} en Matplotlib \cite{matplotlib_docs}.
 
-\section{Snake}
+\section{Verzamelen van Gegevens}
+We hebben verschillende metingen gedaan om te zien hoe goed de algoritmes
+werken. We keken naar de gemiddelde score per speelronde, hoe lang het duurde
+voordat het algoritme het spel onder de knie had, en hoe stabiel de prestaties
+waren. Deze gegevens verzamelden we over 10.000 speelrondes.Om zeker te zijn
+van onze resultaten hebben we elk experiment vijf keer uitgevoerd.
 
-\includegraphics[width=1\textwidth]{assets/Q-LearningGrafiek.png}
+\section{Optimalisatie van Instellingen}
+Voor elk algoritme hebben we systematisch gezocht naar de beste
+hyperparameters. We testten verschillende waardes voor de leersnelheid, hoe
+belangrijk toekomstige beloningen zijn, en hoe vaak het algoritme nieuwe dingen
+moest proberen. Deze instellingen hebben we voor elk spel apart bepaald.
 
-\chapter{Conclusie}
+\chapter{Logboek}
+\small
+\section*{Groepsactiviteiten}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats} & \textbf{Activiteiten + Resultaten}                                                                                                                                                                                                                                                                                   \\
+    \hline
+    02-07-2024     & 3 uur         & School          & Onderzoek over AI, we leerden alle drie over reinforced learning, wat die inhield en wat we interessant vonden. PWS presentatie, deze heeft goed geholpen om te begrijpen wat we moeten doen. De bronnenlijst is gemaakt, deze duurt het langst. Hier zijn de bronnen ingezet waarvan wij denken dat ze handig zijn. \\
+    \hline
+    28/08/2024     & 1 uur         & School          & Overleg tijdens les                                                                                                                                                                                                                                                                                                  \\
+    \hline
+    04/09/2024     & 1 uur         & School          & Overleg tijdens les en taakverdeling gedeeltelijk geregeld                                                                                                                                                                                                                                                           \\
+    \hline
+    11/09/2024     & 1 uur         & School          & Inlezen onderwerp                                                                                                                                                                                                                                                                                                    \\
+    \hline
+    25/09/2024     & 1 uur         & School          & Overleg indeling schrijven                                                                                                                                                                                                                                                                                           \\
+    \hline
+    04/09/2024     & 1 uur 15 min  & School          & Inlezen onderwerp. Onderling plan van aanpak besproken                                                                                                                                                                                                                                                               \\
+    \hline
+    11/09/2024     & 1 uur         & School          & Taken en deadlines besproken. Taken verdeeld voor volgende pws uur. Verder ingelezen over onderwerp                                                                                                                                                                                                                  \\
+    \hline
+    02/10/2024     & 1 uur         & School          & Bronnenlijst overleg                                                                                                                                                                                                                                                                                                 \\
+    \hline
+    09/10/2024     & 1 uur         & School          & Voorwoord maken                                                                                                                                                                                                                                                                                                      \\
+    \hline
+    16/10/2024     & 1 uur         & School          & Onderzoek AI                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    23/10/2024     & 1 uur         & School          & Onderzoek RL                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    06/11/2024     & 1 uur         & School          & Inlezen                                                                                                                                                                                                                                                                                                              \\
+    \hline
+    13/11/2024     & 1 uur         & School          & Verder inlezen                                                                                                                                                                                                                                                                                                       \\
+    \hline
+    20/11/2024     & 1 uur         & School          & Layout maken                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    27/11/2024     & 1 uur         & School          & Meer samenvatten                                                                                                                                                                                                                                                                                                     \\
+    \hline
+    04/12/2024     & 1 uur         & School          & Overleg                                                                                                                                                                                                                                                                                                              \\
+    \hline
+\end{longtable}
+\newpage
+\section*{Matthijs}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                                                                                                                                                                                                                                  \\
+    \hline
+    06-07-2024     & 1 uur         & Thuis                   & Eerste Stanfords CS234 college bekeken uit de winter van 2019 \cite{stanford_cs234}. Het kopje Definitie van Reinforcement Learning geschreven. (Later besloten dit in de inleiding te zetten)                                                                      \\
+    \hline
+    29/07/2024     & 3 uur         & Thuis                   & Snake spel geschreven in python en github aangemaakt en begonnen met Q-learning te implementeren \cite{snake_game} \cite{python_docs}                                                                                                                               \\
+    \hline
+    30/07/2024     & 2 uur         & Thuis                   & Q-learning geïmplementeerd. Maar de agent leert nog slecht.                                                                                                                                                                                                         \\
+    \hline
+    31/07/2024     & 3 uur         & Thuis                   & Q-learning hyperparameters uitgetest en optimale gevonden.                                                                                                                                                                                                          \\
+    \hline
+    03/08/2024     & 2 uur         & Thuis                   & Kennis opgedaan over machine learning en andere types dan reinforcement learning en hoe het verschilt van super- en unsupervised learning \cite{ml_types}                                                                                                           \\
+    \hline
+    05/08/2024     & 3 uur         & Thuis                   & Begin gemaakt een theoretisch kader \cite{spinning_up}                                                                                                                                                                                                              \\
+    \hline
+    06/08/2024     & 2 uur         & Thuis                   & Theoretisch kader afgemaakt.                                                                                                                                                                                                                                        \\
+    \hline
+    08/08/2024     & 2 uur         & Thuis                   & LaTeX geleerd en eerste layout gemaakt van het PWS met alle kopjes.                                                                                                                                                                                                 \\
+    \hline
+    1/09/2024      & 3 uur         & Thuis                   & Voorstel gemaakt                                                                                                                                                                                                                                                    \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord gemaakt, overleg over de aanpak en het algemene idee.                                                                                                                                                                                                     \\
+    \hline
+    20/09/2024     & 2 uur         & Thuis                   & Het Q-learning algoritme tijdsefficiënter gemaakt met numpy en een bug gefixt in snake zodat er nu geen appel kan spawnen in de slang zelf \cite{numpy_docs}                                                                                                        \\
+    \hline
+    27/09/2024     & 4 uur         & Thuis                   & Script gemaakt voor resultaten van Q-learning in grafiek (5000 woorden, gebruik van Matplotlib). Hyperparameters uitgetest en optimale gevonden. Elke training kostte ongeveer 15 minuten. (gemiddeld score van beste waardes was 60 appels) \cite{matplotlib_docs} \\
+    \hline
+    24/10/2024     & 4 uur         & Thuis                   & Script gemaakt voor DQN algoritme met PyTorch \cite{pytorch_docs} \cite{pytorch_rl}                                                                                                                                                                                 \\
+    \hline
+    17/11/2024     & 3 uur         & Thuis                   & Hoofdstuk Kenmerken van specifieke algoritmes begonnen. Introductie geschreven en DQN Algoritme vertaald \cite{delayed_rewards} \cite{multi_agent_rl}                                                                                                               \\
+    \hline
+    24/11/2024     & 3 uur         & Thuis                   & Sectie Deep Q-Network begonnen. Algoritme vertaald, proces beschreven \cite{dqn_nature}                                                                                                                                                                             \\
+    \hline
+    28/11/2024     & 1 uur         & Thuis                   & Flowchart van Deep Q-Network algoritme gemaakt en verder geschreven                                                                                                                                                                                                 \\
+    \hline
+    29/11/2024     & 3 uur         & Thuis                   & Kopje Neuraal Netwerk geschreven en diagram van neuraal netwerk in DQN gemaakt \cite{nn_math}                                                                                                                                                                       \\
+    \hline
+    31/11/2024     & 3 uur         & Thuis                   & Onderzoek over Deep Deterministic Policy Gradient en algoritme vertaald \cite{ddpg} \cite{silver_dpg}                                                                                                                                                               \\
+    \hline
+    2/12/2024      & 2 uur         & Thuis                   & Proces van DDPG geschreven.                                                                                                                                                                                                                                         \\
+    \hline
+    3/12/2024      & 2 uur         & Thuis                   & Actor-Critic model geschreven en figuur Flowchart van Actor Critic model gemaakt en Toepassingen geschreven.                                                                                                                                                        \\
+    \hline
+    4/12/2024      & 2 uur         & Thuis                   & Onderzoeksmethoden geschreven.                                                                                                                                                                                                                                      \\
+    \hline
+    5/12/2024      & 1 uur         & Thuis                   & Puntes op de i gezet.                                                                                                                                                                                                                                               \\
+    \hline
+\end{longtable}
 
-\chapter{Discussie}
-
-\chapter*{Appendix}
-\addcontentsline{toc}{chapter}{Appendix}
+\section*{Thom}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                             \\
+    \hline
+    03/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{wiki_rl}                      \\
+    \hline
+    04/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{scribbr_rl}                   \\
+    \hline
+    05/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{geeksforgeeks_rl}             \\
+    \hline
+    06/09/2024     & 2 uur         & Thuis                   & Inlezen over het onderwerp \cite{oracle_rl}                    \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord maken, overleg over het idee                         \\
+    \hline
+    26/09/2024     & 2,5 uur       & Thuis                   & Layout maken van het verslag, verder inlezen over onderwerp    \\
+    \hline
+    01/10/2024     & 3 uur         & Thuis                   & Matthijs' theoretisch kader verbeterd                          \\
+    \hline
+    02/10/2024     & 3 uur         & Thuis                   & Uitleg theoretisch kader                                       \\
+    \hline
+    04/10/2024     & 3 uur         & Thuis                   & Herschrijven theoretisch kader                                 \\
+    \hline
+    06/10/2024     & 2 uur         & Thuis                   & Antwoorden deelvraag 1                                         \\
+    \hline
+    07/10/2024     & 3 uur         & Bij pepijn              & Inleiding herschreven. Plan van aanpak gemaakt.                \\
+    \hline
+    08/11/2024     & 3 uur         & Thuis                   & Herschrijven van tekst / nalezen versie voor controle moment 2 \\
+    \hline
+    03/12/2024     & 3 uur         & Thuis                   & Afmaken plaatjes maken                                         \\
+    \hline
+    04/12/2024     & 2 uur         & Thuis                   & Afmaken PWS voor controlemoment                                \\
+    \hline
+    05/12/2024     & 2 uur         & Thuis                   & Puntjes op i zetten                                            \\
+    \hline
+\end{longtable}
+\newpage
+\section*{Pepijn}
+\begin{longtable}{|p{0.15\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.55\textwidth}|}
+    \hline
+    \textbf{Datum} & \textbf{Tijd} & \textbf{Plaats}         & \textbf{Activiteiten + Resultaten}                                                                                         \\
+    \hline
+    30/08/2024     & 2 uur         & Thuis                   & Ingelezen onderwerp \cite{ai_basics} \cite{datacamp_ai}                                                                    \\
+    \hline
+    1/09/2024      & 1 uur         & Thuis                   & Onderzoeksplan en -overzicht gemaakt(van het voorstel)                                                                     \\
+    \hline
+    03/09/2024     & 3 uur         & Thuis                   & Ingelezen over het onderwerp \cite{analytics_vidhya_rl} \cite{rl_guide}                                                    \\
+    \hline
+    04/09/2024     & 1 uur         & Thuis                   & Inlezen over q-learning \cite{q_learning_tutorial}                                                                         \\
+    \hline
+    07/09/2024     & 3,5 uur       & Thuis                   & Inlezen over het onderwerp en Deep q learning \cite{dqn_guide} \cite{sutton_barto}                                         \\
+    \hline
+    9/09/2024      & 3 uur         & Thuis                   & Ingelezen over het onderwerp \cite{dqn_paper}                                                                              \\
+    \hline
+    10/09/2024     & 3 uur         & Thuis, online met groep & Voorwoord gemaakt, overleg over de aanpak en het algemene idee.                                                            \\
+    \hline
+    07/10/2024     & 3 uur         & Thuis                   & Inleiding herschreven en lay-out van andere delen van het pws verbeterd. Plan van aanpak gemaakt voor de rest van het pws. \\
+    \hline
+    26/09/2024     & 3 uur         & Thuis                   & Inlezen over speleigenschappen \cite{pmlr-v119-cobbe20a} en begonnnen met het schrijven van deelvraag 2.                   \\
+    \hline
+    29/10/2024     & 3 uur         & Thuis                   & Verder gewerkt aan deelvraag 2 en bijna volledig uitgewerkt                                                                \\
+    \hline
+    30/10/2024     & 3 uur         & Thuis                   & Deelvraag 2 afgeschreven                                                                                                   \\
+    \hline
+    1/11/2024      & 2 uur         & Thuis                   & Alles nagelezen wat tot nu toe was gemaakt en de lay-out erg verbeterd.                                                    \\
+    \hline
+    08/11/2024     & 3 uur         & bij Thom                & Herschrijven van tekst /nalezen versie voor controle moment 2                                                              \\
+    \hline
+    26/11/2024     & 0,5 uur       & Thuis                   & Inleiding anders verwoord en fouten uit het pws gehaald                                                                    \\
+    \hline
+    03/12/2024     & 3 uur         & Thuis                   & Begonnen met deelvraag 3                                                                                                   \\
+    \hline
+    04/12/2024     & 2 uur         & Thuis                   & Deelvraag 3 afgemaakt en verbeterd                                                                                         \\
+    \hline
+    05/12/2024     & 3 uur         & Thuis                   & PWS nagelezen spelling verbeterd bronnotatie geregeld en puntjes op de i gezet.                                            \\
+    \hline
+\end{longtable}
 
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliografie}
