@@ -66,4 +66,4 @@
 \contentsline {section}{\numberline {6.2}Verzamelen van Gegevens}{27}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Optimalisatie van Instellingen}{27}{section.6.3}%
 \contentsline {chapter}{\numberline {7}Logboek}{28}{chapter.7}%
-\contentsline {chapter}{Bibliografie}{34}{chapter*.9}%
+\contentsline {chapter}{Bibliografie}{33}{chapter*.9}%

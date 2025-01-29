@@ -1,12 +1,11 @@
-\documentclass[a4paper,11pt]{report}-
+\documentclass[a4paper,11pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[dutch]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{lmodern}
 \usepackage{amsmath, amssymb}
-\usepackage{pdfpages} 
-
+\usepackage{pdfpages}
 \usepackage[T1]{fontenc}
 \usepackage{longtable}
 \usepackage{xcolor}
@@ -20,16 +19,17 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,shapes.geometric, arrows, positioning}
 \usepackage[hidelinks]{hyperref}
-\usepackage{titlesec} 
+\usepackage{titlesec}
 \usepackage{algorithm}
 \usepackage{amsfonts}
 \usepackage{caption}
 \usepackage{mathtools}
+\usepackage{csquotes} % Aanbevolen door biblatex
 \usepackage{algpseudocode}
 \usepackage{listings}
 \usepackage[
-backend=biber,
-style=nature,
+    backend=biber,
+    style=apa,
 ]{biblatex}
 \addbibresource{references.bib}
 
@@ -48,9 +48,9 @@ style=nature,
 }
 \pagenumbering{Roman}  % Romeinse nummering
 
-\geometry{a4paper, top=3.5cm, bottom=3.5cm, left=2.5cm, right=2.5cm} 
+\geometry{a4paper, top=3.5cm, bottom=3.5cm, left=2.5cm, right=2.5cm}
 
-\begin{document} 
+\begin{document}
 
 \includepdf[pages=1]{cover.pdf}
 

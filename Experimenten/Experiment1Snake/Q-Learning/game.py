@@ -229,7 +229,7 @@ def train(numGames):
             
             
 start_time = time.time()            
-train(5000)    
+train(10000)    
 print(f"Time elapsed: {(time.time() - start_time):.2f} seconds")
       
 with open('games_scores.csv', 'w', newline='') as csvfile:
