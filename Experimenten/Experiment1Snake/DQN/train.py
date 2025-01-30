@@ -20,8 +20,8 @@ GAMMA = 0.99
 LR = 0.001
 REPLAY_CAPACITY = 10000
 EPSILON_START = 0.9
-EPSILON_END = 0.05
-EPSILON_DECAY = 0.995
+EPSILON_END = 0.00
+EPSILON_DECAY = 0.997
 TARGET_UPDATE = 10
 
 class SnakeEnv:
@@ -192,7 +192,7 @@ if __name__ == "__main__":
     agent = DQNAgent(INPUT_SIZE, HIDDEN_SIZE, OUTPUT_SIZE)
 
     scores = []
-    for episode in range(50):
+    for episode in range(1000):
         state = env.reset()
         total_reward = 0
         done = False
@@ -212,7 +212,8 @@ if __name__ == "__main__":
         if episode % TARGET_UPDATE == 0:
             agent.update_target()
         
-        print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Epsilon: {agent.epsilon:.2f} | Loss: {loss:.4f} | Steps: {steps}")
-        save_results_to_csv([episode, total_reward, agent.epsilon, loss, steps])
+        print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Epsilon: {agent.epsilon:.2f} | Loss: {loss:.4f} | Steps: {steps}" if loss is not None else 
+              f"Episode {episode:3d} | Score: {total_reward:6.1f} | Epsilon: {agent.epsilon:.2f} | Loss: N/A | Steps: {steps}")
+        save_results_to_csv([episode, total_reward, agent.epsilon, loss if loss is not None else "N/A", steps])
         
     torch.save(agent.policy_net.state_dict(), "dqn_snake.pth")
