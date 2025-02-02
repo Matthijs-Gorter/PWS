@@ -190,6 +190,14 @@ def save_results_to_csv(results, filename):
             writer.writerow(["Episode", "Score", "Epsilon", "Loss", "Steps"])
         writer.writerow(results)
 
+def save_hyperparameters_to_csv(trial, hyperparams, filename="trial_parameters.csv"):
+    file_exists = os.path.isfile(filename)
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(["Trial", "Learning Rate", "Gamma", "Hidden Size", "Batch Size", "Replay Capacity", "Epsilon Decay", "Target Update"])
+        writer.writerow([trial] + list(hyperparams.values()))
+
 def sample_hyperparameters():
     params = {}
     params['lr'] = 10 ** np.random.uniform(np.log10(HYPERPARAM_RANGES['lr'][0]), np.log10(HYPERPARAM_RANGES['lr'][1]))
@@ -204,9 +212,11 @@ def sample_hyperparameters():
     return params
 
 if __name__ == "__main__":
-    num_trials = 50
+    num_trials = 10
     for trial in range(num_trials):
         hyperparams = sample_hyperparameters()
+        save_hyperparameters_to_csv(trial, hyperparams)
+        
         filename = f"trial_{trial}_results.csv"
         
         env = SnakeEnv(GRID_SIZE)
@@ -242,8 +252,7 @@ if __name__ == "__main__":
                 if current_loss is not None:
                     loss = current_loss
                 steps += 1
-                if steps >= 1000:
-                    break
+                if steps >= 1000: break
             
             scores.append(total_reward)
             

@@ -6,7 +6,7 @@ from train import DQNAgent, SnakeEnv, INPUT_SIZE, HIDDEN_SIZE, OUTPUT_SIZE, GRID
 
 # Pygame parameters
 CELL_SIZE = 30
-GRID_SIZE = 10
+GRID_SIZE = 20
 WIDTH, HEIGHT = GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE 
 
 # Colors
@@ -49,7 +49,7 @@ while not done:
     pygame.draw.rect(screen, RED, (env.food[1] * CELL_SIZE, env.food[0] * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
     pygame.display.flip()
-    clock.tick(5)  # Control game speed
+    clock.tick(25)  # Control game speed
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

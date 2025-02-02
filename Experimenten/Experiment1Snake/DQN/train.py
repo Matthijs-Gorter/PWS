@@ -5,27 +5,28 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import deque
+
 import csv
 import os
 
 # Omgeving configuratie
-GRID_SIZE = 10
+GRID_SIZE = 20
 INPUT_SIZE = 9   # Richting (4) + voedsel positie (2) + gevaren (3)
-HIDDEN_SIZE = 128
+HIDDEN_SIZE = 256
 OUTPUT_SIZE = 3  # Acties: links, rechtdoor, rechts
 
 # DQN hyperparameters
-BATCH_SIZE = 64
+BATCH_SIZE = 128
 GAMMA = 0.99
-LR = 0.001
-REPLAY_CAPACITY = 10000
-EPSILON_START = 0.9
-EPSILON_END = 0.00
-EPSILON_DECAY = 0.997
-TARGET_UPDATE = 10
+LR = 0.0004
+REPLAY_CAPACITY = 100000
+EPSILON_START = 1
+EPSILON_END = 0.05
+EPSILON_DECAY = 0.999
+TARGET_UPDATE = 100
 
 class SnakeEnv:
-    def __init__(self, grid_size=10):
+    def __init__(self, grid_size=20):
         self.grid_size = grid_size
         self.reset()
 
@@ -34,6 +35,7 @@ class SnakeEnv:
         self.direction = (0, 1)  # Start richting: rechts
         self.food = self._spawn_food()
         self.done = False
+        self.apples_eaten = 0
         return self.get_state()
 
     def _spawn_food(self):
@@ -89,7 +91,7 @@ class SnakeEnv:
             new_head[1] < 0 or new_head[1] >= self.grid_size or
             new_head in self.snake):
             self.done = True
-            reward = -10
+            reward = -50
             return self.get_state(), reward, self.done, {}
         
         # Voedsel verzamelen
@@ -97,9 +99,10 @@ class SnakeEnv:
         if new_head == self.food:
             self.food = self._spawn_food()
             reward = 10
+            self.apples_eaten += 1
         else:
             self.snake.pop()
-            reward = -0.1
+            reward = 0
         
         self.done = False
         return self.get_state(), reward, self.done, {}
@@ -171,8 +174,6 @@ class DQNAgent:
         loss.backward()
         self.optimizer.step()
         
-        # Epsilon decay
-        self.epsilon = max(EPSILON_END, self.epsilon * EPSILON_DECAY)
         return loss.item()
     
     def update_target(self):
@@ -183,7 +184,7 @@ def save_results_to_csv(results, filename="results.csv"):
     with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         if not file_exists:
-            writer.writerow(["Episode", "Score", "Epsilon", "Loss", "Steps"])
+            writer.writerow(["Episode", "Score", "Epsilon", "Loss", "Steps", "ApplesEaten"])
         writer.writerow(results)
 
 if __name__ == "__main__":
@@ -192,7 +193,7 @@ if __name__ == "__main__":
     agent = DQNAgent(INPUT_SIZE, HIDDEN_SIZE, OUTPUT_SIZE)
 
     scores = []
-    for episode in range(1000):
+    for episode in range(3000):
         state = env.reset()
         total_reward = 0
         done = False
@@ -211,9 +212,14 @@ if __name__ == "__main__":
         
         if episode % TARGET_UPDATE == 0:
             agent.update_target()
+            
+        apples_eaten = env.apples_eaten
+
         
-        print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Epsilon: {agent.epsilon:.2f} | Loss: {loss:.4f} | Steps: {steps}" if loss is not None else 
-              f"Episode {episode:3d} | Score: {total_reward:6.1f} | Epsilon: {agent.epsilon:.2f} | Loss: N/A | Steps: {steps}")
-        save_results_to_csv([episode, total_reward, agent.epsilon, loss if loss is not None else "N/A", steps])
+        print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Apples: {apples_eaten} | Epsilon: {agent.epsilon:.2f} | Loss: {loss:.4f} | Steps: {steps}" if loss is not None else 
+              f"Episode {episode:3d} | Score: {total_reward:6.1f} | Apples: {apples_eaten} | Epsilon: {agent.epsilon:.2f} | Loss: N/A | Steps: {steps}")
+        save_results_to_csv([episode, total_reward, agent.epsilon, loss if loss is not None else "N/A", steps, apples_eaten])
+        agent.epsilon = max(EPSILON_END, agent.epsilon * EPSILON_DECAY)
+        
         
     torch.save(agent.policy_net.state_dict(), "dqn_snake.pth")
