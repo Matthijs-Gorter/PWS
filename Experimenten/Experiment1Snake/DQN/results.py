@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn
 import numpy as np
+from scipy.stats import kendalltau
 
 # Data inladen
 df = pd.read_csv('results.csv')
@@ -32,9 +33,9 @@ ax1.tick_params(axis='y', labelcolor=color)
 
 ax2 = ax1.twinx()
 color = 'tab:blue'
-ax2.set_ylabel('Score', color=color)
-ax2.plot(df['Episode'], df['Score'], color=color, alpha=0.3)
-ax2.plot(df['Episode'], df['Score'].rolling(window=10).mean(), color=color)
+ax2.set_ylabel('ApplesEaten', color=color)
+ax2.plot(df['Episode'], df['ApplesEaten'], color=color, alpha=0.3)
+ax2.plot(df['Episode'], df['ApplesEaten'].rolling(window=50).mean(), color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 
 plt.title('Exploration-Exploitation Tradeoff (Epsilon vs Score)')
@@ -52,17 +53,28 @@ plt.title('DQN Training Loss Development')
 plt.grid(True)
 plt.tight_layout()
 
-# 4. Samengestelde visualisatie
-fig, axs = plt.subplots(4, 1, sharex=True)
-metrics = ['Score', 'Epsilon', 'Loss', 'Steps']
-colors = ['blue', 'red', 'green', 'purple']
+# 4. Apples verzameld over tijd
+plt.figure()
+plt.plot(df['Episode'], df['ApplesEaten'], 'g-', alpha=0.3, label='Raw Apples')
+plt.plot(df['Episode'], df['ApplesEaten'].rolling(window=10).mean(), 'm-', label='Moving Average (window=10)')
+plt.xlabel('Episode')
+plt.ylabel('Apples Collected')
+plt.title('Apples Collected Over Time')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+
+# 5. Samengestelde visualisatie met Apples
+fig, axs = plt.subplots(5, 1, sharex=True, figsize=(15, 12))  # Adjusted for 5 subplots
+metrics = ['Score', 'Epsilon', 'Loss', 'Steps', 'ApplesEaten']
+colors = ['blue', 'red', 'green', 'purple', 'orange']
 
 for i, metric in enumerate(metrics):
     if metric == 'Loss':
         axs[i].plot(loss_df['Episode'], loss_df[metric], color=colors[i])
     else:
         axs[i].plot(df['Episode'], df[metric], color=colors[i], alpha=0.3)
-        if metric == 'Score':
+        if metric == 'Score':  # Voeg moving average alleen toe voor Score
             axs[i].plot(df['Episode'], df[metric].rolling(window=10).mean(), color=colors[i])
     axs[i].set_ylabel(metric)
     axs[i].grid(True)
@@ -74,14 +86,16 @@ plt.tight_layout()
 # Basis statistieken
 print(df.describe())
 
-# Correlatie matrix
+# Correlatie matrix inclusief Apples
 print(df.corr())
 
-# Performancetrend test (Mann-Kendall)
-from scipy.stats import kendalltau
-tau, p_value = kendalltau(df['Episode'], df['Score'])
-print(f"Kendall's tau: {tau:.3f}, p-value: {p_value:.4f}")
+# Performancetrend test (Mann-Kendall) voor Score en Apples
+tau_score, p_value_score = kendalltau(df['Episode'], df['Score'])
+tau_apples, p_value_apples = kendalltau(df['Episode'], df['ApplesEaten'])
+print(f"Kendall's tau voor Score: {tau_score:.3f}, p-waarde: {p_value_score:.4f}")
+print(f"Kendall's tau voor Apples: {tau_apples:.3f}, p-waarde: {p_value_apples:.4f}")
 
+# Opslaan van alle plots
 plt.savefig('dqn_analysis.png', dpi=300, bbox_inches='tight')
 
 # Toon alle plots

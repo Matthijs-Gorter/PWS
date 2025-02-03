@@ -1,2 +1,0 @@
-n_estimators,min_samples_split,min_samples_leaf,max_depth,bootstrap,mean_accuracy,std_accuracy
-200,2,1,30,False,0.9333333333333333,0.049999999999999996
