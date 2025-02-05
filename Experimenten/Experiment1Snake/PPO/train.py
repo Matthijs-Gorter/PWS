@@ -15,7 +15,7 @@ HIDDEN_SIZE = 256
 OUTPUT_SIZE = 3
 
 # PPO hyperparameters
-LR = 3e-4
+LR = 0.0001
 GAMMA = 0.99
 GAE_LAMBDA = 0.95
 PPO_EPSILON = 0.2
@@ -193,19 +193,26 @@ class PPOAgent:
     def update(self):
         states, actions, old_log_probs, old_values, rewards, dones = self.buffer.prepare_batch()
         
+        # Initialize metrics tracking
+        total_loss = 0.0
+        total_entropy = 0.0
+        total_value_loss = 0.0
+        total_policy_loss = 0.0
+        num_minibatches = 0
+                
         # Bereken advantages en returns
         advantages = self.compute_advantages(rewards, old_values, dones)
         returns = advantages + old_values
         advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
         
-        # Convert naar tensors
+        # Convert to tensors
         states = torch.FloatTensor(states).to(self.device)
         actions = torch.LongTensor(actions).to(self.device)
         old_log_probs = torch.FloatTensor(old_log_probs).to(self.device)
         returns = torch.FloatTensor(returns).to(self.device)
         advantages = torch.FloatTensor(advantages).to(self.device)
-        
-        # Voer meerdere PPO epochs uit
+
+        # Training loop
         for _ in range(PPO_EPOCHS):
             indices = np.arange(len(states))
             np.random.shuffle(indices)
@@ -218,6 +225,8 @@ class PPOAgent:
                 logits, values = self.model(states[idx])
                 dist = torch.distributions.Categorical(logits=logits)
                 new_log_probs = dist.log_prob(actions[idx])
+                                
+                # Calculate entropy
                 entropy = dist.entropy().mean()
                 
                 # Ratio berekenen
@@ -226,22 +235,31 @@ class PPOAgent:
                 # Policy loss
                 surr1 = ratio * advantages[idx]
                 surr2 = torch.clamp(ratio, 1-PPO_EPSILON, 1+PPO_EPSILON) * advantages[idx]
-                policy_loss = -torch.min(surr1, surr2).mean()
-                
-                # Value loss
-                value_loss = self.mse_loss(values, returns[idx].unsqueeze(-1))
 
                 
-                # Totale loss
+                # Calculate losses
+                policy_loss = -torch.min(surr1, surr2).mean()
+                value_loss = self.mse_loss(values, returns[idx].unsqueeze(-1))
                 loss = policy_loss + CRITIC_DISCOUNT * value_loss - ENTROPY_BETA * entropy
                 
+                # Accumulate metrics
+                total_loss += loss.item()
+                total_entropy += entropy.item()
+                total_value_loss += value_loss.item()
+                total_policy_loss += policy_loss.item()
+                num_minibatches += 1
+
                 # Backpropagation
                 self.optimizer.zero_grad()
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), MAX_GRAD_NORM)
                 self.optimizer.step()
-        
+
+        # Calculate averages
+        avg_loss = total_loss / num_minibatches
+        avg_entropy = total_entropy / num_minibatches
         self.buffer.clear()
+        return avg_loss, avg_entropy
 
 def save_results_to_csv(results, filename="ppo_results.csv"):
     file_exists = os.path.isfile(filename)
@@ -264,6 +282,7 @@ if __name__ == "__main__":
         done = False
         
         while not done:
+            # Collect trajectory
             for _ in range(TRAJECTORY_LENGTH):
                 if done:
                     break
@@ -275,13 +294,15 @@ if __name__ == "__main__":
                 
                 state = next_state
                 episode_reward += reward
-                total_steps += 1
-            agent.update()
+            
+            # Update policy and get metrics
+            avg_loss, avg_entropy = agent.update()
+            total_steps += 1
         
-        # Logging en opslaan
+        # Logging with actual metrics
         apples_eaten = env.apples_eaten
-        print(f"Episode {episode} | Total Reward: {episode_reward} | Apples: {apples_eaten}")
-        save_results_to_csv([episode, episode_reward, apples_eaten, 0, 0])  # Loss/entropy kan worden toegevoegd
+        print(f"Episode {episode} | Reward: {episode_reward} | Apples: {apples_eaten} | Loss: {avg_loss:.2f} | Entropy: {avg_entropy:.2f}")
+        save_results_to_csv([episode, episode_reward, apples_eaten, avg_loss, avg_entropy])
         
         episode += 1
         if episode % 100 == 0:
