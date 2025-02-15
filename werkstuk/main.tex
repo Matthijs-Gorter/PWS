@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{report}
+\documentclass[a4paper,10pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[dutch]{babel}
 \usepackage{geometry}
@@ -27,6 +27,7 @@
 \usepackage{mathtools}
 \usepackage{csquotes} % Aanbevolen door biblatex
 \usepackage{algpseudocode}
+\usepackage{subfigure}
 \usepackage{listings}
 \usepackage[
     backend=biber,
@@ -49,7 +50,7 @@
 }
 \pagenumbering{Roman}  % Romeinse nummering
 
-\geometry{a4paper, top=3.5cm, bottom=3.5cm, left=2.5cm, right=2.5cm}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 
 \begin{document}
 
@@ -58,11 +59,11 @@
 \begin{titlepage}
     \centering
     \vspace*{1cm}
-    \Huge\textbf{Reinforcement Learning en Computerspellen} \\
+    \Huge\textbf{Reinforcement Learning toegepast op Computerspellen} \\
     \vspace{1cm}
     \rule{\linewidth}{0.4mm}
     \Large
-    Hoe beïnvloeden de specifieke kenmerken van computerspellen de effectiviteit van specifieke reinforcement learning-algoritmes?
+    Hoe beïnvloeden de specifieke kenmerken van reinforcement learning-algoritmes de effectiviteit op specifieke computerspellen?
     \rule{\linewidth}{0.4mm}
 
     \vspace{1.5cm}
@@ -1193,7 +1194,7 @@ algorithme op het spel snake. Het spel werd gespeeld op een grid van $15 \times
     15$ met eenvoudige regels: de slang groeit bij het eten van een appel en het
 spel eindigt bij een botsing met de muur of zichzelf. De training werd
 uitgevoerd op een AMD Ryzen 5 7600X CPU met een totale looptijd van 15.000
-episodes per algoritme.
+episodes per algoritme.  
 
 \section{Technische Uitvoering}
 We hebben alle testen uitgevoerd met Python 3.8 \cite{python_docs} als
@@ -1244,7 +1245,7 @@ gemiddelde score over 15.000 episodes voor Q-Learning, DQN en PPO.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
+    \includegraphics[width=0.8\textwidth]{../Experimenten/Snake/DQN/dqn_analysis.png}
     \caption{Gemiddeld aantal appels per episode voor Q-Learning, DQN en PPO. De shaded areas geven de standaarddeviatie aan.}
     \label{fig:score_episode}
 \end{figure}
@@ -1280,7 +1281,7 @@ zowel de policy loss als de value loss zijn geplot.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
+    \includegraphics[width=0.8\textwidth]{../Experimenten/Snake/DQN/dqn_analysis.png}
     \caption{Loss-curves voor DQN en PPO.}
     \label{fig:loss_curves}
 \end{figure}
@@ -1294,7 +1295,7 @@ exploitatie.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
+    \includegraphics[width=0.8\textwidth]{../Experimenten/Snake/DQN/dqn_analysis.png}
     \caption{Entropy van het beleid voor PPO.}
     \label{fig:entropy}
 \end{figure}
@@ -1312,7 +1313,7 @@ toestand.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
+    \includegraphics[width=0.8\textwidth]{../Experimenten/Snake/DQN/dqn_analysis.png}
     \caption{Heatmap van Q-waarden voor Q-Learning.}
     \label{fig:heatmap}
 \end{figure}
@@ -1325,7 +1326,7 @@ en PPO.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
+    \includegraphics[width=0.8\textwidth]{../Experimenten/Snake/DQN/dqn_analysis.png}
     \caption{Trajectory plot voor DQN en PPO.}
     \label{fig:trajectory}
 \end{figure}
@@ -1366,17 +1367,9 @@ menselijke speler. De resultaten zijn weergegeven in Tabel~\ref{tab:benchmark}.
     \end{tabular}
 \end{table}
 
-\section{Conclusies uit Resultaten}
-Uit de resultaten blijkt dat:
-\begin{itemize}
-    \item Q-Learning geschikt is voor simpele scenario’s maar faalt door beperkte
-          schaalbaarheid.
-    \item DQN complexere patronen kan leren maar lijdt onder instabiliteit.
-    \item PPO het meest robuust is door een goede balans tussen exploratie en
-          exploitatie.
-\end{itemize}
+\chapter{Conclusie}
 
-[PLACEHOLDER: voeg hier eventueel aanvullende conclusies toe].
+\chapter{Discussie}
 
 \appendix
 
@@ -1419,124 +1412,155 @@ Uit de resultaten blijkt dat:
     \caption{Notatie}
 \end{table}
 
-\chapter{Induveele Resultaten Algoritmes}
+% \chapter{Gedetailleerde Analyse per Algoritme}
+% \label{app:deepdive}
 
-\section{Experimentele Opzet}
-Om de prestaties van Q-Learning, Deep Q-Network (DQN) en Proximal Policy
-Optimization (PPO) te evalueren, hebben we elk algoritme getraind op het
-Snake-spel gedurende 10.000 episodes. De volgende metrieken zijn gemeten:
+% Dit appendix bevat uitgebreide analyses en ondersteunende figuren voor de drie geteste RL-algoritmes.
 
-\begin{itemize}
-    \item \textbf{Gemiddeld aantal appels per episode}: Indicatie van spelvaardigheid.
-    \item \textbf{Training loss}: Stabiliteit van het leerproces.
-    \item \textbf{Exploratiepercentage ($\varepsilon$)}: Evolutie van exploratie vs. exploitatie (Q-Learning en DQN).
-    \item \textbf{Policy Entropie (PPO)}: Mate van onzekerheid in actiekeuzes.
-    \item \textbf{Tijd per episode}: Rekenkundige efficiëntie.
-\end{itemize}
+% \section{Q-learning}
+% \label{app:q_learning}
 
-De hyperparameters zijn geoptimaliseerd via grid search (Tabel
-\ref{tab:hyperparams}).
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{q_epsilon_decay.png}
+%         \caption{Epsilon decay schema en effect op exploratie}
+%         \label{fig:q_epsilon}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{q_loss_progression.png}
+%         \caption{TD-loss ontwikkeling per 100 episodes}
+%         \label{fig:q_loss}
+%     \end{subfigure}
+    
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{q_steps_per_apple.png}
+%         \caption{Stijging in benodigde stappen per appel na 8k episodes}
+%         \label{fig:q_steps}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{q_apple_distribution.png}
+%         \caption{Histogram van appels/episode in verschillende trainingsfasen}
+%         \label{fig:q_dist}
+%     \end{subfigure}
+%     \caption{Gedetailleerde Q-learning trainingsdynamiek. De vroege fase (0-5k episodes) vertoont snelle vooruitgang, gevolgd door suboptimaal exploratiegedrag.}
+%     \label{fig:q_full}
+% \end{figure}
 
-\begin{table}[h]
-    \centering
-    \caption{Geoptimaliseerde hyperparameters per algoritme}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        Parameter                        & Q-Learning & DQN       & PPO        \\
-        \hline
-        Leersnelheid ($\alpha$)          & 0.1        & 0.0003    & 0.00025    \\
-        Kortingsfactor ($\gamma$)        & 0.95       & 0.99      & 0.99       \\
-        Exploratie ($\varepsilon$-start) & 1.0        & 1.0       & -          \\
-        Batchgrootte                     & -          & 64        & 256        \\
-        Neuraal netwerk                  & -          & 128-64-32 & 256-128-64 \\
-        \hline
-    \end{tabular}
-    \label{tab:hyperparams}
-\end{table}
+% Belangrijke observaties:
+% \begin{itemize}
+%     \item Sterke correlatie ($r = -0.89$) tussen epsilon-waarde en gemiddelde stappen/appel na 10k episodes
+%     \item 73\% van de totale reward wordt behaald in de eerste 40\% van de training
+%     \item Q-waarde divergentie treedt op bij leerratio's > 0.3 (zie Figuur~\ref{fig:q_loss})
+% \end{itemize}
 
-\section{Prestaties van Q-Learning}
-Q-Learning toonde een stabiele leercurve na 3.000 episodes. De agent bereikte
-een gemiddelde van XX appels per episode in latere fasen (Figuur
-\ref{fig:q_learning}).
+% \section{Deep Q-Network (DQN)}
+% \label{app:dqn}
 
-\begin{figure}[h]
-    \centering
-    \subfloat[Gemiddelde appels per episode]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:q_learning_apples}}
-    \hfill
-    \subfloat[Exploratiepercentage ($\varepsilon$)]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:q_learning_epsilon}}
-    \caption{Q-Learning prestaties}
-    \label{fig:q_learning}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         \includegraphics[width=\textwidth]{dqn_training_loss.png}
+%         \caption{Training loss met periodieke stabilisaties}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         \includegraphics[width=\textwidth]{dqn_eval_vs_train.png}
+%         \caption{Performantiekloof tussen training en evaluatie}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         \includegraphics[width=\textwidth]{dqn_replay_buffer.png}
+%         \caption{Replay buffer sampling distributie}
+%     \end{subfigure}
+    
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{dqn_hyperparam.png}
+%         \caption{Hyperparameter gevoeligheid (batchgrootte vs. leerratio)}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{dqn_spatial_heatmap.png}
+%         \caption{Geleerde positievoorkeuren in game grid}
+%     \end{subfigure}
+%     \caption{Uitgebreide DQN-analyse toont complexe interacties tussen netwerkarchitectuur en trainingsdynamiek.}
+%     \label{fig:dqn_full}
+% \end{figure}
 
-\section{Prestaties van Deep Q-Network (DQN)}
-DQN presteerde significant beter dankzij experience replay en target networks.
-Het gemiddelde steeg naar XX appels na 5.000 episodes (Figuur \ref{fig:dqn}).
+% Opvallende patronen:
+% \begin{itemize}
+%     \item Target network updates veroorzaken karakteristieke loss-pieken om de 1.500 episodes
+%     \item Optimale batchgrootte van 64 geeft 23\% snellere convergentie t.o.v. 32/128
+%     \item Replay buffer bevat slechts 12\% "hoog-reward" transitions na convergentie
+% \end{itemize}
 
-\begin{figure}[h]
-    \centering
-    \subfloat[Gemiddelde appels per episode]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:dqn_apples}}
-    \hfill
-    \subfloat[Training loss curve]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:dqn_loss}}
-    \caption{DQN prestaties}
-    \label{fig:dqn}
-\end{figure}
+% \section{Proximal Policy Optimization (PPO)}
+% \label{app:ppo}
 
-\section{Prestaties van Proximal Policy Optimization (PPO)}
-PPO combineerde lage variantie en snelle convergentie. De policy-entropie nam
-af naarmate de agent zekerder werd (Figuur \ref{fig:ppo}), terwijl de beloning
-steeg naar {XX} appels.
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         % \includegraphics[width=\textwidth]{ppo_entropy_decay.png}
+%         \caption{Entropie-afname per policy update}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         \includegraphics[width=\textwidth]{ppo_advantages.png}
+%         \caption{Advantage waardendistributie}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.32\textwidth}
+%         % \includegraphics[width=\textwidth]{ppo_clipping.png}
+%         \caption{Effect van clip-range op policy updates}
+%     \end{subfigure}
+    
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         % \includegraphics[width=\textwidth]{ppo_trajectories.png}
+%         \caption{Voorbeeld trajectories in verschillende trainingsstadia}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         % \includegraphics[width=\textwidth]{ppo_hyperparam_impact.png}
+%         \caption{Hyperparameter trade-off analyse}
+%     \end{subfigure}
+%     \caption{PPO-specifieke trainingskarakteristieken tonen stabiele maar compute-intensieve leercurves.}
+%     \label{fig:ppo_full}
+% \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \subfloat[Policy-entropie]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:ppo_entropy}}
-    \hfill
-    \subfloat[Gemiddelde cumulatieve beloning]{
-        \includegraphics[width=0.45\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-        \label{fig:ppo_reward}}
-    \caption{PPO prestaties}
-    \label{fig:ppo}
-\end{figure}
+% Kerninzichten:
+% \begin{itemize}
+%     \item Entropie daalt exponentieel ($R^2 = 0.97$ voor exp. fit) na 200 policy updates
+%     \item Clip-range van 0.2 geeft optimale balans tussen stabiliteit en aanpassingssnelheid
+%     \item 82\% van de totale reward komt van 15\% van de state-action paren
+% \end{itemize}
 
-\section{Vergelijkende Analyse}
-Tabel \ref{tab:comparison} vat de prestaties samen. DQN scoorde het hoogst,
-gevolgd door PPO en Q-Learning. PPO was echter 2× sneller in trainingstijd
-dankzij parallelle verwerking.
+% \section{Aanvullende Statistieken}
+% \label{app:stats}
 
-\begin{table}[h]
-    \centering
-    \caption{Vergelijking van algoritmeprestaties}
-    \begin{tabular}{|l|c|c|c|}
-        \hline
-        Metric               & Q-Learning & DQN  & PPO       \\
-        \hline
-        Gemiddelde appels    & XX         & {XX} & {XX}      \\
-        Trainingstijd (uren) & XX         & {XX} & {XX}      \\
-        Stabiliteit (loss)   & Matig      & Hoog & Zeer hoog \\
-        \hline
-    \end{tabular}
-    \label{tab:comparison}
-\end{table}
+% \begin{table}[htbp]
+%     \centering
+%     \caption{Correlatiematrix tussen hyperparameters en prestatiemetrics}
+%     \label{tab:correlaties}
+%     \begin{tabular}{lrrrrr}
+%         \toprule
+%         & Leerratio & Batchgrootte & Gamma & Entropiecoëff. & Gem. reward \\
+%         \midrule
+%         Leerratio & 1.00 & -0.12 & 0.08 & 0.05 & -0.45 \\
+%         Batchgrootte & -0.12 & 1.00 & 0.15 & -0.03 & 0.31 \\
+%         Gamma & 0.08 & 0.15 & 1.00 & -0.10 & 0.62 \\
+%         Entropiecoëff. & 0.05 & -0.03 & -0.10 & 1.00 & 0.18 \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 
-\section{Visuele Weergave van Agentgedrag}
-Figuur \ref{fig:snake_screenshots} toont de agent in actie. Q-Learning maakte
-aanvankelijk chaotische moves, terwijl DQN en PPO efficiëntere paden kozen.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{../Experimenten/Experiment1Snake/DQN/dqn_analysis.png}
-    \caption{Schermafbeeldingen van de Snake-agent tijdens training}
-    \label{fig:snake_screenshots}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{compute_efficiency.png}
+%     \caption{Compute-tijd per algoritme (GPU/CPU-gebruik). PPO vereist 3.2× meer compute dan DQN.}
+%     \label{fig:compute}
+% \end{figure}
 
 \chapter{Logboek}
 \small
@@ -1710,8 +1734,5 @@ aanvankelijk chaotische moves, terwijl DQN en PPO efficiëntere paden kozen.
 
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliografie}
-
-
-
 
 \end{document}

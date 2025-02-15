@@ -1,16 +1,16 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  11 FEB 2025 08:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.8)  15 FEB 2025 21:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/matth/Developer/PWS/main/main.tex
-(c:/Users/matth/Developer/PWS/main/main.tex
+**c:/Users/matth/Developer/PWS/werkstuk/main.tex
+(c:/Users/matth/Developer/PWS/werkstuk/main.tex
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
 (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
 Document Class: report 2024/02/08 v1.4n Standard LaTeX document class
-(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
-File: size11.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count194
 \c@chapter=\count195
@@ -782,19 +782,203 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip76
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
+) (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip77
+\subfigcapskip=\skip78
+\subfigcaptopadj=\dimen318
+\subfigbottomskip=\skip79
+\subfigcapmargin=\dimen319
+\subfiglabelskip=\skip80
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:88: LaTeX Error: Command \c@subfigure already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.88 \newcounter{subfigure}
+                           [figure]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:98: LaTeX Error: Command \l@subfigure already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 ...dxxxline{\ext@subfigure}{2}{3.8em}{2.5em}}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:99: LaTeX Error: Command \c@lofdepth already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \newcounter{lofdepth}
+                          
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:101: LaTeX Error: Command \c@subtable already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 \newcounter{subtable}
+                           [table]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:111: LaTeX Error: Command \l@subtable already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 ...dxxxline{\ext@subtable}{2}{3.8em}{2.5em}}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:112: LaTeX Error: Command \c@lotdepth already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 \newcounter{lotdepth}
+                           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.cfg)
+\subfig@top=\skip81
+\subfig@bottom=\skip82
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:269: LaTeX Error: Command \listsubcaptions already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.269     {\@listsubcaptions{\@captype}}}
+                                         
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:280: LaTeX Error: Command \@listsubcaptions already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.280   \gdef\@subfigcaptionlist{}}
+                                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:333: LaTeX Error: Command \@dottedxxxline already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.333   \fi}
+            
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:361: LaTeX Error: Command \subfloat@label already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.361 ...           \@nameuse{thesub\@captype}.)}}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:386: LaTeX Error: Command \sf@@sub@label already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.386   \@esphack}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/subfigure\subfigure.sty:388: LaTeX Error: Command \subref already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.388   \ref{sub@#1}}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 ) (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
 \lst@mode=\count372
 \lst@gtempboxa=\box126
 \lst@token=\toks48
 \lst@length=\count373
-\lst@currlwidth=\dimen318
+\lst@currlwidth=\dimen320
 \lst@column=\count374
 \lst@pos=\count375
-\lst@lostspace=\dimen319
-\lst@width=\dimen320
+\lst@lostspace=\dimen321
+\lst@width=\dimen322
 \lst@newlines=\count376
 \lst@lineno=\count377
-\lst@maxwidth=\dimen321
+\lst@maxwidth=\dimen323
  (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
 File: lstpatch.sty 2024/05/25 1.10b (Carsten Heinz)
 ) (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
@@ -857,14 +1041,14 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@sectionciteorderinternal@0=\count421
 \blx@entrysetcounter=\count422
 \blx@biblioinstance=\count423
-\labelnumberwidth=\skip77
-\labelalphawidth=\skip78
-\biblabelsep=\skip79
-\bibitemsep=\skip80
-\bibnamesep=\skip81
-\bibinitsep=\skip82
-\bibparsep=\skip83
-\bibhang=\skip84
+\labelnumberwidth=\skip83
+\labelalphawidth=\skip84
+\biblabelsep=\skip85
+\bibitemsep=\skip86
+\bibnamesep=\skip87
+\bibinitsep=\skip88
+\bibparsep=\skip89
+\bibhang=\skip90
 \blx@bcfin=\read5
 \blx@bcfout=\write5
 \blx@langwohyphens=\language80
@@ -961,20 +1145,20 @@ Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@savedcitation=\count502
 \c@pageref=\count503
 \c@savedpageref=\count504
-\shorthandwidth=\skip85
-\shortjournalwidth=\skip86
-\shortserieswidth=\skip87
-\shorttitlewidth=\skip88
-\shortauthorwidth=\skip89
-\shorteditorwidth=\skip90
-\locallabelnumberwidth=\skip91
-\locallabelalphawidth=\skip92
-\localshorthandwidth=\skip93
-\localshortjournalwidth=\skip94
-\localshortserieswidth=\skip95
-\localshorttitlewidth=\skip96
-\localshortauthorwidth=\skip97
-\localshorteditorwidth=\skip98
+\shorthandwidth=\skip91
+\shortjournalwidth=\skip92
+\shortserieswidth=\skip93
+\shorttitlewidth=\skip94
+\shortauthorwidth=\skip95
+\shorteditorwidth=\skip96
+\locallabelnumberwidth=\skip97
+\locallabelalphawidth=\skip98
+\localshorthandwidth=\skip99
+\localshortjournalwidth=\skip100
+\localshortserieswidth=\skip101
+\localshorttitlewidth=\skip102
+\localshortauthorwidth=\skip103
+\localshorteditorwidth=\skip104
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
  (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.def
@@ -1052,7 +1236,7 @@ Package: xparse 2024-05-08 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 49.
+Package hyperref Info: Option `colorlinks' set `true' on input line 50.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -1060,24 +1244,24 @@ Package csquotes Info: Redefining alias 'default' -> 'dutch'.
  (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1088,22 +1272,22 @@ LaTeX Font Info:    ... okay on input line 54.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
-* v-part:(T,H,B)=(99.58464pt, 645.87756pt, 99.58464pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=455.24411pt
-* \textheight=645.87756pt
+* \textheight=702.78308pt
 * \oddsidemargin=-1.1381pt
 * \evensidemargin=-1.1381pt
-* \topmargin=-9.68535pt
+* \topmargin=-38.1381pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=11.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=50.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=57.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -1116,13 +1300,13 @@ LaTeX Font Info:    ... okay on input line 54.
 (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count516
-\scratchdimen=\dimen322
+\scratchdimen=\dimen324
 \scratchbox=\box128
 \nofMPsegments=\count517
 \nofMParguments=\count518
 \everyMPshowfont=\toks49
 \MPscratchCnt=\count519
-\MPscratchDim=\dimen323
+\MPscratchDim=\dimen325
 \MPnumerator=\count520
 \makeMPintoPDFobject=\count521
 \everyMPtoPDFconversion=\toks50
@@ -1145,9 +1329,9 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
+Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 54.
- (main.out) (main.out)
+Package hyperref Info: Link coloring ON on input line 55.
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
@@ -1195,22 +1379,22 @@ Package biblatex Warning: Biber reported the following issues
 (biblatex)                - article entry 'silver_dpg' (references.bib): Invalid format '2024-11-31' of date field 'urldate' - ignoring.
 
 )
-Package biblatex Info: Reference section=0 on input line 54.
-Package biblatex Info: Reference segment=0 on input line 54.
+Package biblatex Info: Reference section=0 on input line 55.
+Package biblatex Info: Reference segment=0 on input line 55.
 
 
 pdfTeX warning: pdflatex (file ./cover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=370, 597.23125pt x 845.1575pt>
+<cover.pdf, id=6, 597.23125pt x 845.1575pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
-Package pdftex.def Info: cover.pdf  used on input line 56.
+Package pdftex.def Info: cover.pdf  used on input line 57.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
 pdfTeX warning: pdflatex (file ./cover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf>
-Package pdftex.def Info: cover.pdf  used on input line 56.
+Package pdftex.def Info: cover.pdf  used on input line 57.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 
 
@@ -1218,37 +1402,37 @@ pdfTeX warning: pdflatex (file ./cover.pdf): PDF inclusion: found PDF version <1
 
 
 pdfTeX warning: pdflatex (file ./cover.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<cover.pdf, id=373, page=1, 597.23125pt x 845.1575pt>
+<cover.pdf, id=9, page=1, 597.23125pt x 845.1575pt>
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 56.
+Package pdftex.def Info: cover.pdf , page1 used on input line 57.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 56.
+Package pdftex.def Info: cover.pdf , page1 used on input line 57.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 56.
+Package pdftex.def Info: cover.pdf , page1 used on input line 57.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 56.
+Package pdftex.def Info: cover.pdf , page1 used on input line 57.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 
 
 File: cover.pdf Graphic file (type pdf)
 <use cover.pdf, page 1>
-Package pdftex.def Info: cover.pdf , page1 used on input line 56.
+Package pdftex.def Info: cover.pdf , page1 used on input line 57.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 [1
 
 
  <./cover.pdf>]
-<../assets/logo-clz.png, id=547, 88.8921pt x 99.44353pt>
+<../assets/logo-clz.png, id=183, 88.8921pt x 99.44353pt>
 File: ../assets/logo-clz.png Graphic file (type png)
 <use ../assets/logo-clz.png>
-Package pdftex.def Info: ../assets/logo-clz.png  used on input line 69.
+Package pdftex.def Info: ../assets/logo-clz.png  used on input line 70.
 (pdftex.def)             Requested size: 91.04742pt x 101.8559pt.
 
 
@@ -1256,65 +1440,60 @@ Package pdftex.def Info: ../assets/logo-clz.png  used on input line 69.
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.79 ...r en Techniek \\ Februari 2025 \\ \newpage
+l.80 ...r en Techniek \\ Februari 2025 \\ \newpage
                                                    [1{C:/Users/matth/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <../assets/logo-clz.png>]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.103 \tableofcontents
+l.104 \tableofcontents
                        [1
 
-] (main.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-[2
-
 ]
-
-[3]
-
-[4])
+No file main.toc.
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
 
 
-[5]
+[2
+
+]
 Hoofdstuk 1.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 137.
+(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 137.
+ (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 137.
+ (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 137.
+ (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 137.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 137.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 137.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 137.
+ (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 137.
+ (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 144.
+(caption)                particular \caption on input line 145.
 See the caption package documentation for explanation.
 
 
@@ -1322,53 +1501,65 @@ See the caption package documentation for explanation.
 [1
 
 {C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-
-[2]
-
-[3]
-Hoofdstuk 2.
-
-Overfull \hbox (2.13174pt too wide) in paragraph at lines 229--233
-\T1/lmr/m/n/10.95 Reinforcement Learning (RL) ope-reert bin-nen het ka-der van Markov De-ci-sion Pro-ces-ses (MDP's),
+Overfull \hbox (0.44162pt too wide) in paragraph at lines 194--194
+[]\T1/lmr/bx/n/10 Hoe be-ïn-vloe-den de spel-ken-mer-ken de pres-ta-tie van rein-for-ce-ment learning-algoritmes?| 
  []
 
 
 
-[4
-
-{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 267.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+[2]
+Hoofdstuk 2.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 268.
+(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[5{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+[3
 
-[6{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
 
-[7]
+[4{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+
+[5{C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+[6]
 Hoofdstuk 3.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 424.
+
+LaTeX Warning: Reference `alg:Q-learning' on page 7 undefined on input line 399.
 
 
-[8
+LaTeX Warning: Reference `fig:ql_flowchart' on page 7 undefined on input line 400.
+
+
+LaTeX Warning: Reference `eq:Q-functie' on page 7 undefined on input line 422.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 425.
+
+
+[7
 
 ]
 
-[9]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 599.
- (C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
+[8]
+
+LaTeX Warning: Reference `fig:neuraal-netwerk' on page 9 undefined on input line 514.
+
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 600.
+(C:\Users\matth\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 599.
+(Font)              <9> on input line 600.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 599.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 599.
+(Font)              <6> on input line 600.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+[9]
+
+LaTeX Warning: Reference `alg:DQN' on page 10 undefined on input line 663.
+
+
+LaTeX Warning: Reference `fig:dqn_flowchart' on page 10 undefined on input line 664.
 
 
 
@@ -1376,262 +1567,213 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [11]
 
+LaTeX Warning: Reference `fig:actorCriticFlowchart' on page 12 undefined on input line 803.
+
+
+
 [12]
+
+LaTeX Warning: Reference `alg:ddpg' on page 13 undefined on input line 845.
+
+
 
 [13]
 
 [14]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[15]
-
-[16]
 Hoofdstuk 4.
 
 
-[17
+[15
 
 ]
 
-[18]
+[16]
 
-[19]
+[17]
+
+[18]
+Hoofdstuk 5.
+
+
+[19
+
+]
 
 [20]
 
 [21]
-Hoofdstuk 5.
+Hoofdstuk 6.
 
 
 [22
 
 ]
-
-[23]
-
-[24]
-
-[25]
-Hoofdstuk 6.
-
-Overfull \hbox (1.2489pt too wide) in paragraph at lines 1188--1197
-\T1/lmr/m/n/10.95 In dit on-der-zoek zijn drie rein-for-ce-ment learning-algoritmes ge-test op het spel Snake: Q-Learning,
- []
-
-
-
-[26
-
-]
-
-[27]
 Hoofdstuk 7.
-<../Experimenten/Experiment1Snake/DQN/dqn_analysis.png, id=850, 1072.7277pt x 851.5815pt>
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1247.
+
+LaTeX Warning: Reference `tab:hyperparameters' on page 23 undefined on input line 1225.
+
+
+LaTeX Warning: Reference `fig:score_episode' on page 23 undefined on input line 1243.
+
+<../Experimenten/Snake/DQN/dqn_analysis.png, id=416, 1072.7277pt x 851.5815pt>
+File: ../Experimenten/Snake/DQN/dqn_analysis.png Graphic file (type png)
+<use ../Experimenten/Snake/DQN/dqn_analysis.png>
+Package pdftex.def Info: ../Experimenten/Snake/DQN/dqn_analysis.png  used on input line 1248.
 (pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
 
+LaTeX Warning: Reference `tab:prestatie' on page 23 undefined on input line 1258.
 
-[28
+
+
+[23
 
 ]
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1283.
+
+LaTeX Warning: Reference `fig:loss_curves' on page 24 undefined on input line 1278.
+
+File: ../Experimenten/Snake/DQN/dqn_analysis.png Graphic file (type png)
+<use ../Experimenten/Snake/DQN/dqn_analysis.png>
+Package pdftex.def Info: ../Experimenten/Snake/DQN/dqn_analysis.png  used on input line 1284.
 (pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1297.
+
+LaTeX Warning: Reference `fig:entropy' on page 24 undefined on input line 1292.
+
+File: ../Experimenten/Snake/DQN/dqn_analysis.png Graphic file (type png)
+<use ../Experimenten/Snake/DQN/dqn_analysis.png>
+Package pdftex.def Info: ../Experimenten/Snake/DQN/dqn_analysis.png  used on input line 1298.
+(pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
+
+LaTeX Warning: Reference `fig:heatmap' on page 24 undefined on input line 1310.
+
+File: ../Experimenten/Snake/DQN/dqn_analysis.png Graphic file (type png)
+<use ../Experimenten/Snake/DQN/dqn_analysis.png>
+Package pdftex.def Info: ../Experimenten/Snake/DQN/dqn_analysis.png  used on input line 1316.
 (pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
 
 
-[29 <../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>]
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1315.
-(pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1328.
+[24 <../Experimenten/Snake/DQN/dqn_analysis.png>]
+
+LaTeX Warning: Reference `fig:trajectory' on page 25 undefined on input line 1324.
+
+File: ../Experimenten/Snake/DQN/dqn_analysis.png Graphic file (type png)
+<use ../Experimenten/Snake/DQN/dqn_analysis.png>
+Package pdftex.def Info: ../Experimenten/Snake/DQN/dqn_analysis.png  used on input line 1329.
 (pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
 
+LaTeX Warning: Reference `tab:fouten' on page 25 undefined on input line 1338.
 
-[30]
-Overfull \hbox (60.57724pt too wide) in paragraph at lines 1360--1367
+
+LaTeX Warning: Reference `tab:benchmark' on page 25 undefined on input line 1355.
+
+
+Overfull \hbox (21.23979pt too wide) in paragraph at lines 1361--1368
  [][] 
  []
 
 
 
-[31]
+[25]
+
+[26]
+
+[27]
+Hoofdstuk 8.
+
+
+[28
+
+]
+Hoofdstuk 9.
+
+
+[29
+
+]
+B\ij lage A.
+
+
+[30
+
+]
+B\ij lage B.
+
+Underfull \hbox (badness 1127) in paragraph at lines 1572--1573
+[]|\T1/lmr/m/n/9 Onderzoek over AI, we leer-den alle drie over rein-for-ced
+ []
+
+
+Underfull \hbox (badness 5302) in paragraph at lines 1582--1582
+[]|\T1/lmr/m/n/9 1 uur 15
+ []
+
+
+Overfull \hbox (4.47968pt too wide) in alignment at lines 1568--1604
+ [] [] [] [] 
+ []
+
+
+
+[31
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1629--1629
+[]|\T1/lmr/m/n/9 Thuis,
+ []
+
+
+LaTeX Warning: Citation 'dqn_nature' on page 32 undefined on input line 1639.
+
+
+Overfull \hbox (4.47968pt too wide) in alignment at lines 1607--1655
+ [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 8170) in paragraph at lines 1666--1667
+[]|\T1/lmr/m/n/9 Inlezen over het on-der-werp []^^P  What is Rein-for-ce-ment
+ []
+
+
+Underfull \hbox (badness 8170) in paragraph at lines 1668--1669
+[]|\T1/lmr/m/n/9 Inlezen over het on-der-werp []^^P  What is Rein-for-ce-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1670--1670
+[]|\T1/lmr/m/n/9 Thuis,
+ []
+
+
+Overfull \hbox (4.47968pt too wide) in alignment at lines 1658--1692
+ [] [] [] [] 
+ []
 
 [32]
 
 [33]
-B\ij lage A.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[34
-
-]
-
-[35]
-B\ij lage B.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1466.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1470.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 1470.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1483.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1487.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-
-
-[36
-
-]
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1501.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1505.
-(pdftex.def)             Requested size: 204.85846pt x 162.62079pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[37]
-File: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png Graphic file (type png)
-<use ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png>
-Package pdftex.def Info: ../Experimenten/Experiment1Snake/DQN/dqn_analysis.png  used on input line 1536.
-(pdftex.def)             Requested size: 364.19667pt x 289.11807pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[38]
-
-[39]
-B\ij lage C.
-
-Underfull \hbox (badness 1859) in paragraph at lines 1558--1558
-[]|\T1/lmr/m/n/10 1 uur 15
+Underfull \hbox (badness 10000) in paragraph at lines 1711--1711
+[]|\T1/lmr/m/n/9 Thuis,
  []
 
 
-Overfull \hbox (4.47968pt too wide) in alignment at lines 1544--1580
+Overfull \hbox (4.47968pt too wide) in alignment at lines 1695--1733
  [] [] [] [] 
  []
 
 
 
-[40
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 1605--1605
-[]|\T1/lmr/m/n/10 Thuis,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1605--1605
-\T1/lmr/m/n/10 on-line
- []
-
-
-LaTeX Warning: Citation 'dqn_nature' on page 41 undefined on input line 1615.
-
-
-Overfull \hbox (4.47968pt too wide) in alignment at lines 1583--1631
- [] [] [] [] 
- []
-
-[41]
-Underfull \hbox (badness 1237) in paragraph at lines 1642--1643
-[]|\T1/lmr/m/n/10 Inlezen over het on-der-werp []^^P  What is Rein-for-ce-ment
- []
-
-
-Underfull \hbox (badness 1237) in paragraph at lines 1644--1645
-[]|\T1/lmr/m/n/10 Inlezen over het on-der-werp []^^P  What is Rein-for-ce-ment
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1646--1646
-[]|\T1/lmr/m/n/10 Thuis,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1646--1646
-\T1/lmr/m/n/10 on-line
- []
-
-
-Overfull \hbox (4.47968pt too wide) in alignment at lines 1634--1668
- [] [] [] [] 
- []
-
-
-
-[42]
-Underfull \hbox (badness 10000) in paragraph at lines 1687--1687
-[]|\T1/lmr/m/n/10 Thuis,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1687--1687
-\T1/lmr/m/n/10 on-line
- []
-
-
-Overfull \hbox (4.47968pt too wide) in alignment at lines 1671--1709
- [] [] [] [] 
- []
-
-
-
-[43]
+[34]
 
 Package biblatex Warning: Month out of range
-(biblatex)                at entry 'pmlr-v119-cobbe20a' on input line 1711.
-
-
-Overfull \hbox (8.78683pt too wide) in paragraph at lines 1712--1712
-[][]\T1/lmr/m/n/10.95 Puterman, M. L. (1994, april). \T1/lmr/m/it/10.95 Markov De-ci-sion pro-ces-ses\T1/lmr/m/n/10.95 . [][]$https : / / doi . org / 10 . 1002 / 9780470316887$[][] 
- []
+(biblatex)                at entry 'pmlr-v119-cobbe20a' on input line 1735.
 
 
 
-[44
+[35
 
 ]
 
-[45] (main.aux)
+[36] (main.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1640,8 +1782,17 @@ L3 programming layer <2024-07-20>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9837CC8D6877281BEA57F815931F5537;15189.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  7FFB8B56FCEA69F8CCCFB1859571B739;13674.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -1652,17 +1803,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39542 strings out of 473899
- 755216 string characters out of 5726501
- 1962960 words of memory out of 5000000
- 61573 multiletter control sequences out of 15000+600000
- 658011 words of font info for 97 fonts, out of 8000000 for 9000
+ 39422 strings out of 473899
+ 754005 string characters out of 5726501
+ 1975960 words of memory out of 5000000
+ 61487 multiletter control sequences out of 15000+600000
+ 640816 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,93p,1442b,2809s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (52 pages, 2138571 bytes).
+ 84i,17n,93p,1446b,2809s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi5.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy5.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/matth/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (40 pages, 2096551 bytes).
 PDF statistics:
- 1216 PDF objects out of 1440 (max. 8388607)
- 234 named destinations out of 1000 (max. 500000)
- 771 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 761 PDF objects out of 1000 (max. 8388607)
+ 204 named destinations out of 1000 (max. 500000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

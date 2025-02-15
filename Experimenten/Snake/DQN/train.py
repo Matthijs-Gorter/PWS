@@ -5,12 +5,12 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from collections import deque
-
 import csv
 import os
+import time  # Added for timing episodes
 
 # Omgeving configuratie
-GRID_SIZE = 20
+GRID_SIZE = 10
 INPUT_SIZE = 9   # Richting (4) + voedsel positie (2) + gevaren (3)
 HIDDEN_SIZE = 256
 OUTPUT_SIZE = 3  # Acties: links, rechtdoor, rechts
@@ -26,7 +26,7 @@ EPSILON_DECAY = 0.999
 TARGET_UPDATE = 100
 
 class SnakeEnv:
-    def __init__(self, grid_size=20):
+    def __init__(self, grid_size=10):
         self.grid_size = grid_size
         self.reset()
 
@@ -184,7 +184,7 @@ def save_results_to_csv(results, filename="results.csv"):
     with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         if not file_exists:
-            writer.writerow(["Episode", "Score", "Epsilon", "Loss", "Steps", "ApplesEaten"])
+            writer.writerow(["Episode", "TotalReward", "ApplesEaten", "AvgLoss", "Epsilon", "StepsPerApple", "EpisodeTime"])
         writer.writerow(results)
 
 if __name__ == "__main__":
@@ -192,12 +192,14 @@ if __name__ == "__main__":
     env = SnakeEnv(GRID_SIZE)
     agent = DQNAgent(INPUT_SIZE, HIDDEN_SIZE, OUTPUT_SIZE)
 
-    scores = []
-    for episode in range(3000):
+    start_time = time.time()  # Start timing the episode
+    for episode in range(15000):
         state = env.reset()
         total_reward = 0
         done = False
         steps = 0
+        episode_loss_sum = 0.0
+        episode_loss_count = 0
         
         while not done:
             action = agent.select_action(state)
@@ -205,21 +207,36 @@ if __name__ == "__main__":
             agent.memory.push(state, action, reward, next_state, done)
             state = next_state
             total_reward += reward
-            loss = agent.train()
+            loss_value = agent.train()
+            if loss_value is not None:
+                episode_loss_sum += loss_value
+                episode_loss_count += 1
             steps += 1
         
-        scores.append(total_reward)
+        # Calculate metrics
+        apples_eaten = env.apples_eaten
+        avg_loss = episode_loss_sum / episode_loss_count if episode_loss_count > 0 else 0.0
+        steps_per_apple = steps / apples_eaten if apples_eaten > 0 else 0.0
         
+        # Update target network
         if episode % TARGET_UPDATE == 0:
             agent.update_target()
-            
-        apples_eaten = env.apples_eaten
-
         
-        print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Apples: {apples_eaten} | Epsilon: {agent.epsilon:.2f} | Loss: {loss:.4f} | Steps: {steps}" if loss is not None else 
-              f"Episode {episode:3d} | Score: {total_reward:6.1f} | Apples: {apples_eaten} | Epsilon: {agent.epsilon:.2f} | Loss: N/A | Steps: {steps}")
-        save_results_to_csv([episode, total_reward, agent.epsilon, loss if loss is not None else "N/A", steps, apples_eaten])
+        # Logging to console
+        # print(f"Episode {episode:3d} | Score: {total_reward:6.1f} | Apples: {apples_eaten} | Epsilon: {agent.epsilon:.2f} | AvgLoss: {avg_loss:.4f} | Steps/Apple: {steps_per_apple:.1f} | Time: {time:.2f}s")
+        
+        # Save to CSV
+        save_results_to_csv([
+            episode,
+            total_reward,
+            apples_eaten,
+            avg_loss,
+            agent.epsilon,
+            steps_per_apple,
+            time.time() - start_time
+        ])
+        
+        # Decay epsilon
         agent.epsilon = max(EPSILON_END, agent.epsilon * EPSILON_DECAY)
-        
-        
+    
     torch.save(agent.policy_net.state_dict(), "dqn_snake.pth")
