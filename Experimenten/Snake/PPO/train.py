@@ -7,9 +7,10 @@ import torch.nn.functional as F
 from collections import deque
 import csv
 import os
+import time  # to measure elapsed time
 
 # Omgeving configuratie
-GRID_SIZE = 20
+GRID_SIZE = 10
 INPUT_SIZE = 9
 HIDDEN_SIZE = 256
 OUTPUT_SIZE = 3
@@ -21,13 +22,13 @@ GAE_LAMBDA = 0.95
 PPO_EPSILON = 0.2
 CRITIC_DISCOUNT = 0.5
 ENTROPY_BETA = 0.01
-TRAJECTORY_LENGTH = 2048
+TRAJECTORY_LENGTH = 512
 MINIBATCH_SIZE = 64
 PPO_EPOCHS = 4
 MAX_GRAD_NORM = 0.5
 
 class SnakeEnv:
-    def __init__(self, grid_size=20):
+    def __init__(self, grid_size=10):
         self.grid_size = grid_size
         self.reset()
 
@@ -55,7 +56,7 @@ class SnakeEnv:
         dir_vec = [0] * 4
         if self.direction == (0, 1):   dir_vec[1] = 1  # rechts
         elif self.direction == (0, -1): dir_vec[3] = 1  # links
-        elif self.direction == (1, 0): dir_vec[2] = 1  # onder
+        elif self.direction == (1, 0):  dir_vec[2] = 1  # onder
         elif self.direction == (-1, 0): dir_vec[0] = 1  # boven
         
         # Gevaren detectie
@@ -63,7 +64,7 @@ class SnakeEnv:
         current_dir = self.direction
         for rel_dir in [(-current_dir[1], current_dir[0]),  # links
                         current_dir,                        # rechtdoor
-                        (current_dir[1], -current_dir[0])]: # rechts
+                        (current_dir[1], -current_dir[0])]:   # rechts
             new_head = (head[0] + rel_dir[0], head[1] + rel_dir[1])
             danger = 0
             if (new_head[0] < 0 or new_head[0] >= self.grid_size or
@@ -235,9 +236,7 @@ class PPOAgent:
                 # Policy loss
                 surr1 = ratio * advantages[idx]
                 surr2 = torch.clamp(ratio, 1-PPO_EPSILON, 1+PPO_EPSILON) * advantages[idx]
-
                 
-                # Calculate losses
                 policy_loss = -torch.min(surr1, surr2).mean()
                 value_loss = self.mse_loss(values, returns[idx].unsqueeze(-1))
                 loss = policy_loss + CRITIC_DISCOUNT * value_loss - ENTROPY_BETA * entropy
@@ -262,11 +261,16 @@ class PPOAgent:
         return avg_loss, avg_entropy
 
 def save_results_to_csv(results, filename="ppo_results.csv"):
+    """
+    Appends a new row of results to a CSV file.
+    The CSV file will have the columns:
+    Episode,TotalReward,ApplesEaten,Loss,Entropy,StepsPerApple,TotalTime
+    """
     file_exists = os.path.isfile(filename)
     with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         if not file_exists:
-            writer.writerow(["Episode", "Score", "ApplesEaten", "Loss", "Entropy"])
+            writer.writerow(["Episode", "TotalReward", "ApplesEaten", "Loss", "Entropy", "StepsPerApple", "TotalTime"])
         writer.writerow(results)
 
 if __name__ == "__main__":
@@ -277,9 +281,11 @@ if __name__ == "__main__":
     total_steps = 0
     
     while True:
+        start_time = time.time()  # Start timer for the episode
         state = env.reset()
         episode_reward = 0
         done = False
+        episode_steps = 0  # To count the number of steps in the episode
         
         while not done:
             # Collect trajectory
@@ -294,16 +300,20 @@ if __name__ == "__main__":
                 
                 state = next_state
                 episode_reward += reward
-            
+                episode_steps += 1  # Increment step count
+                
             # Update policy and get metrics
             avg_loss, avg_entropy = agent.update()
             total_steps += 1
         
-        # Logging with actual metrics
         apples_eaten = env.apples_eaten
-        print(f"Episode {episode} | Reward: {episode_reward} | Apples: {apples_eaten} | Loss: {avg_loss:.2f} | Entropy: {avg_entropy:.2f}")
-        save_results_to_csv([episode, episode_reward, apples_eaten, avg_loss, avg_entropy])
+        episode_time = time.time() - start_time  # Calculate total time for the episode
+        steps_per_apple = episode_steps / apples_eaten if apples_eaten > 0 else episode_steps
         
+        # print(f"Episode {episode} | Reward: {episode_reward} | Apples: {apples_eaten} | Loss: {avg_loss:.2f} | Entropy: {avg_entropy:.2f} | StepsPerApple: {steps_per_apple:.2f} | TotalTime: {episode_time:.2f}")
+        save_results_to_csv([episode, episode_reward, apples_eaten, avg_loss, avg_entropy, steps_per_apple, episode_time])
         episode += 1
-        if episode % 100 == 0:
-            torch.save(agent.model.state_dict(), f"ppo_snake_{episode}.pth")
+        if episode >= 15000:
+            break
+        # if episode % 100 == 0:
+    torch.save(agent.model.state_dict(), f"ppo_snake_{episode}.pth")

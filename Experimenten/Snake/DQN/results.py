@@ -1,102 +1,142 @@
+#!/usr/bin/env python3
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn
-import numpy as np
-from scipy.stats import kendalltau
+import seaborn as sns
+import argparse
 
-# Data inladen
-df = pd.read_csv('results.csv')
+def laad_data(bestand):
+    """
+    Laad de CSV-data in een pandas DataFrame.
+    """
+    return pd.read_csv(bestand)
 
-# Algemene opmaak voor wetenschappelijke plots
-plt.style.use('seaborn-v0_8-white')
-plt.rcParams.update({'font.size': 12, 'figure.figsize': (15,10)})
+def plot_individuele_metrics(df, label="Algoritme"):
+    """
+    Plot de 6 metrics (TotalReward, ApplesEaten, AvgLoss, Epsilon, StepsPerApple, TotalTime)
+    over de episodes in een subplot-overzicht.
+    """
+    episodes = df['Episode']
+    
+    plt.figure(figsize=(15,10))
+    
+    # Total Reward per Episode
+    plt.subplot(2,3,1)
+    plt.plot(episodes, df['TotalReward'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Total Reward")
+    plt.title("Total Reward per Episode")
+    plt.legend()
 
-# 1. Prestatie over tijd (Score)
-plt.figure()
-plt.plot(df['Episode'], df['Score'], 'b-', alpha=0.3, label='Raw Score')
-plt.plot(df['Episode'], df['Score'].rolling(window=10).mean(), 'r-', label='Moving Average (window=10)')
-plt.xlabel('Episode')
-plt.ylabel('Score')
-plt.title('DQN Learning Curve')
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
+    # Apples Eaten per Episode
+    plt.subplot(2,3,2)
+    plt.plot(episodes, df['ApplesEaten'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Apples Eaten")
+    plt.title("Apples Eaten per Episode")
+    plt.legend()
 
-# 2. Epsilon decay en Score relatie
-fig, ax1 = plt.subplots()
+    # Average Loss per Episode
+    plt.subplot(2,3,3)
+    plt.plot(episodes, df['AvgLoss'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Avg Loss")
+    plt.title("Average Loss per Episode")
+    plt.legend()
 
-color = 'tab:red'
-ax1.set_xlabel('Episode')
-ax1.set_ylabel('Epsilon', color=color)
-ax1.plot(df['Episode'], df['Epsilon'], color=color, linestyle='--')
-ax1.tick_params(axis='y', labelcolor=color)
+    # Epsilon per Episode
+    plt.subplot(2,3,4)
+    plt.plot(episodes, df['Epsilon'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Epsilon")
+    plt.title("Epsilon per Episode")
+    plt.legend()
 
-ax2 = ax1.twinx()
-color = 'tab:blue'
-ax2.set_ylabel('ApplesEaten', color=color)
-ax2.plot(df['Episode'], df['ApplesEaten'], color=color, alpha=0.3)
-ax2.plot(df['Episode'], df['ApplesEaten'].rolling(window=50).mean(), color=color)
-ax2.tick_params(axis='y', labelcolor=color)
+    # Steps Per Apple per Episode
+    plt.subplot(2,3,5)
+    plt.plot(episodes, df['StepsPerApple'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Steps Per Apple")
+    plt.title("Steps Per Apple per Episode")
+    plt.legend()
 
-plt.title('Exploration-Exploitation Tradeoff (Epsilon vs Score)')
-plt.grid(True)
-plt.tight_layout()
+    # Total Time per Episode
+    plt.subplot(2,3,6)
+    plt.plot(episodes, df['TotalTime'], label=label)
+    plt.xlabel("Episode")
+    plt.ylabel("Total Time")
+    plt.title("Total Time per Episode")
+    plt.legend()
 
-# 3. Loss ontwikkeling (filter NaN waardes)
-loss_df = df.dropna(subset=['Loss'])
+    plt.tight_layout()
+    plt.show()
 
-plt.figure()
-plt.plot(loss_df['Episode'], loss_df['Loss'], 'g-')
-plt.xlabel('Episode')
-plt.ylabel('Loss')
-plt.title('DQN Training Loss Development')
-plt.grid(True)
-plt.tight_layout()
+def plot_vergelijking(df1, df2, label1="Algoritme 1", label2="Algoritme 2"):
+    """
+    Vergelijk de metrics van twee algoritmes door ze in dezelfde grafieken weer te geven.
+    """
+    metrics = ['TotalReward', 'ApplesEaten', 'AvgLoss', 'Epsilon', 'StepsPerApple', 'TotalTime']
+    titels = ["Total Reward", "Apples Eaten", "Average Loss", "Epsilon", "Steps Per Apple", "Total Time"]
 
-# 4. Apples verzameld over tijd
-plt.figure()
-plt.plot(df['Episode'], df['ApplesEaten'], 'g-', alpha=0.3, label='Raw Apples')
-plt.plot(df['Episode'], df['ApplesEaten'].rolling(window=10).mean(), 'm-', label='Moving Average (window=10)')
-plt.xlabel('Episode')
-plt.ylabel('Apples Collected')
-plt.title('Apples Collected Over Time')
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
+    plt.figure(figsize=(15,10))
+    
+    for i, (metric, titel) in enumerate(zip(metrics, titels), start=1):
+        plt.subplot(2,3,i)
+        plt.plot(df1['Episode'], df1[metric], label=label1)
+        plt.plot(df2['Episode'], df2[metric], label=label2)
+        plt.xlabel("Episode")
+        plt.ylabel(titel)
+        plt.title(f"{titel} per Episode")
+        plt.legend()
+    
+    plt.tight_layout()
+    plt.show()
 
-# 5. Samengestelde visualisatie met Apples
-fig, axs = plt.subplots(5, 1, sharex=True, figsize=(15, 12))  # Adjusted for 5 subplots
-metrics = ['Score', 'Epsilon', 'Loss', 'Steps', 'ApplesEaten']
-colors = ['blue', 'red', 'green', 'purple', 'orange']
+def plot_histogrammen(df, label="Algoritme"):
+    """
+    Plot histogrammen voor elke metric zodat je de verdeling kunt zien.
+    """
+    metrics = ['TotalReward', 'ApplesEaten', 'AvgLoss', 'Epsilon', 'StepsPerApple', 'TotalTime']
+    
+    plt.figure(figsize=(15,10))
+    for i, metric in enumerate(metrics, start=1):
+        plt.subplot(2,3,i)
+        plt.hist(df[metric].dropna(), bins=30, alpha=0.7, label=label)
+        plt.xlabel(metric)
+        plt.title(f"Histogram van {metric}")
+        plt.legend()
+    plt.tight_layout()
+    plt.show()
 
-for i, metric in enumerate(metrics):
-    if metric == 'Loss':
-        axs[i].plot(loss_df['Episode'], loss_df[metric], color=colors[i])
-    else:
-        axs[i].plot(df['Episode'], df[metric], color=colors[i], alpha=0.3)
-        if metric == 'Score':  # Voeg moving average alleen toe voor Score
-            axs[i].plot(df['Episode'], df[metric].rolling(window=10).mean(), color=colors[i])
-    axs[i].set_ylabel(metric)
-    axs[i].grid(True)
+def plot_correlatie_heatmap(df, label="Algoritme"):
+    """
+    Plot een heatmap van de correlaties tussen de metrics.
+    """
+    plt.figure(figsize=(8,6))
+    # We gebruiken hier alleen de numerieke kolommen met de metrics
+    correlatie = df[['TotalReward', 'ApplesEaten', 'AvgLoss', 'Epsilon', 'StepsPerApple', 'TotalTime']].corr()
+    sns.heatmap(correlatie, annot=True, cmap='coolwarm')
+    plt.title(f"Correlatie Heatmap voor {label}")
+    plt.show()
 
-axs[-1].set_xlabel('Episode')
-plt.suptitle('DQN Training Metrics Development')
-plt.tight_layout()
+def main():
+    # parser = argparse.ArgumentParser(description="Visualiseer de resultaten van een DQN-algoritme")
+    # parser.add_argument("bestand1", help="./results.csv")
+    # parser.add_argument("--bestand2", help="../Q-Learning/results.csv", default=None)
+    # args = parser.parse_args()
+    
+    # Laad de data
+    df1 = laad_data("./results.csv")
+    
+    # Als een tweede bestand is meegegeven, maak een vergelijking
+    # if args.bestand2:
+    df2 = laad_data("../Q-Learning/results.csv")
+    plot_vergelijking(df1, df2)
+    # else:
+    #     plot_individuele_metrics(df1)
+    
+    # Extra visualisaties: histogrammen en correlatie heatmap
+    plot_histogrammen(df1)
+    plot_correlatie_heatmap(df1)
 
-# Basis statistieken
-print(df.describe())
-
-# Correlatie matrix inclusief Apples
-print(df.corr())
-
-# Performancetrend test (Mann-Kendall) voor Score en Apples
-tau_score, p_value_score = kendalltau(df['Episode'], df['Score'])
-tau_apples, p_value_apples = kendalltau(df['Episode'], df['ApplesEaten'])
-print(f"Kendall's tau voor Score: {tau_score:.3f}, p-waarde: {p_value_score:.4f}")
-print(f"Kendall's tau voor Apples: {tau_apples:.3f}, p-waarde: {p_value_apples:.4f}")
-
-# Opslaan van alle plots
-plt.savefig('dqn_analysis.png', dpi=300, bbox_inches='tight')
-
-# Toon alle plots
-plt.show()
+if __name__ == '__main__':
+    main()

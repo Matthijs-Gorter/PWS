@@ -244,7 +244,7 @@ train(15000)
 # Schrijf de loggegevens naar CSV
 with open('games_scores.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['Episode', 'TotalReward', 'ApplesEaten', 'AvgLoss', 'Epsilon', 'StepsPerApple', 'EpisodeTime'])
+    writer.writerow(['Episode', 'TotalReward', 'ApplesEaten', 'AvgLoss', 'Epsilon', 'StepsPerApple', 'TotalTime'])
     writer.writerows(log_data)
 
 # Start de visuele game na de training

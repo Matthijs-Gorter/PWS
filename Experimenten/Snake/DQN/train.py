@@ -184,7 +184,7 @@ def save_results_to_csv(results, filename="results.csv"):
     with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         if not file_exists:
-            writer.writerow(["Episode", "TotalReward", "ApplesEaten", "AvgLoss", "Epsilon", "StepsPerApple", "EpisodeTime"])
+            writer.writerow(["Episode", "TotalReward", "ApplesEaten", "AvgLoss", "Epsilon", "StepsPerApple", "TotalTime"])
         writer.writerow(results)
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-Episode,TotalReward,ApplesEaten,AvgLoss,Epsilon,StepsPerApple,EpisodeTime
+Episode,TotalReward,ApplesEaten,AvgLoss,Epsilon,StepsPerApple,TotalTime
 0,-50,0,0.0,1,0.0,0.0
 1,-50,0,0.0,0.999,0.0,0.0
 2,-50,0,0.0,0.998001,0.0,0.0015044212341308594
